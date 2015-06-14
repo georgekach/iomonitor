@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/meantest-dev',
+	db: 'mongodb://george:pass123*@ds047802.mongolab.com:47802/rtumon',
 	app: {
 		title: 'meantest - Development Environment'
 	},
