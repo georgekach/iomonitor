@@ -1,31 +1,8 @@
 'use strict';
 
-angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles','$mdToast','$animate',
-	function($scope, $stateParams, $location, Authentication, Articles,$mdToast,$animate) {
+angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
+	function($scope, $stateParams, $location, Authentication, Articles) {
 		$scope.authentication = Authentication;
-	//toastr
-	$scope.toastPosition = {
-		bottom: false,
-		top: true,
-		left: true,
-		right: false
-	};
-	
-	$scope.getToastPosition = function(){
-		return Object.keys($scope.toastPosition)
-		.filter(function (pos) {
-			return $scope.toastPosition[pos];
-		}).join(' ');
-	};
-	
-	$scope.sendMail = function(){
-		$mdToast.show(
-			$mdToast.simple()
-			.content('Thanks for your message, Youre the man')
-			.hideDelay(3000)
-	
-		);
-	};
 
 		$scope.create = function() {
 			var article = new Articles({
