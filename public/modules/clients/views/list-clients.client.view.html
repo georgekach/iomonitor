@@ -13,6 +13,8 @@
 			<h4 class="list-group-item-heading" data-ng-bind="client.name"></h4>
         </a>
     </div>
+    <highchart id="chart1" config="chartConfig"></highchart>
+    
     <div class="alert alert-warning text-center" data-ng-hide="!clients.$resolved || clients.length">
     	No Clients yet, why don't you <a href="/#!/clients/create">create one</a>?
     </div>

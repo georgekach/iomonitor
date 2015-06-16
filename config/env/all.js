@@ -25,7 +25,10 @@ module.exports = {
 				'public/lib/angular-material/angular-material.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+				'public/lib/highcharts-release/adapters/standalone-framework.js',
+				'public/lib/highcharts-release/highcharts.js',
+				'public/lib/highcharts-ng/src/highcharts-ng.js',
 			]
 		},
 		css: [

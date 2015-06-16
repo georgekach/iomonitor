@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles','$mdToast', '$animate',
-	function($scope, $stateParams, $location, Authentication, Articles,$mdToast, $animate) {
+angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles','$mdToast', '$animate','$mdDialog',
+	function($scope, $stateParams, $location, Authentication, Articles,$mdToast, $animate,$mdDialog) {
 		$scope.authentication = Authentication;
 		
 		// Toastr
@@ -29,6 +29,22 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 					.hideDelay(3000)
 			);
 		};
+		
+		//Dialog
+		 $scope.showAlert = function(ev) {
+	    // Appending dialog to document.body to cover sidenav in docs app
+	    // Modal dialogs should fully cover application
+	    // to prevent interaction outside of dialog
+	    $mdDialog.show(
+	      $mdDialog.alert()
+	        
+	        .title('This is an alert title')
+	        .content('You can specify some description text in here.')
+	        .ariaLabel('Alert Dialog Demo')
+	        .ok('Got it!')
+	        .targetEvent(ev)
+	    );
+	  };
 
 
 		$scope.create = function() {
