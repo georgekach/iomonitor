@@ -4,13 +4,13 @@
 	"version": "0.0.1",
 	"author": "George Kachambwa",
 	"engines": {
-		"node": "0.10.x",
-		"npm": "1.4.x"
+		"node": "0.12.x",
+		"npm": "2.1.x"
 	},
 	"scripts": {
 		"start": "grunt",
 		"test": "grunt test",
-		"postinstall": "bower install"
+		"postinstall": "bower install --config.interactive=false"
 	},
 	"dependencies": {
 		"express": "~4.10.1",
