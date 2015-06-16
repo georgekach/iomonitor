@@ -14,5 +14,8 @@
     "angular-material": "~0.7.1",
     "highcharts-release": "~4.1.6",
     "highcharts-ng": "~0.0.8"
+  },
+  "resolutions": {
+    "angular": "~1.3"
   }
 }
