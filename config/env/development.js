@@ -2,6 +2,7 @@
 
 module.exports = {
 	db: 'mongodb://george:pass123*@ds047802.mongolab.com:47802/rtumon',
+	//db: 'mongodb://localhost:27017/rtumon',
 	app: {
 		title: 'meantest - Development Environment'
 	},

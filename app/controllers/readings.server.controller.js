@@ -105,3 +105,13 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+/**
+ * Upload readings from devices
+ */
+ 
+ exports.uploadReading =  function(req,res){
+	 var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
+			socketio.sockets.emit('reading.received', req.param('reading'));// emit an event for all connected clients
+			res.jsonp({reading: req.param('reading')});
+ };
