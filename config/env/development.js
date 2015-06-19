@@ -1,13 +1,10 @@
 'use strict';
 
 module.exports = {
-<<<<<<< HEAD
-	//db: 'mongodb://george:pass123*@ds047802.mongolab.com:47802/rtumon',
-	db: 'mongodb://localhost:27017/rtumon',
-=======
+
 	db: 'mongodb://george:pass123*@ds047802.mongolab.com:47802/rtumon',
 	//db: 'mongodb://localhost:27017/rtumon',
->>>>>>> origin/master
+
 	app: {
 		title: 'meantest - Development Environment'
 	},

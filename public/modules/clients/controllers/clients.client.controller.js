@@ -117,19 +117,13 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
 		
 
         var globalSeries;
-<<<<<<< HEAD
+
         /*Highcharts.setOptions({
             global: {
                 useUTC: false
             }
         });*/
-=======
-        //Highcharts.setOptions({
-        //    global: {
-        //        useUTC: false
-        //    }
-        //});
->>>>>>> origin/master
+
         $scope.chartConfig = {
             chart: {
                 type: 'spline',
@@ -163,16 +157,7 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
                     width: 1,
                     color: '#808080'
                 }]
-<<<<<<< HEAD
-            },/*,
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                            Highcharts.numberFormat(this.y, 2);
-                }
-            }*/
-=======
+
             },
             //tooltip: {
              //   formatter: function () {
@@ -181,7 +166,7 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
              //               Highcharts.numberFormat(this.y, 2);
              //   }
             //},
->>>>>>> origin/master
+
             legend: {
                 enabled: false
             },

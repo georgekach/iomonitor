@@ -14,8 +14,7 @@ module.exports = function(app) {
 		.put(users.requiresLogin, readings.hasAuthorization, readings.update)
 		.delete(users.requiresLogin, readings.hasAuthorization, readings.delete);
 		
-	app.route('/readings/upload')
-		.post(readings.upload);
+	
 
 	app.route('/readings/upload')
 		.post(readings.uploadReading);

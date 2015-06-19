@@ -110,11 +110,7 @@ exports.hasAuthorization = function(req, res, next) {
 <<<<<<< HEAD
  * Upload a Reading
  */
-exports.upload = function(req, res) {
-	
-	return res.jsonp({
-				message: 'This is a test ' +req.param('unitid')
-			});
+
 	/*
 	var reading = new Reading(req.body);
 	reading.user = req.user;
@@ -129,9 +125,9 @@ exports.upload = function(req, res) {
 		}
 	});
 	*/
-};
-=======
- * Upload readings from devices
+
+
+/* * Upload readings from devices
  */
  
  exports.uploadReading =  function(req,res){
@@ -139,4 +135,4 @@ exports.upload = function(req, res) {
 			socketio.sockets.emit('reading.received', req.param('reading'));// emit an event for all connected clients
 			res.jsonp({reading: req.param('reading')});
  };
->>>>>>> origin/master
+

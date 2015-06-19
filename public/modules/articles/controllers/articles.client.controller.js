@@ -8,8 +8,8 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		// Toastr
 
 		$scope.toastPosition = {
-			bottom: false,
-			top: true,
+			bottom: true,
+			top: false,
 			left: true,
 			right: false
 		};
