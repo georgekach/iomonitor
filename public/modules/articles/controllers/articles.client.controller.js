@@ -1,9 +1,8 @@
 'use strict';
 
-angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles','$mdToast', '$animate','$mdDialog','Socket',
-	function($scope, $stateParams, $location, Authentication, Articles,$mdToast, $animate,$mdDialog,Socket) {
+angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles','$mdToast', '$animate','$mdDialog',
+	function($scope, $stateParams, $location, Authentication, Articles,$mdToast, $animate,$mdDialog) {
 		$scope.authentication = Authentication;
-		
 		
 		// Toastr
 
@@ -30,26 +29,6 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 					.hideDelay(3000)
 			);
 		};
-		
-		//SOckect.io
-		Socket.on('article.created', function(article) {
-    			$mdToast.show(
-				$mdToast.simple()
-					.content('Article created'+article)
-					.position($scope.getToastPosition())
-					.hideDelay(3000)
-			);
-			});
-			
-			Socket.on('reading.received', function(reading) {
-    			$mdToast.show(
-				$mdToast.simple()
-					.content('reading received '+reading.toString())
-					.position($scope.getToastPosition())
-					.hideDelay(3000)
-			);
-			});
-		
 		
 		//Dialog
 		 $scope.showAlert = function(ev) {
@@ -81,8 +60,6 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
-			
-			
 		};
 
 		$scope.remove = function(article) {

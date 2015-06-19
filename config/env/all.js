@@ -29,8 +29,6 @@ module.exports = {
 				'public/lib/highcharts-release/adapters/standalone-framework.js',
 				'public/lib/highcharts-release/highcharts.js',
 				'public/lib/highcharts-ng/src/highcharts-ng.js',
-				'public/lib/socket-io/socket.io.js',
-				'public/lib/angular-socket-io/socket.min.js',
 			]
 		},
 		css: [

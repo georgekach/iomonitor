@@ -18,7 +18,6 @@ var fs = require('fs'),
 	mongoStore = require('connect-mongo')({
 		session: session
 	}),
-	socketio = require('socket.io'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
@@ -159,12 +158,6 @@ module.exports = function(db) {
 		return httpsServer;
 	}
 
-	
-	//Create Socket.io from the server
-	var server = http.createServer(app);
-	var io = socketio.listen(server);
-	app.set('socketio', io);
-	app.set('server', server);
 	// Return Express server instance
 	return app;
 };

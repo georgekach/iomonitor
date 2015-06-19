@@ -17,9 +17,6 @@ module.exports = function(app) {
 	app.route('/readings/upload')
 		.post(readings.upload);
 
-	app.route('/readings/upload')
-		.post(readings.uploadReading);
-		
 	// Finish by binding the Reading middleware
 	app.param('readingId', readings.readingByID);
 };
