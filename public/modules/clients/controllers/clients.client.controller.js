@@ -117,11 +117,11 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
 		
 
         var globalSeries;
-        Highcharts.setOptions({
+        /*Highcharts.setOptions({
             global: {
                 useUTC: false
             }
-        });
+        });*/
         $scope.chartConfig = {
             chart: {
                 type: 'spline',
@@ -134,6 +134,7 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
                         // set up the updating of the chart each second
                         var series = this.series[0];
                         globalSeries = series;
+                      
                         updateData();
                     }
                 }
@@ -154,14 +155,14 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
                     width: 1,
                     color: '#808080'
                 }]
-            }/*,
+            },/*,
             tooltip: {
                 formatter: function () {
                     return '<b>' + this.series.name + '</b><br/>' +
                             Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
                             Highcharts.numberFormat(this.y, 2);
                 }
-            }*/,
+            }*/
             legend: {
                 enabled: false
             },
@@ -187,13 +188,14 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
             }]
         };
 
-          function updateData(){
+       
+       function updateData(){
             setInterval(function () {
                 var x = (new Date()).getTime(), // current time
                         y = Math.random();
-                globalSeries.addPoint([x, y], true, true);
+               globalSeries.addPoint([x, y], true, true);
             }, 1000);
-        };
+        }
     /*    var socket = io.connect('http://localhost:3001');
 
 

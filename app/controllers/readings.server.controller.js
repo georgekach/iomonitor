@@ -105,3 +105,27 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+/**
+ * Upload a Reading
+ */
+exports.upload = function(req, res) {
+	
+	return res.jsonp({
+				message: 'This is a test ' +req.param('unitid')
+			});
+	/*
+	var reading = new Reading(req.body);
+	reading.user = req.user;
+
+	reading.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(reading);
+		}
+	});
+	*/
+};

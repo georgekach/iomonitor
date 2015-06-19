@@ -13,6 +13,9 @@ module.exports = function(app) {
 		.get(readings.read)
 		.put(users.requiresLogin, readings.hasAuthorization, readings.update)
 		.delete(users.requiresLogin, readings.hasAuthorization, readings.delete);
+		
+	app.route('/readings/upload')
+		.post(readings.upload);
 
 	// Finish by binding the Reading middleware
 	app.param('readingId', readings.readingByID);
