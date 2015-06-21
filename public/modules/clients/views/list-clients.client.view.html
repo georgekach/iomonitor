@@ -3,19 +3,23 @@
         <h1>Clients</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="client in clients" data-ng-href="#!/clients/{{client._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="client.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="client.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="client.name"></h4>
+        <div class="col-xs-6 col-sm-3" data-ng-repeat="client in clients">
+            <a data-ng-href="#!/clients/{{client._id}}" class="list-group-item">    
+            <h4 class="cust-list text-center">
+            <i class="glyphicon glyphicon-user"></i></h4>
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <h4>{{client.name}}</h4>
+                        <small class="list-group-item-text text-muted">
+                            <span data-ng-bind="client.created | date:'medium'"></span>
+                        </small>
+                    </div>
+                </div>
+            
         </a>
+        </div>
     </div>
     <highchart id="chart1" config="chartConfig"></highchart>
-    
-    <div class="alert alert-warning text-center" data-ng-hide="!clients.$resolved || clients.length">
-    	No Clients yet, why don't you <a href="/#!/clients/create">create one</a>?
-    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!clients.$resolved || clients.length">No Clients yet, why don't you
+        <a href="/#!/clients/create">create one</a>?</div>
 </section>

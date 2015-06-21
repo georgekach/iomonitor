@@ -1,8 +1,8 @@
-<section data-ng-controller="ArticlesController" data-ng-init="find()">
-	<div class="page-header">
+<section flex layout="column" data-ng-controller="ArticlesController" data-ng-init="find()">
+	<div >
 		<h1>Articles</h1>
 		<md-button md-no-ink class="md-primary md-raised" ng-click="sendMail()"> Send Mail</md-button>
-		<md-buttom ng-click="showAlert()">Show Alert dialog</md-button>
+		<md-button ng-click="showAlert()">Show Alert dialog</md-button>
 	</div>
 	<div class="list-group">
 		<a data-ng-repeat="article in articles" data-ng-href="#!/articles/{{article._id}}" class="list-group-item">
