@@ -16,8 +16,7 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 			$scope.isCollapsed = false;
 		});
 
-        $scope.toggleLeft = buildToggler('left');
-        $scope.toggleRight = buildToggler('right');
+
         /**
          * Build handler to open/close a SideNav; when animation finishes
          * report completion in console
@@ -27,22 +26,25 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
                 $mdSidenav(navID)
                     .toggle()
                     .then(function () {
-                        $log.debug("toggle " + navID + " is done");
+                        $log.debug('toggle ' + navID + ' is done');
                     });
             },300);
             return debounceFn;
         }
 
+        $scope.toggleLeft = buildToggler('left');
+        $scope.toggleRight = buildToggler('right');
+
         $scope.close = function () {
             $mdSidenav('left').close()
                 .then(function () {
-                    $log.debug("close LEFT is done");
+                    $log.debug('close LEFT is done');
                 });
         };
         $scope.closeRight = function () {
             $mdSidenav('right').close()
                 .then(function () {
-                    $log.debug("close RIGHT is done");
+                    $log.debug('close RIGHT is done');
                 });
         };
 	}
