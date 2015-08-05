@@ -33,7 +33,10 @@
 
 	<!-- Fav Icon -->
 	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
-
+	<!--<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>-->
+	<!--<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>-->
+	<link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
+	<!--<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>-->
 	<!--Application CSS Files-->
 	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 
@@ -46,7 +49,7 @@
 <body flex>
 
 		<div flex layout-fill layout="column">
-			<header data-ng-include="'/modules/core/views/myheader.client.view.html'"></header>
+			<header data-ng-include="'/modules/core/views/header.client.view.html'"></header>
 			<div flex layout-fill layout="row">
 			<!--<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">-->
 				<!--<md-toolbar class="md-theme-indigo">-->
@@ -65,10 +68,10 @@
 				<div data-ng-include="'/modules/core/views/sidenav.client.view.html'"></div>
 
 
-
 				{% block content %}{% endblock %}
 			</div>
 		</div>
+
 		<!--
 		<div data-ng-include="'/modules/core/views/sidenav.client.view.html'" layout="vertical"></div>
 		

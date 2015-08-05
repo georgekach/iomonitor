@@ -34,6 +34,10 @@ var ClientSchema = new Schema({
 		trim: true
 		},
     devices: [{type: Schema.Types.ObjectId, ref: 'Device'}],
+	users: [{
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	}],
     profile: {
         name: { type: String, default: '' },
         location: { type: String, default: '' },

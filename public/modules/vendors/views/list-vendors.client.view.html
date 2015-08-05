@@ -1,18 +1,46 @@
-<section data-ng-controller="VendorsController" data-ng-init="find()">
+<section class="container" data-ng-controller="VendorsController" data-ng-init="find()">
     <div class="page-header">
-        <h1>Vendors</h1>
+        <!--<h1>Vendors</h1>-->
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
+            <li><i class="fa fa-user right-padded-5"></i>List Vendors</li>
+        </ol>
+
     </div>
-    <div class="list-group">
-        <a data-ng-repeat="vendor in vendors" data-ng-href="#!/vendors/{{vendor._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="vendor.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="vendor.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="vendor.name"></h4>
-        </a>
+    <div>
+        <a href="/#!/vendors/create" class="btn btn-primary"> Add New</a>
+        <input type="text" placeholder="Search for" ng-model="query" class="pull-right">
     </div>
+
+    <table st-table="vendors" class="table table-striped top-buffer">
+        <thead>
+        <tr>
+            <th>Agent ID</th>
+            <th>Name</th>
+            <th>Email</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="vendor in vendors | filter:query">
+            <td><a href="/#!/vendors/{{vendor._id}}"> {{vendor._id}}</a></td>
+            <td>{{vendor.name}}</td>
+            <td>{{vendor.email}}</td>
+
+        </tr>
+        </tbody>
+    </table>
+    <!--<div class="list-group">-->
+        <!--<a data-ng-repeat="vendor in vendors" data-ng-href="#!/vendors/{{vendor._id}}" class="list-group-item">-->
+			<!--<small class="list-group-item-text">-->
+				<!--Posted on-->
+				<!--<span data-ng-bind="vendor.created | date:'medium'"></span>-->
+				<!--by-->
+				<!--<span data-ng-bind="vendor.user.displayName"></span>-->
+			<!--</small>-->
+			<!--<h4 class="list-group-item-heading" data-ng-bind="vendor.companyname"></h4>-->
+        <!--</a>-->
+    <!--</div>-->
     <div class="alert alert-warning text-center" data-ng-hide="!vendors.$resolved || vendors.length">
     	No Vendors yet, why don't you <a href="/#!/vendors/create">create one</a>?
     </div>

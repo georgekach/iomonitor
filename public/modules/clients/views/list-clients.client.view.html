@@ -1,25 +1,51 @@
-<section data-ng-controller="ClientsController" data-ng-init="find()">
+<section class="container" data-ng-controller="ClientsController" data-ng-init="find()">
     <div class="page-header">
-        <h1>Clients</h1>
+        <!--<h1><i class="fa fa-user"></i>Clients</h1>-->
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
+            <li><i class="fa fa-user right-padded-5"></i>List Clients</li>
+        </ol>
     </div>
-    <div class="list-group">
-        <div class="col-xs-6 col-sm-3" data-ng-repeat="client in clients">
-            <a data-ng-href="#!/clients/{{client._id}}" class="list-group-item">    
-            <h4 class="cust-list text-center">
-            <i class="glyphicon glyphicon-user"></i></h4>
-                <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1">
-                        <h4>{{client.name}}</h4>
-                        <small class="list-group-item-text text-muted">
-                            <span data-ng-bind="client.created | date:'medium'"></span>
-                        </small>
-                    </div>
-                </div>
-            
-        </a>
-        </div>
+    <div>
+    <a href="/#!/clients/create" class="btn btn-primary"> Add New </a>
+        <input class=" col-sm-2 col-md-2 pull-right" type="text" ng-model="query" placeholder="Filter by" autofocus>
     </div>
-    <highchart id="chart1" config="chartConfig"></highchart>
+    <table st-table="clients" class="table table-striped top-buffer">
+        <thead>
+        <tr>
+            <th>Client ID</th>
+            <th>Name</th>
+            <th>Email</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="client in clients | filter:query">
+            <td><a href="/#!/clients/{{client._id}}"> {{client._id}}</a></td>
+            <td>{{client.name}}</td>
+            <td>{{client.email}}</td>
+
+        </tr>
+        </tbody>
+    </table>
+    <!--<div class="list-group">-->
+        <!--<div class="col-xs-6 col-sm-3" data-ng-repeat="client in clients">-->
+            <!--<a data-ng-href="#!/clients/{{client._id}}" class="list-group-item">    -->
+            <!--<h4 class="cust-list text-center">-->
+            <!--<i class="glyphicon glyphicon-user"></i></h4>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-10 col-xs-offset-1">-->
+                        <!--<h4>{{client.name}}</h4>-->
+                        <!--<small class="list-group-item-text text-muted">-->
+                            <!--<span data-ng-bind="client.created | date:'medium'"></span>-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!-- -->
+        <!--</a>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<highchart id="chart1" config="chartConfig"></highchart>-->
     <div class="alert alert-warning text-center" data-ng-hide="!clients.$resolved || clients.length">No Clients yet, why don't you
         <a href="/#!/clients/create">create one</a>?</div>
 </section>

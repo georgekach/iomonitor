@@ -1,19 +1,54 @@
 <section data-ng-controller="DevicesController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Devices</h1>
-    </div>
-    <div class="list-group">
-        <a data-ng-repeat="device in devices" data-ng-href="#!/devices/{{device._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="device.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="device.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="device.name"></h4>
-        </a>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!devices.$resolved || devices.length">
-    	No Devices yet, why don't you <a href="/#!/devices/create">create one</a>?
+    <div class="container">
+        <div class="page-header">
+            <!--<h1>Devices</h1>-->
+            <ol class="breadcrumb">
+                <li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
+                <li>Devices List ({{devices.length}})</li>
+            </ol>
+        </div>
+        <div>
+            <a href="/#!/devices/create" class="btn btn-primary"> Add New</a>
+            <input type="text" placeholder="Filter By" ng-model="query" class="pull-right">
+        </div>
+
+        <!--<div class="list-group">
+            <a data-ng-repeat="device in devices" data-ng-href="#!/devices/{{device._id}}" class="list-group-item">
+                <small class="list-group-item-text">
+                    Posted on
+                    <span data-ng-bind="device.created | date:'medium'"></span>
+                    by
+                    <span data-ng-bind="device.user.displayName"></span>
+                </small>
+                <h4 class="list-group-item-heading" data-ng-bind="device.deviceId"></h4>
+                {{device.deviceId}}
+            </a>
+        </div>
+        <div class="alert alert-warning text-center" data-ng-hide="!devices.$resolved || devices.length">
+            No Devices yet, why don't you <a href="/#!/devices/create">create one</a>?
+        </div>
+        </div>-->
+
+        <table st-table="devices" class="table table-striped top-buffer">
+            <thead>
+            <tr>
+                <th>Device ID</th>
+                <th>location</th>
+                <th>Version</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="device in devices | filter:query">
+                <td><a href="/#!/devices/{{device._id}}"> {{device.deviceId}}</a></td>
+                <td><span ng-click="openEditDevice('lg',device)">{{device.location}}</span></td>
+                <td>{{device.version}}</td>
+
+            </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-warning text-center" data-ng-hide="!devices.$resolved || devices.length">
+            No Devices yet, why don't you <a href="/#!/devices/create">create one</a>?
+        </div>
     </div>
 </section>

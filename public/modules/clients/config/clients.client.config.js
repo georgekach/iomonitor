@@ -9,3 +9,4 @@ angular.module('clients').run(['Menus',
 		Menus.addSubMenuItem('topbar', 'clients', 'New Client', 'clients/create');
 	}
 ]);
+

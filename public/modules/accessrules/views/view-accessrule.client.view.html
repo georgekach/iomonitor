@@ -1,0 +1,26 @@
+<section class="container" data-ng-controller="AccessrulesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<!--<h1 data-ng-bind="accessrule.name"></h1>-->
+		<ol class="breadcrumb">
+			<li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
+			<li><a href="/#!/accessrules/">Access Rules </a></li>
+			<li> View Access Rule - {{accessrule.name}}</li>
+		</ol>
+	</div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == accessrule.user._id))">
+		<a class="btn btn-primary" href="/#!/accessrules/{{accessrule._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="accessrule.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="accessrule.user.displayName"></span>
+		</em>
+	</small>
+</section>

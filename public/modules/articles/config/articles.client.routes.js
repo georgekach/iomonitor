@@ -11,7 +11,8 @@ angular.module('articles').config(['$stateProvider',
 		}).
 		state('createArticle', {
 			url: '/articles/create',
-			templateUrl: 'modules/articles/views/create-article.client.view.html'
+			templateUrl: 'modules/articles/views/create-article.client.view.html',
+				data: { displayName: 'Create Article'}
 		}).
 		state('viewArticle', {
 			url: '/articles/:articleId',

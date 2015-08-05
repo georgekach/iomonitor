@@ -1,0 +1,47 @@
+<section class="container" data-ng-controller="SensortypesController" data-ng-init="find()">
+    <div class="page-header">
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
+            <li><i class="fa fa-cogs right-padded-5"></i><a href="/#!/systemadministration"> System Administration</a></li>
+            <li><i class="fa right-padded-5"></i>Sensor types</li>
+        </ol>
+    </div>
+    <div>
+        <button class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> </button>
+        <input class="pull-right" type="text" placeholder="Filter By" ng-model="query">
+    </div>
+    <table st-table="sensortypes" class="table table-striped top-buffer">
+        <thead>
+        <tr>
+            <th>Type Name</th>
+            <th>Measured Parameter</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="sensortype in sensortypes | filter:query">
+            <td><a href="/#!/devices/{{device._id}}"> {{sensortype.name}}</a></td>
+            <!--<td><span ng-click="openEditDevice('lg',device)">{{device.location}}</span></td>-->
+            <td>{{sensortype.measuredparameter}}</td>
+            <td>{{sensortype.description}}</td>
+
+
+        </tr>
+        </tbody>
+    </table>
+    <!--
+    <div class="list-group">
+        <a data-ng-repeat="sensortype in sensortypes" data-ng-href="#!/sensortypes/{{sensortype._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="sensortype.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="sensortype.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="sensortype.name"></h4>
+        </a>
+    </div>-->
+    <div class="alert alert-warning text-center" data-ng-hide="!sensortypes.$resolved || sensortypes.length">
+    	No Sensortypes yet, why don't you <a href="/#!/sensortypes/create">create one</a>?
+    </div>
+</section>

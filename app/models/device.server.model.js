@@ -10,12 +10,12 @@ var mongoose = require('mongoose'),
  * Device Schema
  */
 var DeviceSchema = new Schema({
-	/*name: {
+	name: {
 		type: String,
 		default: '',
 		required: 'Please fill Device name',
 		trim: true
-	},*/
+	},
 	 deviceId: { type: String, unique: false, lowercase: true },
     description: {
 		type: String,
@@ -24,9 +24,14 @@ var DeviceSchema = new Schema({
 		},
 		
     location: {
-		type: String,
-		default:'',
-		trim: true
+		lon:{
+			type: Number,
+			default: 0
+		},
+		lat:{
+			type: Number,
+			default: 0
+		}
 		},
     version: {
 		type: String,
@@ -34,6 +39,25 @@ var DeviceSchema = new Schema({
 		trim: true
 		},
     clientId:{type: Schema.Types.ObjectId, ref: 'Client'},
+	devicesensors:[{ type: Schema.Types.ObjectId, ref: 'Devicesensor'}],
+	simnumber:{
+		type: String,
+		default:'',
+		trim: true
+	},
+	interval:{
+	 type: Number,
+		default: 10
+	},
+	publicurl:{
+		type: String,
+		default: '',
+		trim: true
+	},
+	timezone:{
+		type: String,
+		default:''
+	},
     previousreadingtime: {
 		type: String,
 		default:'',

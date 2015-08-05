@@ -1,0 +1,26 @@
+<section class="container" data-ng-controller="SensortypesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<ol class="breadcrumb">
+			<li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
+			<li><i class="fa fa-cogs right-padded-5"></i><a href="/#!/systemadministration"> System Administration</a></li>
+			<li><i class="fa right-padded-5"></i><a href="/#!/sensortypes"> Sensor types</a></li>
+			<li><i class="right-padded-5"></i>View Sensor Type</li>
+		</ol>
+	</div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == sensortype.user._id))">
+		<a class="btn btn-primary" href="/#!/sensortypes/{{sensortype._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="sensortype.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="sensortype.user.displayName"></span>
+		</em>
+	</small>
+</section>

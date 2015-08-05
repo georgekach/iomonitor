@@ -1,10 +1,51 @@
 'use strict';
 
 // Clients controller
-angular.module('clients').controller('ClientsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Clients',
-	function($scope, $stateParams, $location, Authentication, Clients) {
+angular.module('clients').controller('ClientsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Clients','$mdToast', '$animate','$mdDialog','Devices','$modal','$log',
+	function($scope, $stateParams, $location, Authentication, Clients,$mdToast, $animate,$mdDialog,Devices,$modal,$log) {
 		$scope.authentication = Authentication;
+        $scope.section = 'Clients';
+        $scope.clientsDevices = '';
 
+        //Toastr Settings
+        $scope.toastPosition = {
+            bottom: true,
+            top: false,
+            left: true,
+            right: false
+        };
+
+        // Modal
+
+        $scope.items = ['item1', 'item2', 'item3'];
+
+        $scope.animationsEnabled = true;
+
+        $scope.open = function (size) {
+
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'modules/clients/views/edit-client.client.view.html',//'myModalContent.html',
+                controller: 'ClientsController',
+                size: size,
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+        }
+
+
+
+            //EndModal
+
+
+        $scope.getToastPosition = function() {
+            return Object.keys($scope.toastPosition)
+                .filter(function(pos) { return $scope.toastPosition[pos]; })
+                .join(' ');
+        };
 		// Create new Client
 		$scope.create = function() {
 			// Create new Client object
@@ -48,6 +89,13 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
 				$location.path('clients/' + client._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content('Error updating record' +errorResponse.data)
+                        .position($scope.getToastPosition())
+                        .hideDelay(3000)
+                );
+                $log.info($scope.error);
 			});
 		};
 
@@ -61,6 +109,9 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
 			$scope.client = Clients.get({ 
 				clientId: $stateParams.clientId
 			});
+
+            $scope.clientsDevices = Devices.query();
+
 		};
 		
 		// Highcharts

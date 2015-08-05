@@ -88,7 +88,7 @@ exports.list = function(req, res) {
  * Device middleware
  */
 exports.deviceByID = function(req, res, next, id) { 
-	Device.findById(id).populate('user', 'displayName').exec(function(err, device) {
+	Device.findById(id).populate('user devicesensors').exec(function(err, device) {
 		if (err) return next(err);
 		if (! device) return next(new Error('Failed to load Device ' + id));
 		req.device = device ;

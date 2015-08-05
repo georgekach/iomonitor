@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus','$mdSidenav','$mdUtil','$log',
-	function($scope, Authentication, Menus,$mdSidenav,$mdUtil,$log) {
+angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus','$mdSidenav','$mdUtil','$log','SmoothScroll','$location',
+	function($scope, Authentication, Menus,$mdSidenav,$mdUtil,$log,SmoothScroll,$location) {//
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
@@ -15,6 +15,21 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 		$scope.$on('$stateChangeSuccess', function() {
 			$scope.isCollapsed = false;
 		});
+
+
+            $('#side-menu').metisMenu();
+
+
+/* Smooth scrolling*/
+        $scope.gotoElement = function (eID){
+            // set the location.hash to the id of
+            // the element you wish to scroll to.
+            $location.hash('bottom');
+
+            // call $anchorScroll()
+            SmoothScroll.scrollTo(eID);
+
+        };
 
 
         /**

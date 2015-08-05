@@ -14,8 +14,13 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+				 'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/angular-material/angular-material.css',
+				'public/lib/metismenu/metisMenu.css',
+				'public/lib/sb-admin/sb-admin-2.css',
+				'public/lib/font-awesome-4.3.0/css/font-awesome.css',
+				'public/lib/openlayers3/build/ol.css',
+				'public/lib/weather-icons/css/weather-icons.css',
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -31,6 +36,18 @@ module.exports = {
 				'public/lib/highcharts-ng/src/highcharts-ng.js',
 				'public/lib/socket-io/socket.io.js',
 				'public/lib/angular-socket-io/socket.min.js',
+				'public/lib/jquery/dist/jquery.js',
+				'public/lib/metismenu/metisMenu.js',
+				'public/lib/sb-admin/sb-admin-2.js',
+				'public/lib/angular-smart-table/smart-table.js',
+				'public/lib/raphael/raphael.js',
+				'public/lib/justgage-toorshia/justgage.js',
+				'public/lib/angular-justgage/ng-justgage.js',
+				'https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js',
+
+				'public/lib/openlayers3/build/ol.js',
+				'public/lib/angular-openlayers-directive/dist/angular-openlayers-directive.js',
+				'public/lib/angular-sanitize/angular-sanitize.js',
 			]
 		},
 		css: [

@@ -1,0 +1,19 @@
+<section data-ng-controller="DevicesensoralertsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Devicesensoralerts</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="devicesensoralert in devicesensoralerts" data-ng-href="#!/devicesensoralerts/{{devicesensoralert._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="devicesensoralert.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="devicesensoralert.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="devicesensoralert.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!devicesensoralerts.$resolved || devicesensoralerts.length">
+    	No Devicesensoralerts yet, why don't you <a href="/#!/devicesensoralerts/create">create one</a>?
+    </div>
+</section>

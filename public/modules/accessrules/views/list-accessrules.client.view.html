@@ -1,0 +1,48 @@
+<section class="container" data-ng-controller="AccessrulesController" data-ng-init="find()">
+    <div class="page-header">
+        <!--<h1>Accessrules</h1>-->
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
+            <li>Access Rules ({{accessrules.length}})</li>
+        </ol>
+    </div>
+    <div >
+
+        <a href="/#!/accessrules/create" class="btn btn-primary col-md-1"> Add New</a>
+
+        <input type="text" placeholder="Filter By" ng-model="query" class="pull-right">
+
+    </div>
+    <table st-table="accessrules" class="table table-striped top-buffer">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Created by</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="accessrule in accessrules | filter:query">
+            <td><a href="/#!/accessrules/{{accessrule._id}}"> {{accessrule.name}}</a></td>
+            <td>{{accessrule.user.displayName}}</td>
+            <td>{{device.version}}</td>
+
+        </tr>
+        </tbody>
+    </table>
+    <!--
+    <div class="list-group">
+        <a data-ng-repeat="accessrule in accessrules" data-ng-href="#!/accessrules/{{accessrule._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="accessrule.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="accessrule.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="accessrule.name"></h4>
+        </a>
+    </div>-->
+    <div class="alert alert-warning text-center" data-ng-hide="!accessrules.$resolved || accessrules.length">
+    	No Accessrules yet, why don't you <a href="/#!/accessrules/create">create one</a>?
+    </div>
+</section>

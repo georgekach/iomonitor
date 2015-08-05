@@ -4,7 +4,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 	function($scope, $stateParams, $location, Authentication, Articles,$mdToast, $animate,$mdDialog,Socket) {
 		$scope.authentication = Authentication;
 		
-		
+
 		// Toastr
 
 		$scope.toastPosition = {
@@ -69,6 +69,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 
 
 		$scope.create = function() {
+
 			var article = new Articles({
 				title: this.title,
 				content: this.content

@@ -1,0 +1,40 @@
+<section class="container" data-ng-controller="SensortypesController" data-ng-init="findOne()">
+    <div class="page-header">
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
+            <li><i class="fa fa-cogs right-padded-5"></i><a href="/#!/systemadministration"> System Administration</a></li>
+            <li><i class="fa right-padded-5"></i><a href="/#!/sensortypes"> Sensor types</a></li>
+            <li><i class="right-padded-5"></i>Edit Sensor Type - {{sensortype.name}}</li>
+        </ol>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="sensortype.name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="measuredparameter">Measurement Unit</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="sensortype.measuredparameter" id="measuredparameter" class="form-control" placeholder="Unit" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="description">Description</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="sensortype.description" id="description" class="form-control" placeholder="Description" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>

@@ -1,6 +1,12 @@
 <section data-ng-controller="DevicesController" data-ng-init="findOne()">
+	<div class="container">
 	<div class="page-header">
-		<h1 data-ng-bind="device.name"></h1>
+		<!--<h1 data-ng-bind="device.deviceId"></h1>-->
+		<ol class="breadcrumb">
+			<li><i class="fa fa-home" style="padding-right: 5px"></i><a href="/#!/">Home</a></li>
+			<li><i class="fa fa-user"  style="padding-right: 5px"></i><a href="/#!/devices">List Devices</a></li>
+			<li>Device Details for {{device.deviceId}}</li>
+		</ol>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == device.user._id))">
 		<a class="btn btn-primary" href="/#!/devices/{{device._id}}/edit">
@@ -12,10 +18,11 @@
 	</div>
 	<small>
 		<em class="text-muted">
-			Posted on
+			Created on
 			<span data-ng-bind="device.created | date:'mediumDate'"></span>
 			by
 			<span data-ng-bind="device.user.displayName"></span>
 		</em>
 	</small>
+	</div>
 </section>

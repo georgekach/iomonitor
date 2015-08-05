@@ -1,69 +1,115 @@
+
 <div flex data-ng-controller="HeaderController">
-	<md-toolbar layout="row" layout-align="space-around center">
+    <md-toolbar flex layout="row" layout-align="space-between center">
 
-		<md-button class="md-icon-button" ng-click="toggleLeft()" aria-label="View Menu"><md-icon md-svg-icon="menu"></md-button>
-            <h2 class="md-toolbar-tools">My Test App</h2>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" md-no-ink ng-click="toggleLeft()" aria-label="View Menu"
+                       data-ng-show="authentication.user">
+                <md-icon md-svg-icon="menu">
+            </md-button>
+            <!--<h2 class="md-toolbar-tools">{{section}} <span class="fa fa-angle-right"></span> {{viewTitle}}</h2>-->
 
-                
-            <md-button aria-label="The button">the button</md-button>
+
+            <md-menu md-position-mode="target-right target" md-offset="0 70" data-ng-show="authentication.user">
+                <md-button class="md-icon-button button" aria-label="Notifications" ng-click="$mdOpenMenu()">
+                    <h4><i class="glyphicon glyphicon-envelope"></i></h4>
+                </md-button>
+                <menu-content>
+                    <md-menu-item>
+                        <md-button href="/#!/" aria-label="Notifications">Notifications</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button href="/#!/" aria-label="System Alerts">System Alerts</md-button>
+                    </md-menu-item>
+                </menu-content>
+            </md-menu>
+            <!--
+            <md-menu md-position-mode="target-right target" md-offset="0 70" data-ng-show="authentication.user">
+                <md-button class="md-icon-button button" aria-label="Connected User" ng-click="$mdOpenMenu()">
+
+                    <h4><i class="glyphicon glyphicon-user"></i></h4>
+                </md-button>
+                <md-menu-content>
+                    <md-menu-item>
+                        <md-button href="/#!/settings/profile" aria-label="Edit Profile">Edit Profile</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button href="/#!/settings/password" aria-label="Change Password">Change Password</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button href="/auth/signout" aria-label="Sign out">Sign out</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+
+            </md-menu>-->
+
+            <md-button md-no-ink href="/#!/signup" aria-label="The button" data-ng-hide="authentication.user">Sign up
+            </md-button>
+            <md-button md-no-ink href="/#!/signin" aria-label="The button" data-ng-hide="authentication.user">Sign In
+            </md-button>
 
 
+            <span flex></span>
+        </div>
 
-        </md-toolbar>
-        <!--<div class="navbar-header">-->
-		<!--<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">-->
-			<!--<span class="sr-only">Toggle navigation</span>-->
-			<!--<span class="icon-bar"></span>-->
-			<!--<span class="icon-bar"></span>-->
-			<!--<span class="icon-bar"></span>-->
-		<!--</button>-->
-		<!--<a href="/#!/" class="navbar-brand">IO.Monitor</a>-->
-	<!--</div>-->
-	<!--<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">-->
-		<!--<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">-->
-			<!--<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">-->
-				<!--<a ng-switch-when="dropdown" class="dropdown-toggle">-->
-					<!--<span data-ng-bind="item.title"></span>-->
-					<!--<b class="caret"></b>-->
-				<!--</a>-->
-				<!--<ul ng-switch-when="dropdown" class="dropdown-menu">-->
-					<!--<li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">-->
-						<!--<a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>-->
-					<!--</li>-->
-				<!--</ul>-->
-				<!--<a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>-->
-			<!--</li>-->
-		<!--</ul>-->
-		<!--<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">-->
-			<!--<li ui-route="/signup" ng-class="{active: $uiRoute}">-->
-				<!--<a href="/#!/signup">Sign Up</a>-->
-			<!--</li>-->
-			<!--<li class="divider-vertical"></li>-->
-			<!--<li ui-route="/signin" ng-class="{active: $uiRoute}">-->
-				<!--<a href="/#!/signin">Sign In</a>-->
-			<!--</li>-->
-		<!--</ul>-->
-		<!--<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">-->
-			<!--<li class="dropdown">-->
-				<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-					<!--<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu">-->
-					<!--<li>-->
-						<!--<a href="/#!/settings/profile">Edit Profile</a>-->
-					<!--</li>-->
-					<!--<li>-->
-						<!--<a href="/#!/settings/accounts">Manage Social Accounts</a>-->
-					<!--</li>-->
-					<!--<li data-ng-show="authentication.user.provider === 'local'">-->
-						<!--<a href="/#!/settings/password">Change Password</a>-->
-					<!--</li>-->
-					<!--<li class="divider"></li>-->
-					<!--<li>-->
-						<!--<a href="/auth/signout">Signout</a>-->
-					<!--</li>-->
-				<!--</ul>-->
-			<!--</li>-->
-		<!--</ul>-->
-	<!--</nav>-->
+        <!--<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">-->
+        <!--<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">-->
+        <!--<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">-->
+        <!--<a ng-switch-when="dropdown" class="dropdown-toggle">-->
+        <!--<span data-ng-bind="item.title"></span>-->
+        <!--<b class="caret"></b>-->
+        <!--</a>-->
+        <!--<ul ng-switch-when="dropdown" class="dropdown-menu">-->
+        <!--<li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">-->
+        <!--<a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--<a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
+            <li ui-route="/signup" ng-class="{active: $uiRoute}">
+                <a href="/#!/signup">Sign Up</a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li ui-route="/signin" ng-class="{active: $uiRoute}">
+                <a href="/#!/signin">Sign In</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/#!/settings/profile">Edit Profile</a>
+                    </li>
+                    <li>
+                        <a href="/#!/settings/accounts">Manage Social Accounts</a>
+                    </li>
+                    <li data-ng-show="authentication.user.provider === 'local'">
+                        <a href="/#!/settings/password">Change Password</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/auth/signout">Signout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>-->
+
+    </md-toolbar>
+
+    <!--<div class="navbar-header">-->
+    <!--<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">-->
+    <!--<span class="sr-only">Toggle navigation</span>-->
+    <!--<span class="icon-bar"></span>-->
+    <!--<span class="icon-bar"></span>-->
+    <!--<span class="icon-bar"></span>-->
+    <!--</button>-->
+    <!--<a href="/#!/" class="navbar-brand">IO.Monitor</a>-->
+    <!--</div>-->
+
 </div>
