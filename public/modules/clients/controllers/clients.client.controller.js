@@ -91,7 +91,7 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
 				$scope.error = errorResponse.data.message;
                 $mdToast.show(
                     $mdToast.simple()
-                        .content('Error updating record' +errorResponse.data)
+                        .content('Updated Record Successfully')
                         .position($scope.getToastPosition())
                         .hideDelay(3000)
                 );

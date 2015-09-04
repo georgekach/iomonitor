@@ -1,0 +1,10 @@
+{
+  "filename": "ServerConfig.json",
+  "version": "0.9.2",
+  "description": "This is a file that stores the environment variables for the server",
+  "mailer_url": "mail.google.com",
+  "author": {
+    "name": "George Kachambwa",
+    "email": "kachambwa.george@gmail.com"
+  }
+}

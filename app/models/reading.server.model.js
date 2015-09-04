@@ -82,7 +82,9 @@ var ReadingSchema = new Schema({
 		trim: true
 		},
     device:{type: Schema.Types.ObjectId, ref: 'Device'},
-	devicesensor:{type: Schema.Types.ObjectId, ref: 'Devicesensor'},
+	processed: {
+		type: Boolean
+	},
 	created: {
 		type: Date,
 		default: Date.now

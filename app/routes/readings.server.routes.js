@@ -15,9 +15,9 @@ module.exports = function(app) {
 		.delete(users.requiresLogin, readings.hasAuthorization, readings.delete);
 		
 	
-
-	app.route('/readings/upload')
-		.post(readings.uploadReading);
+/*
+	app.route('/readings/process')
+		.get(readings.processReadings);*/
 		
 	// Finish by binding the Reading middleware
 	app.param('readingId', readings.readingByID);
