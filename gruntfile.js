@@ -8,7 +8,9 @@ module.exports = function(grunt) {
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
-		mochaTests: ['app/tests/**/*.js']
+		mochaTests: ['app/tests/**/*.js'],
+		cronFiles:['servercron.js'],
+		readingsTCPServer:['server.readings.tcp.js']
 	};
 
 	// Project Configuration

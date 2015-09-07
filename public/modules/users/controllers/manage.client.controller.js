@@ -1,8 +1,9 @@
 /**
  * Created by George on 8/3/2015.
  */
-angular.module('users').controller('ManageUsersController', ['$scope', '$http', '$location','Users','$modal',
-    function($scope, $http, $location, Users,$modal) {
+'use strict';
+angular.module('users').controller('ManageUsersController', ['$scope', '$http', '$location','Users','$modal','Devicesensoralerts','Devicesensors',
+    function($scope, $http, $location, Users,$modal,Devicesensoralerts,Devicesensors) {
 
         $scope.animationsEnabled = true;
 

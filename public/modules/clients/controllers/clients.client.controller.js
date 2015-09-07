@@ -34,7 +34,7 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
                     }
                 }
             });
-        }
+        };
 
 
 

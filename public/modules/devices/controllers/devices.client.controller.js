@@ -270,7 +270,7 @@ angular.module('devices').controller('DevicesController', ['$scope', '$statePara
 					$mdToast.simple()
 						.content('Device Record Updated')
 						.position($scope.getToastPosition())
-						.theme("success-toast")
+						.theme('success-toast')
 						.hideDelay(3000)
 				);
 

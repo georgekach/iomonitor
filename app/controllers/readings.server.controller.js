@@ -220,7 +220,7 @@ exports.processReadingsForAlerts = function () {
 
     console.log('processing readings for alerts');
 
-    Reading.find({processed: {'$exists': false}}).populate('device').exec( function (err, readings) {
+    Reading.find({processed: {'$exists': false},deviceId:{'$exists':true}}).populate('device').exec( function (err, readings) {
             if (err) {
 
                 console.log('error here');
@@ -229,7 +229,7 @@ exports.processReadingsForAlerts = function () {
 
                 readings.forEach(function (item) {
 
-                    console.log('reading readings for alerts processing ...' + item.unitId+item.device.name);
+                    console.log('reading readings for alerts processing ...' + item.unitId);
                     Devicesensor.find({'deviceId': item.device._id}, function (err2, devicesensors) {
 
 
@@ -269,7 +269,7 @@ exports.processReadingsForAlerts = function () {
 
                                                                }
                                                                else{
-                                                                   console.log('Cant work with a null alertaction')
+                                                                   console.log('Cant work with a null alertaction');
                                                                }
 
                                                            });
