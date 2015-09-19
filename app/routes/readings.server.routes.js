@@ -7,12 +7,16 @@ module.exports = function(app) {
 	// Readings Routes
 	app.route('/readings')
 		.get(readings.list)
-		.post(users.requiresLogin, readings.create);
+		.post( readings.create);
 
 	app.route('/readings/:readingId')
 		.get(readings.read)
-		.put(users.requiresLogin, readings.hasAuthorization, readings.update)
-		.delete(users.requiresLogin, readings.hasAuthorization, readings.delete);
+		.put( readings.update)
+		.delete(readings.delete);
+
+	app.route('/readingsbydevice/:myId')
+		.get(readings.readingByDeviceID);
+
 		
 	
 /*
@@ -21,4 +25,6 @@ module.exports = function(app) {
 		
 	// Finish by binding the Reading middleware
 	app.param('readingId', readings.readingByID);
+	app.param('myId', readings.readingByDeviceID);
+
 };

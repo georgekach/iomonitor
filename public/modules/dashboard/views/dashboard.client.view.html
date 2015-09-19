@@ -105,39 +105,47 @@
 
                                 <h4>Summary</h4>
 
+                                <select class="form-control" style="margin-bottom: 5px;" ng-model="selectedDevice" ng-options="device.name for device in devices " ng-change="update()">
+
+                                </select>
+
+
                                 <div layout="row">
                                     <strong class="right-padded-5">Device Name:</strong>
-                                    Online
+                                    {{selectedDevice.deviceId}}
                                 </div>
                                 <div layout="row">
                                     <strong class="right-padded-5">Description:</strong>
-                                    Online
+                                    {{selectedDevice.description}}
                                 </div>
                                 <div layout="row">
                                     <strong class="right-padded-5">Status:</strong>
-                                    Online
+                                    {{selectedDevice.status}}
                                 </div>
                                 <div layout="row">
                                     <strong class="right-padded-5">Signal Strength:</strong>
-                                    Poor
+                                    {{selectedDevice.signal}}
                                 </div>
                                 <div layout="row">
                                     <strong class="right-padded-5">Battery:</strong>
-                                    Ok
+                                    {{selectedDevice.batterystatus}}
                                 </div>
                                 <div layout="row">
                                     <strong class="right-padded-5">Connected Sensors:</strong>
-                                    4
+                                    {{selectedDevice.sensors.length}}
                                 </div>
                                 <div layout="row">
                                     <strong class="right-padded-5">Last Reading Time:</strong>
-                                    Online
+                                    {{selectedDevice.latestreadingtime}}
                                 </div>
                             </div>
                             <h4>Connected Sensors</h4>
 
                             <div layout="row" flex layout-fill layout-padding layout-margin>
                                 <div layout="row" layout-align="space-around center">
+                                    <div class="clickable dashboard-sensor-tile right-padded-5" layout="row" layout-align="center center" ng-repeat="sensor in selectedDevice.sensors" ng-click="showSummary('stats')">
+                                        <span class="fa fa-tint  "></span></div>
+                                    <!--
                                     <div class="clickable dashboard-sensor-tile right-padded-5" layout="row" layout-align="center center"  ng-click="showSummary('stats')">
                                         <span class="fa fa-tint  "></span></div>
                                     <div class="clickable dashboard-sensor-tile right-padded-5" layout="row" layout-align="center center" ng-click="showSummary('stats')">
@@ -148,7 +156,7 @@
                                     </div>
                                     <div class="clickable dashboard-sensor-tile right-padded-5" layout="row" layout-align="center center" ng-click="showSummary('stats')">
                                         <span class="fa fa-tint "></span>
-                                    </div>
+                                    </div>-->
                                 </div>
 
                             </div>

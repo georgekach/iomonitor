@@ -4,6 +4,7 @@
 angular.module('vendors').controller('VendorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Vendors',
 	function($scope, $stateParams, $location, Authentication, Vendors) {
 		$scope.authentication = Authentication;
+		$scope.vendorsClients = '';
 
 		// Create new Vendor
 		$scope.create = function() {

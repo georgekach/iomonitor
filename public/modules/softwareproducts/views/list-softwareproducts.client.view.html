@@ -1,42 +1,43 @@
-<section class="container" data-ng-controller="SoftwareproductsController" data-ng-init="find()">
-    <div class="page-header">
-        <!--<h1>Softwareproducts</h1>-->
-        <ol class="breadcrumb">
-            <li><i class="fa fa-home" style="padding-right: 5px"></i><a href="/#!/">Home</a></li>
-            <li><i class="fa fa-user"  style="padding-right: 5px"></i> List Products</li>
+<section  data-ng-controller="SoftwareproductsController" data-ng-init="find()">
+    <div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
 
-        </ol>
+        <h2 class="margin-right-5">Software Products Listing</h2>
+
+
     </div>
-    <table st-table="softwareproducts" class="table table-striped">
-        <thead>
-        <tr>
-            <th>Product ID</th>
-            <th>Name</th>
-            <th>Description</th>
+    <div class="section-margin">
+        <table st-table="softwareproducts" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Description</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="softwareproduct in softwareproducts">
-            <td><a href="/#!/softwareproducts/{{softwareproduct._id}}"> {{softwareproduct._id}}</a></td>
-            <td>{{softwareproduct.name}}</td>
-            <td>{{softwareproduct.description}}</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="softwareproduct in softwareproducts">
+                <td><a href="/#!/softwareproducts/{{softwareproduct._id}}"> {{softwareproduct._id}}</a></td>
+                <td>{{softwareproduct.name}}</td>
+                <td>{{softwareproduct.description}}</td>
 
-        </tr>
-        </tbody>
-    </table>
-    <!--<div class="list-group">-->
+            </tr>
+            </tbody>
+        </table>
+        <!--<div class="list-group">-->
         <!--<a data-ng-repeat="softwareproduct in softwareproducts" data-ng-href="#!/softwareproducts/{{softwareproduct._id}}" class="list-group-item">-->
-			<!--<small class="list-group-item-text">-->
-				<!--Posted on-->
-				<!--<span data-ng-bind="softwareproduct.created | date:'medium'"></span>-->
-				<!--by-->
-				<!--<span data-ng-bind="softwareproduct.user.displayName"></span>-->
-			<!--</small>-->
-			<!--<h4 class="list-group-item-heading" data-ng-bind="softwareproduct.name"></h4>-->
+        <!--<small class="list-group-item-text">-->
+        <!--Posted on-->
+        <!--<span data-ng-bind="softwareproduct.created | date:'medium'"></span>-->
+        <!--by-->
+        <!--<span data-ng-bind="softwareproduct.user.displayName"></span>-->
+        <!--</small>-->
+        <!--<h4 class="list-group-item-heading" data-ng-bind="softwareproduct.name"></h4>-->
         <!--</a>-->
-    <!--</div>-->
-    <div class="alert alert-warning text-center" data-ng-hide="!softwareproducts.$resolved || softwareproducts.length">
-    	No Softwareproducts yet, why don't you <a href="/#!/softwareproducts/create">create one</a>?
+        <!--</div>-->
+        <div class="alert alert-warning text-center"
+             data-ng-hide="!softwareproducts.$resolved || softwareproducts.length">
+            No Softwareproducts yet, why don't you <a href="/#!/softwareproducts/create">create one</a>?
+        </div>
     </div>
 </section>

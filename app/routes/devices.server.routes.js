@@ -14,6 +14,11 @@ module.exports = function(app) {
 		.put(users.requiresLogin, devices.hasAuthorization, devices.update)
 		.delete(users.requiresLogin, devices.hasAuthorization, devices.delete);
 
+	app.route('/devicesensor/:sensId')
+		.get(devices.readsensor)
+		.delete(users.requiresLogin, devices.hasAuthorization, devices.deletesensor);
 	// Finish by binding the Device middleware
 	app.param('deviceId', devices.deviceByID);
+	app.param('sensId',devices.readsensor);
+
 };

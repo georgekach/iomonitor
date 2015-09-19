@@ -54,3 +54,33 @@ exports.update = function(req, res) {
 exports.me = function(req, res) {
 	res.json(req.user || null);
 };
+
+/*
+* List all users
+ */
+exports.listUsers = function (req, res) {
+	User.find().select('username firstName lastName created').exec(function (err, users) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(users);
+		}
+	});
+};
+/*
+ * List all of a clients users
+ */
+exports.listByClient = function (req, res) {
+	User.find({client:req.params.clientId1}).select('username firstName lastName created').exec(function (err, users) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			console.log('My Results are '+ users);
+			res.jsonp(users);
+		}
+	});
+};

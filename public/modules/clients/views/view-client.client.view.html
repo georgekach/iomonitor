@@ -1,14 +1,11 @@
-<section class="container" layout="column" data-ng-controller="ClientsController" data-ng-init="findOne()">
-	<div class="container">
-		<div flex>
-	<div class="page-header">
-		<!--<h1 data-ng-bind="client.name"></h1>-->
-		<ol class="breadcrumb">
-			<li><i class="fa fa-home" style="padding-right: 5px"></i><a href="/#!/">Home</a></li>
-			<li><i class="fa fa-user"  style="padding-right: 5px"></i><a href="/#!/clients">List Clients</a></li>
-			<li>Client Details for {{client._id}}</li>
-		</ol>
-	</div>
+<section layout="column" data-ng-controller="ClientsController" data-ng-init="findOne()">
+	<div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
+        <!--<h2 data-ng-bind="client.name"></h2>-->
+        <h2 class="left-margin-20">{{client.name}} - View</h2>
+    </div>
+	<div class="section-margin">
+		
+	
 	<div class="pull-right" >
 		<a class="btn btn-primary" href="/#!/clients/{{client._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
@@ -25,6 +22,6 @@
 			<span data-ng-bind="client.user.displayName"></span>
 		</em>
 	</small>
-		</div>
+		
 	</div>
 </section>

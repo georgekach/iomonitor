@@ -34,10 +34,17 @@ exports.read = function(req, res) {
 };
 
 /**
+ * Show the current Device
+ */
+exports.readsensor = function(req, res) {
+	res.jsonp(req.currentSelectedSensor);
+};
+/**
  * Update a Device
  */
 exports.update = function(req, res) {
 	var device = req.device ;
+
 
 	device = _.extend(device , req.body);
 
@@ -70,6 +77,25 @@ exports.delete = function(req, res) {
 };
 
 /**
+ * Delete a Devices Sensor
+ */
+exports.deletesensor = function(req, res) {
+	var device = req.device ;
+
+	device.sensors.id(req.params.sensId).remove();
+
+	device.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(device);
+		}
+	});
+};
+
+/**
  * List of Devices
  */
 exports.list = function(req, res) { 
@@ -91,8 +117,17 @@ exports.deviceByID = function(req, res, next, id) {
 	Device.findById(id).populate('user devicesensors').exec(function(err, device) {
 		if (err) return next(err);
 		if (! device) return next(new Error('Failed to load Device ' + id));
-		req.device = device ;
-		next();
+		Device.populate(device,{
+			path: 'devicesensors.devicesensoralerts',
+			model:'Devicesensoralert'
+		},function(err, fulldevice) {
+			if(err) return res.send(err);
+			console.log(fulldevice); // This object should now be populated accordingly.
+			req.device = fulldevice ;
+			next();
+		});
+		//req.device = fulldevice ;
+		//next();
 	});
 };
 

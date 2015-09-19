@@ -1,23 +1,83 @@
-<section class="container" data-ng-controller="VendorsController" data-ng-init="findOne()">
-    <div class="page-header">
-        <h1>Edit Vendor</h1>
+<section   data-ng-controller="VendorsController" data-ng-init="findOne()">
+    <div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
+
+        <h2 class="margin-right-5">Edit Agent</h2>
+
+
     </div>
-    <div class="col-md-12">
+    <div class="section-margin">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="companyname">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="vendor.companyname" id="companyname" class="form-control" placeholder="companyname" required>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Agent Details">
+                    <div class="col-md-12">
+
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="control-label" for="vendorname">Agent Name</label>
+
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="vendor.vendorname" id="vendorname"
+                                               class="form-control" placeholder="vendorname" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="companyname">Company Name</label>
+
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="vendor.companyname" id="companyname"
+                                               class="form-control" placeholder="companyname" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="address">Address</label>
+
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="vendor.address" id="address"
+                                               class="form-control" placeholder="companyname" required>
+                                    </div>
+                                </div>
+
+                                <div data-ng-show="error" class="text-danger">
+                                    <strong data-ng-bind="error"></strong>
+                                </div>
+                            </fieldset>
+
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
+                </md-tab>
+                <md-tab  label="Clients listing">
+                    <div class="section-margin">
+                        <div>
+                            <span class="btn btn-primary">Add New</span>
+                        </div>
+
+                        <table st-table="vendorsClients" class="table table-striped top-buffer">
+                            <thead>
+                            <tr>
+                                <th>Client ID</th>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="client in vendorsClients">
+                                <td>{{client.name}}</td>
+                                <td>{{client.fname}}</td>
+                                <td>{{client.sname}}</td>
+                                <td><a href="/#!/clients/{{client._id}}" class="btn btn-primary"> View</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+
+            <div class="modal-footer">
+            <input type="submit" value="Save" class="btn btn-success">
+                <button class="btn btn-danger"> Cancel</button>
+        </div>
         </form>
     </div>
 </section>

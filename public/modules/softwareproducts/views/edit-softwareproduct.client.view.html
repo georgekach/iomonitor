@@ -1,23 +1,31 @@
-<section class="container" data-ng-controller="SoftwareproductsController" data-ng-init="findOne()">
-    <div class="page-header">
-        <h1>Edit Softwareproduct</h1>
+<section data-ng-controller="SoftwareproductsController" data-ng-init="findOne()">
+
+    <div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
+
+        <h2 class="margin-right-5">Edit Software Product</h2>
+
+
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="softwareproduct.name" id="name" class="form-control" placeholder="Name" required>
+    <div class="section-margin">
+        <div class="col-md-12">
+            <form class="form-horizontal" data-ng-submit="update()" novalidate>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="control-label" for="name">Name</label>
+
+                        <div class="controls">
+                            <input type="text" data-ng-model="softwareproduct.name" id="name" class="form-control"
+                                   placeholder="Name" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-default">
+                    </div>
+                    <div data-ng-show="error" class="text-danger">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
 </section>

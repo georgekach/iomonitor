@@ -28,6 +28,11 @@ var AlertSchema = new Schema({
 		required: 'Please fill Alert date of occurence',
 		trim: true
 	},
+	alerttype:{
+		type:String,
+		default:'',
+		enum:['system','device','notification']
+	},
 	alertstatus:{
 		type: String
 	},

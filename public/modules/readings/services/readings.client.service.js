@@ -11,3 +11,5 @@ angular.module('readings').factory('Readings', ['$resource',
 		});
 	}
 ]);
+
+

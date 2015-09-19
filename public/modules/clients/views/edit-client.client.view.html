@@ -1,11 +1,17 @@
-<section class="container modal-body" data-ng-controller="ClientsController" data-ng-init="findOne()">
-    <div class="page-header">
+<section data-ng-controller="ClientsController" data-ng-init="findOne()">
+    <div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
+       
+        <h2>Edit Client</h2>
+       
+    </div>
+    
+    <!--<div class="page-header">
         <ol class="breadcrumb">
             <li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
             <li><i class="right-padded-5"></i><a href="/#!/clients">Clients</a></li>
             <li><i class="right-padded-5 active"></i>Edit Client - {{client.name}}</li>
         </ol>
-    </div>
+    </div>-->
 
     <!--
     <script type="text/ng-template" id="myModalContent.html">
@@ -27,9 +33,10 @@
     </script>-->
 
     <!--<button class="btn btn-default" ng-click="open()">Open me!</button>-->
-
+<div class="section-margin">
+    <form class="form-horizontal" data-ng-submit="update()" novalidate>
     <md-content>
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+
             <md-tabs md-dynamic-height md-border-bottom>
                 <md-tab label="General Details">
                     <div class="col-md-12 top-buffer">
@@ -78,9 +85,7 @@
                                            placeholder="Email Address">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <input type="submit" value="Update" class="btn btn-default">
-                            </div>
+
                             <div data-ng-show="error" class="text-danger">
                                 <strong data-ng-bind="error"></strong>
                             </div>
@@ -138,7 +143,7 @@
                 <md-tab label="Users">
                     <h3> Users</h3>
                     <button class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> </button>
-                    <table st-table="client.users" class="table table-striped top-buffer">
+                    <table st-table="clientsUsers" class="table table-striped top-buffer">
                         <thead>
                         <tr>
                             <th>User Id</th>
@@ -148,7 +153,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="user in client.users ">
+                        <tr ng-repeat="user in clientsUsers ">
                             <td><span ng-click="openEditDevice('lg',device)">{{user.username}}</span></td>
                             <td><span ng-click="openEditDevice('lg',device)"> {{user.firstName}}</span></td>
                             <td> </td>
@@ -162,21 +167,21 @@
                     <h1>
                         Devices </h1>
 
-                    <div class="top-buffer" data-ng-controller="DevicesController as devCtrl">
+                    <div class="top-buffer" >
                         <table st-table="client.devices" class="table table-striped top-buffer">
                             <thead>
                             <tr>
                                 <th>Device ID</th>
                                 <th>Name</th>
-                                <!--<th>Email</th>-->
+                                <th>Actions</th>
 
                             </tr>
                             </thead>
                             <tbody>
                             <tr ng-repeat="device in client.devices ">
-                                <td><span ng-click="openEditDevice('lg',device)">{{device._id}}</span></td>
-                                <td><span ng-click="openEditDevice('lg',device)"> {{device.name}}</span></td>
-                                <!--<td>{{device.email}}</td>-->
+                                <td><span>{{device._id}}</span></td>
+                                <td><span> {{device.name}}</span></td>
+                                <td><a class="btn btn-primary" href="/#!/devices/{{device._id}}/edit"> Edit</a></td>
 
                             </tr>
                             </tbody>
@@ -185,7 +190,14 @@
 
                 </md-tab>
             </md-tabs>
-        </form>
+
+
     </md-content>
+    <div >
+        <input type="submit" value="Save Record" class="btn btn-primary">
+        <a href="/#!/clients" class="btn btn-danger">Discard</a>
+    </div>
+    </form>
+    </div>
 </section>
 

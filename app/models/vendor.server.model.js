@@ -49,7 +49,12 @@ var VendorSchema = new Schema({
 		default:'',
 		trim: true
 		},
-	
+	clients:[{
+		type:Schema.Types.ObjectId,
+		ref: 'Clients'
+	}
+
+	],
 	created: {
 		type: Date,
 		default: Date.now

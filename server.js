@@ -13,6 +13,7 @@ var init = require('./config/init')(),
  */
 
 // Bootstrap db connection
+
 var db = mongoose.connect(config.db, function (err) {
     if (err) {
         console.error(chalk.red('Could not connect to MongoDB!'));
@@ -23,7 +24,7 @@ var db = mongoose.connect(config.db, function (err) {
 // Init the express application
 var app = require('./config/express')(db);
 
-// Bootstrap passport config
+// Bootscmdtrap passport config
 require('./config/passport')();
 
 // Start the app by listening on <port>
@@ -33,15 +34,27 @@ app.get('server').listen(config.port);
 // Expose app
 exports = module.exports = app;
 
-var socketServer = require('./server.readings.tcp');
+var ios = app.get('socketio');
 
-socketServer.startReadingsTCPServer();
+var socketServer = require('./server.readings.tcp')(ios);
 
 
+    socketServer.listen(config.readingsport);
+    console.log('Readings tcp server started on port' + config.readingsport);
+
+
+
+if(!ios){
+    console.log('no val for ios');
+}
+else
+{
+    console.log('ios has values'+ios);
+}
 
 var cronjobs = require('./servercron');
-cronjobs.startReadingsDeviceIdCronJob();
-cronjobs.startAlertsCronJob();
+//cronjobs.startReadingsDeviceIdCronJob(ios);
+//cronjobs.startAlertsCronJob();
 
 
 
@@ -52,8 +65,8 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'kachambwa.george@gmail.com',
-        pass: '7dAHgfu2s'
+        //user: 'kachambwa.george@gmail.com',
+        //pass: '7dAHgfu2s'
     }
 });
 

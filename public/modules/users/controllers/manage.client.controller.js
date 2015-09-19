@@ -13,14 +13,14 @@ angular.module('users').controller('ManageUsersController', ['$scope', '$http', 
                 animation: $scope.animationsEnabled,
                 templateUrl: 'modules/users/views/manage/create-user.client.view.html',//'myModalContent.html',
                 controller: function($modalInstance,$scope,user){
-                    $scope.device = deviceOnEdit;
+                    /*$scope.device = deviceOnEdit;
 
                     var resultP = Devicesensors.query();
                     var devId = $scope.device._id;
                     $scope.connectedSensors = resultP;
 
                     var resForDeviceSensorAlerts = Devicesensoralerts.query();
-                    $scope.deviceSensorAlerts = resForDeviceSensorAlerts;
+                    $scope.deviceSensorAlerts = resForDeviceSensorAlerts;*/
 
                     $scope.ok = function () {
                         $modalInstance.close(user);
@@ -32,10 +32,10 @@ angular.module('users').controller('ManageUsersController', ['$scope', '$http', 
 
                 },
                 windowClass: 'app-modal-window',
-                size: size,
+                size: 'lg',//size
                 resolve: {
                     user: function () {
-                        return selectedDevice;
+                        return ''; //selectedDevice;
                     }
                 }
             });
@@ -47,6 +47,12 @@ angular.module('users').controller('ManageUsersController', ['$scope', '$http', 
 
 
     };
+
+
+        // Find a list of Devices
+        $scope.find = function () {
+            $scope.users = Users.query();
+        };
 
     }
 ]);

@@ -77,7 +77,7 @@ exports.delete = function (req, res) {
  * List of Readings
  */
 exports.list = function (req, res) {
-    Reading.find().sort('-created').populate('user', 'displayName').exec(function (err, readings) {
+    Reading.find().exec(function (err, readings) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -92,7 +92,7 @@ exports.list = function (req, res) {
  * Reading middleware
  */
 exports.readingByID = function (req, res, next, id) {
-    Reading.findById(id).populate('user', 'displayName').exec(function (err, reading) {
+    Reading.findById(id).exec(function (err, reading) {
         if (err) return next(err);
         if (!reading) return next(new Error('Failed to load Reading ' + id));
         req.reading = reading;
@@ -110,6 +110,20 @@ exports.hasAuthorization = function (req, res, next) {
     next();
 };
 
+/**
+ * Reading middleware
+ */
+exports.readingByDeviceID = function (req, res) {
+    Reading.find({device: req.params.myId}).exec(function (err, readings) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(readings);
+        }
+    });
+};
 /**
  <<<<<<< HEAD
  * Upload a Reading
@@ -132,7 +146,7 @@ exports.hasAuthorization = function (req, res, next) {
 
 // Processing reading for DeviceId
 
-exports.processReadingsForDeviceID = function () {
+exports.processReadingsForDeviceID = function (io) {
 
     console.log('processing readings for Device Id');
 
@@ -177,8 +191,9 @@ exports.processReadingsForDeviceID = function () {
                             else {
                                 console.log('Cant find the device');
                             }
-
-                            //io.sockets.emit('pushdata-'+device.deviceId, {readingtime:new Date().getTime(),readingvalue: item.lastValue1});
+                                //+device.deviceId
+                            console.log(io);
+                            io.sockets.emit('pushdata', {readingtime:new Date().getTime(),readingvalue: item.lastValue1});
                             console.log(item.lastValue1);
 
                             if (device) {

@@ -1,12 +1,11 @@
-<section class="container" data-ng-controller="VendorsController" data-ng-init="findOne()">
-	<div class="page-header">
-		<!--<h1 data-ng-bind="vendor.name"></h1>-->
-		<ol class="breadcrumb">
-			<li><i class="fa fa-home" style="padding-right: 5px"></i><a href="/#!/">Home</a></li>
-			<li><i class="fa fa-user"  style="padding-right: 5px"></i><a href="/#!/vendors">List Vendors</a></li>
-			<li>Device Details for {{vendor.name}}</li>
-		</ol>
+<section data-ng-controller="VendorsController" data-ng-init="findOne()">
+	<div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
+
+		<h2 class="margin-right-5">{{vendor.name}} - View</h2>
+
+
 	</div>
+	<div class="section-margin">
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == vendor.user._id))">
 		<a class="btn btn-primary" href="/#!/vendors/{{vendor._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
@@ -23,4 +22,6 @@
 			<span data-ng-bind="vendor.user.displayName"></span>
 		</em>
 	</small>
+
+		</div>
 </section>

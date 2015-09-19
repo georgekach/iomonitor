@@ -1,9 +1,25 @@
 'use strict';
 
-angular.module('dashboard').controller('DashboardController', ['$scope','$mdToast', '$animate','$mdDialog','$interval',
-	function($scope,$mdToast, $animate,$mdDialog,$interval) {
+angular.module('dashboard').controller('DashboardController', ['$scope','$mdToast', '$animate','$mdDialog','$interval','Devices',
+	function($scope,$mdToast, $animate,$mdDialog,$interval,Devices) {
 		// Controller Logic
 		// ...
+
+		$scope.devices = Devices.query();
+		//$scope.selectedDevice = '';
+
+		$scope.toastPosition = {
+			bottom: true,
+			top: false,
+			left: true,
+			right: false
+		};
+
+		$scope.getToastPosition = function () {
+			return Object.keys($scope.toastPosition)
+				.filter(function (pos) { return $scope.toastPosition[pos]; })
+				.join(' ');
+		};
 
 		var globalSeries;
 
@@ -13,6 +29,31 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 		 }
 		 });*/
 
+		var socket = io('http://localhost:3002');
+		socket.on('connect', function(){
+			console.log('connected');
+		});
+		socket.on('pushdata', function(data){
+
+			console.log('Data Received'+ data.readingtime+' '+data.readingvalue);
+			$mdToast.show(
+				$mdToast.simple()
+					.content('Data Received @'+ data.readingtime+'  '+data.readingvalue)
+					.position($scope.getToastPosition())
+					.hideDelay(3000)
+			);
+
+			var x = (new Date()).getTime(), // current time
+				y = data.readingvalue;
+			//$scope.chartConfig.series[0].data.concat(10,x,y)//.addPoint([x, y], true, true);
+			$scope.chartConfig.series[0].data.shift();
+			$scope.chartConfig.series[0].data.push([x, y]);
+			$scope.myval = y;
+		});
+		socket.on('disconnect', function(){
+
+			console.log('Connection is lost');
+		});
 
 		$scope.colours = [{
 			name: 'Red',
@@ -115,11 +156,20 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 
 		$scope.myval = 10;
 
+		$scope.update = function() {
+			$scope.chartConfig.title = $scope.selectedDevice.name;
+			// use $scope.selectedItem.code and $scope.selectedItem.name here
+			// for other stuff ...
+		};
+
 		$scope.showSummary = function(selection)
 		{
 			$scope.selectedSummary = selection;
 
 		};
+		/*
+		// undo this for dummy data
+
 		$interval(function(){
 		//	$scope.myval = Math.random();
 			var x = (new Date()).getTime(), // current time
@@ -129,7 +179,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 			$scope.chartConfig.series[0].data.push([x, y]);
 			$scope.myval = y*100;
 
-		},1000);
+		},1000);*/
 
 		function updateData(){
 			setInterval(function () {

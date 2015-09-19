@@ -48,29 +48,16 @@
 
 <body flex>
 
-		<div flex layout-fill layout="column">
-			<header data-ng-include="'/modules/core/views/header.client.view.html'"></header>
+		
+			<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
 			<div flex layout-fill layout="row">
-			<!--<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">-->
-				<!--<md-toolbar class="md-theme-indigo">-->
-					<!--<h1 class="md-toolbar-tools">Sidenav Left</h1>-->
-				<!--</md-toolbar>-->
-				<!--<md-content layout-padding >-->
-					<!--<md-button  class="md-primary" hide-gt-md>-->
-						<!--Close Sidenav Left-->
-					<!--</md-button>-->
-					<!--<p hide-md show-gt-md>-->
-						<!--This sidenav is locked open on your device. To go back to the default behavior,-->
-						<!--narrow your display.-->
-					<!--</p>-->
-				<!--</md-content>-->
-			<!--</md-sidenav>-->
+			
 				<div data-ng-include="'/modules/core/views/sidenav.client.view.html'"></div>
 
 
 				{% block content %}{% endblock %}
 			</div>
-		</div>
+		
 
 		<!--
 		<div data-ng-include="'/modules/core/views/sidenav.client.view.html'" layout="vertical"></div>

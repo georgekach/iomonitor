@@ -1,7 +1,11 @@
-<section class="container" data-ng-controller="SoftwareproductsController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="softwareproduct.name"></h1>
+<section   data-ng-controller="SoftwareproductsController" data-ng-init="findOne()">
+	<div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
+
+		<h2 class="margin-right-5">{{softwareproduct.name}} - View</h2>
+
+
 	</div>
+	<div class="section-margin">
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == softwareproduct.user._id))">
 		<a class="btn btn-primary" href="/#!/softwareproducts/{{softwareproduct._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
@@ -18,4 +22,5 @@
 			<span data-ng-bind="softwareproduct.user.displayName"></span>
 		</em>
 	</small>
+		</div>
 </section>

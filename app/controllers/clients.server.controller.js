@@ -88,12 +88,23 @@ exports.list = function(req, res) {
  * Client middleware
  */
 exports.clientByID = function(req, res, next, id) { 
-	Client.findById(id).populate('users devices').exec(function(err, client) {
+	/*Client.findById(id).populate('users devices').exec(function(err, client) {
 		if (err) return next(err);
 		if (! client) return next(new Error('Failed to load Client ' + id));
 		req.client = client ;
 		next();
+	});*/
+
+	Client.findById(id).populate('devices').exec(function(err, client) {
+		if (err) return next(err);
+		if (! client) return next(new Error('Failed to load Client ' + id));
+		req.client = client ;
+		console.log('full client record '+ client);
+		next();
+
+
 	});
+
 };
 
 /**

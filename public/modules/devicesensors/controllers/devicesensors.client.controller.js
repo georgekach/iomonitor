@@ -1,8 +1,8 @@
 'use strict';
 
 // Devicesensors controller
-angular.module('devicesensors').controller('DevicesensorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Devicesensors',
-	function($scope, $stateParams, $location, Authentication, Devicesensors) {
+angular.module('devicesensors').controller('DevicesensorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Devicesensors','$mdToast',
+	function($scope, $stateParams, $location, Authentication, Devicesensors,$mdToast) {
 		$scope.authentication = Authentication;
 
 		// Create new Devicesensor
@@ -62,5 +62,7 @@ angular.module('devicesensors').controller('DevicesensorsController', ['$scope',
 				devicesensorId: $stateParams.devicesensorId
 			});
 		};
+		
+		
 	}
 ]);

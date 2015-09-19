@@ -12,9 +12,9 @@
 
 var cron = require('cron');
 
-exports.startReadingsDeviceIdCronJob = function(){
+exports.startReadingsDeviceIdCronJob = function(io){
 
-
+    console.log('io value is '+ io);
 
     var readingsDeviceIdCronJob = cron.job('0 */1 * * * *', function () {
         // perform operation e.g. GET request http.get() etc.
@@ -22,9 +22,9 @@ exports.startReadingsDeviceIdCronJob = function(){
         // this cronjob aligns readings with devices
         var readingsController = require('./app/controllers/readings.server.controller');
         if (readingsController) {
-            readingsController.processReadingsForDeviceID();
+            readingsController.processReadingsForDeviceID(io);
         }
-        console.info('cron job completed');
+        //console.info('cron job completed');
     });
     readingsDeviceIdCronJob.start();
 

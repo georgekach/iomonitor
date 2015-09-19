@@ -2,12 +2,12 @@
 
 module.exports = {
 	app: {
-		title: 'meantest',
+		title: 'Intellisense',
 		description: 'my first mean application',
 		keywords: 'rtu, device mean app'
 	},
-	port: process.env.PORT || 3004,
-	readingsport: 3003,
+	port: process.env.PORT || 3002,
+	readingsport: 3000,
 	templateEngine: 'swig',
 	sessionSecret: 'MEAN',
 	sessionCollection: 'sessions',
@@ -17,8 +17,8 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				 'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/angular-material/angular-material.css',
-				'public/lib/metismenu/metisMenu.css',
-				//'public/lib/sb-admin/sb-admin-2.css',
+				'public/lib/metisMenu/dist/metisMenu.css',
+				
 				'public/lib/font-awesome-4.3.0/css/font-awesome.css',
 				//'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
 				'public/lib/openlayers3/build/ol.css',
@@ -39,7 +39,7 @@ module.exports = {
 				'public/lib/socket-io/socket.io.js',
 				'public/lib/angular-socket-io/socket.min.js',
 				'public/lib/jquery/dist/jquery.js',
-				'public/lib/metismenu/metisMenu.js',
+				'public/lib/metisMenu/dist/metisMenu.js',
 				'public/lib/sb-admin/sb-admin-2.js',
 				'public/lib/angular-smart-table/smart-table.js',
 				'public/lib/raphael/raphael.js',

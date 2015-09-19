@@ -1,11 +1,12 @@
 'use strict';
 
 // Clients controller
-angular.module('clients').controller('ClientsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Clients','$mdToast', '$animate','$mdDialog','Devices','$modal','$log',
-	function($scope, $stateParams, $location, Authentication, Clients,$mdToast, $animate,$mdDialog,Devices,$modal,$log) {
+angular.module('clients').controller('ClientsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Clients','$mdToast', '$animate','$mdDialog','Devices','$modal','$log','ClientsUsers',
+	function($scope, $stateParams, $location, Authentication, Clients,$mdToast, $animate,$mdDialog,Devices,$modal,$log,ClientsUsers) {
 		$scope.authentication = Authentication;
         $scope.section = 'Clients';
         $scope.clientsDevices = '';
+        $scope.clientsUsers = '';
 
         //Toastr Settings
         $scope.toastPosition = {
@@ -110,7 +111,8 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
 				clientId: $stateParams.clientId
 			});
 
-            $scope.clientsDevices = Devices.query();
+            //$scope.clientsDevices = Devices.query();
+            $scope.clientsUsers = ClientsUsers.query({clientId1:$stateParams.clientId});
 
 		};
 		

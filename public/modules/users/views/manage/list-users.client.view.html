@@ -1,34 +1,33 @@
-<section data-ng-controller="ClientsController" data-ng-init="find()">
+<section  data-ng-controller="ManageUsersController" data-ng-init="find()">
     <div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
-        <h2 class="left-margin-20">Clients</h2>
+        <!--<h2 data-ng-bind="client.name"></h2>-->
+        <h2 class="left-margin-20">Users List</h2>
         <div flex offset="75">
             <input class="rounded" type="text" placeholder="Filter By" ng-model="query" autofocus>
         </div>
-
-
     </div>
     <div class="section-margin">
         <div>
 
-            <a href="/#!/clients/create" class="btn btn-primary"> Add New </a>
-            
-        </div>
-        <table st-table="clients" class="table table-striped top-buffer">
-            <thead>
-                <tr>
-                    <th>Client ID</th>
-                    <th>Name</th>
-                    <th>Surname</th>
+            <a href="/#!/users/create" class="btn btn-primary"> Add New </a>
 
-                </tr>
+        </div>
+        <table st-table="users" class="table table-striped top-buffer">
+            <thead>
+            <tr>
+                <th>Client ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+
+            </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="client in clients | filter:query">
-                    <td><a href="/#!/clients/{{client._id}}"> {{client.name}}</a></td>
-                    <td>{{client.fname}}</td>
-                    <td>{{client.sname}}</td>
+            <tr ng-repeat="user in users | filter:query">
+                <td><a href="/#!/users/{{user._id}}"> {{user.name}}</a></td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
 
-                </tr>
+            </tr>
             </tbody>
         </table>
         <!--<div class="list-group">-->
@@ -49,8 +48,8 @@
         <!--</div>-->
         <!--</div>-->
         <!--<highchart id="chart1" config="chartConfig"></highchart>-->
-        <div class="alert alert-warning text-center" data-ng-hide="!clients.$resolved || clients.length">No Clients yet, why don't you
-            <a href="/#!/clients/create">create one</a>?</div>
+        <div class="alert alert-warning text-center" data-ng-hide="!users.$resolved || users.length">No Clients yet, why don't you
+            <a href="/#!/users/create">create one</a>?</div>
 
     </div>
 </section>

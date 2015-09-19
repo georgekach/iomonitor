@@ -1,23 +1,88 @@
 <section data-ng-controller="ReadingsController" data-ng-init="findOne()">
-    <div class="page-header">
-        <h1>Edit Reading</h1>
+    <div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
+
+        <h2 class="margin-right-5">Edit Reading</h2>
+
     </div>
+    <div class="section-margin">
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="reading.name" id="name" class="form-control" placeholder="Name" required>
+                    <label class="control-label col-md-1" for="unitId">Unit Id</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.unitId" id="unitId" class="form-control" placeholder="unitId" required>
+                    </div>
+
+                    <label class="control-label col-md-1" for="unittype">Unit Type</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.unittype" id="unittype" class="form-control" placeholder="unittype" >
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                    <label class="control-label col-md-1" for="time">Time</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.time" id="time" class="form-control" placeholder="Time" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="channels">Channels</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.channels" id="channels" class="form-control" placeholder="Channels" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="state1">State 1</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.state1" id="state1" class="form-control" placeholder="state1" >
+                    </div>
+
+                    <label class="control-label col-md-1" for="lastValue1">Last Value 1</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.lastValue1" id="lastValue1" class="form-control" placeholder="lastValue1" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="state2">State 2</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.state2" id="state2" class="form-control" placeholder="state2" >
+                    </div>
+
+                    <label class="control-label col-md-1" for="lastValue2">Last Value 2</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.lastValue2" id="lastValue2" class="form-control" placeholder="lastValue2" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="state3">State 3</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.state3" id="state3" class="form-control" placeholder="state3" >
+                    </div>
+
+                    <label class="control-label col-md-1" for="lastValue3">Last Value 3</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.lastValue3" id="lastValue3" class="form-control" placeholder="lastValue3" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="state4">State 4</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.state4" id="state4" class="form-control" placeholder="state4" >
+                    </div>
+
+                    <label class="control-label col-md-1" for="lastValue4">Last Value 4</label>
+                    <div class="controls col-md-4">
+                        <input type="text" data-ng-model="reading.lastValue4" id="lastValue4" class="form-control" placeholder="lastValue4" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-primary">
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
             </fieldset>
         </form>
+    </div>
     </div>
 </section>

@@ -38,6 +38,10 @@ var ClientSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'User'
 	}],
+	vendor:{
+		type:Schema.Types.ObjectId,
+		ref: 'Vendor'
+	},
     profile: {
         name: { type: String, default: '' },
         location: { type: String, default: '' },
