@@ -21,6 +21,8 @@ var db = mongoose.connect(config.db, function (err) {
     }
 });
 
+
+
 // Init the express application
 var app = require('./config/express')(db);
 

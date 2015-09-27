@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
 	Device = mongoose.model('Device'),
 	_ = require('lodash');
 
+
 /**
  * Create a Device
  */
@@ -114,20 +115,12 @@ exports.list = function(req, res) {
  * Device middleware
  */
 exports.deviceByID = function(req, res, next, id) { 
-	Device.findById(id).populate('user devicesensors').exec(function(err, device) {
+	Device.findById(id).deepPopulate('user').exec(function(err, device) {
 		if (err) return next(err);
 		if (! device) return next(new Error('Failed to load Device ' + id));
-		Device.populate(device,{
-			path: 'devicesensors.devicesensoralerts',
-			model:'Devicesensoralert'
-		},function(err, fulldevice) {
-			if(err) return res.send(err);
-			console.log(fulldevice); // This object should now be populated accordingly.
-			req.device = fulldevice ;
-			next();
-		});
-		//req.device = fulldevice ;
-		//next();
+
+		req.device = device ;
+		next();
 	});
 };
 

@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
+require('./devicesensoralarmaction.server.model.js');
 
 /**
  * Devicesensoralert Schema
@@ -16,17 +17,10 @@ var DevicesensoralertSchema = new Schema({
 		required: 'Please fill Devicesensoralert name',
 		trim: true
 	},
-	devicesensorId:{
-		type: Schema.ObjectId,
-		ref: 'Devicesensor'
-	},
 	lastalarm:{
 		type: Date
 	},
-	alarmactions:[{
-		type: Schema.Types.ObjectId,
-		ref : 'Devicesensoralarmaction'
-	}],
+	alertactions:[mongoose.model('Devicesensoralarmaction').schema],
 	created: {
 		type: Date,
 		default: Date.now

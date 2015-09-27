@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
+require('./devicesensoralert.server.model.js');
 
 /**
  * Devicesensor Schema
@@ -15,10 +16,6 @@ var DevicesensorSchema = new Schema({
 		default: '',
 		required: 'Please fill Devicesensor name',
 		trim: true
-	},
-	deviceId:{
-		type: Schema.Types.ObjectId,
-		ref: 'Device'
 	},
 	sensortype:{
 		type: Schema.Types.ObjectId,
@@ -35,10 +32,12 @@ var DevicesensorSchema = new Schema({
 	nextcommunication:{
 		type: Date
 	},
-	devicesensoralerts:[{
-		type: Schema.Types.ObjectId,
-	ref: 'Devicesensoralert'
-	}],
+	sensoralerts:[mongoose.model('Devicesensoralert').schema],
+	/*
+	 devicesensoralerts:[{
+	 type: Schema.Types.ObjectId,
+	 ref: 'Devicesensoralert'
+	 }],*/
 	created: {
 		type: Date,
 		default: Date.now

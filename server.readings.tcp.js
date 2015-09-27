@@ -14,6 +14,8 @@ var readingDataArray = '';
 var currentReadString = '';
 var Reading = mongoose.model('Reading');
 var Device = mongoose.model('Device');
+var Devicesensoralert = mongoose.model('Devicesensoralert');
+
 var completeData = '';
 
 module.exports = function(io) {
@@ -121,8 +123,23 @@ module.exports = function(io) {
             }
             console.log('Saved record');
 
-            Device.findOne({'deviceId': reading.unitId}, function (err2, device) {
-                if (err2) {
+            Device.findOne({'deviceId': reading.unitId}).populate({path:'user sensors'}).exec( function (err2, devicep) {
+                var options = {
+                  path:'sensors.sensoralerts',
+                    model:'Devicesensoralert'
+                };
+
+                Device.populate(devicep,options,function(err34,devicer){
+
+                    var options2 = {
+                        path:'sensors.sensoralerts.alertactions',
+                        model:'Devicesensoralarmaction'
+                    };
+
+                    Device.populate(devicep,options,function(err34,device){
+                    console.log('Device Details are '+device.sensors);
+
+                if (err34) {
                     console.log('error finding the device');
 
                 } else {
@@ -182,6 +199,8 @@ module.exports = function(io) {
 
                                 console.log('looping through sensors');
 
+
+
                                 Devicesensoralert.find({'devicesensorId':sensor._id}).populate('alarmactions').exec(function(err3,sensoralerts){
                                     if(err3)
                                     {
@@ -228,6 +247,7 @@ module.exports = function(io) {
 
                             });
 
+
                         }
                     }
                     else {
@@ -237,11 +257,12 @@ module.exports = function(io) {
 
 
                 }
+                });
 
             });
         });
 
-
+        });
     };
 
 

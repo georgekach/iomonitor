@@ -39,14 +39,19 @@ angular.module('devices').controller('DevicesController', ['$scope', '$statePara
 
 		$scope.showAlertView = function (selection, sensorAlert) {
 			$scope.selectedAlertView = selection;
-			$scope.currentSelectedSensorAlert = sensorAlert;
-			$scope.currentSelectedSensorAlertsActions = sensorAlert.alarmactions;
+			if(sensorAlert) {
+				$scope.currentSelectedSensorAlert = sensorAlert;
+				if (sensorAlert.alarmactions) {
+					$scope.currentSelectedSensorAlertsActions = sensorAlert.alarmactions;
+				}
+			}
 
 		};
 		$scope.showAlertActionView = function (selection, sensorAlertAction) {
 			$scope.selectedAlertActionView = selection;
+			if(sensorAlertAction){
 			$scope.currentSelectedSensorAlertAction = sensorAlertAction;
-
+			}
 
 		};
 		// Create new Device
@@ -266,7 +271,22 @@ angular.module('devices').controller('DevicesController', ['$scope', '$statePara
 				channel: this.channel_c
 				});
 
+			$scope.device.$update(function(err)
+			{
+				if(err)
+				{
+					console.log('error updating record');
+				}
 
+				$mdToast.show(
+					$mdToast.simple()
+						.content('Sensor Record Created')
+						.position($scope.getToastPosition())
+						.hideDelay(3000)
+				);
+
+
+			});
 			// Redirect after save
 			/*
 			devicesensor.$save(function(response) {
@@ -302,7 +322,7 @@ angular.module('devices').controller('DevicesController', ['$scope', '$statePara
 		{
 
 			alert('Youve selected connected sensors');
-		}
+		};
 
 		$scope.removeSensor = function(devicesensor)
 		{
@@ -316,19 +336,25 @@ angular.module('devices').controller('DevicesController', ['$scope', '$statePara
 						.theme('success-toast')
 						.hideDelay(3000)
 				);
+				if($scope.device.sensors){
+					$scope.currentSelectedSensor = $scope.device.sensors[0];
+					$scope.showView('edit',$scope.currentSelectedSensor);
+				}
 
 				//$location.path('devices/' + device._id);
 			}, function (errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 
-		}
+		};
 
 		$scope.createSensorAlert = function(){
 
 			var newDeviceSensorAlert = {
-
+				name: this.alertname_c
 			};
+
+			console.log('Alert Details'+newDeviceSensorAlert);
 			newDeviceSensorAlert.alarmactions = [];
 
 			$scope.showAlertView('editAlert',newDeviceSensorAlert);
@@ -342,6 +368,18 @@ angular.module('devices').controller('DevicesController', ['$scope', '$statePara
 				$scope.currentSelectedSensor.sensoralerts = [];
 				$scope.currentSelectedSensor.sensoralerts.push(newDeviceSensorAlert);
 			}
+			$scope.device.$update(function (){
+
+
+
+				$mdToast.show(
+					$mdToast.simple()
+						.content('Device Record Updated')
+						.position($scope.getToastPosition())
+						.theme('success-toast')
+						.hideDelay(3000)
+				);
+			});
 		};
 
 		$scope.removeSensorAlert = function(alert){
@@ -355,17 +393,36 @@ angular.module('devices').controller('DevicesController', ['$scope', '$statePara
 
 		$scope.createAlertAction = function()
 		{
-			var newAlertAction =
-			$scope.showAlertActionView();
+			var newAlertAction = {
+
+				name: this.alertaction_name_c,
+				actiontype: this.alertaction_actiontype_c,
+				thresholdvaluemin:this.alertaction_thresholdvaluemin_c,
+				thresholdvaluemax: this.alertaction_thresholdvaluemax_c,
+				sendonclear: this.alertaction_sendonclear_c
+			};
+
+			//$scope.showAlertActionView();
 			if($scope.currentSelectedSensorAlert.alertactions)
 			{
-				$scope.currentSelectedSensorAlert.alertactions.push({name:' Action 01'});
+				$scope.currentSelectedSensorAlert.alertactions.push(newAlertAction);
 			}
 			else{
 				$scope.currentSelectedSensorAlert.alertactions = [];
-				$scope.currentSelectedSensorAlert.alertactions.push({name:' Action 01'});
+				$scope.currentSelectedSensorAlert.alertactions.push(newAlertAction);
 
 			}
+
+			$scope.device.$update(function(){
+				$mdToast.show(
+					$mdToast.simple()
+						.content('Device Record Updated')
+						.position($scope.getToastPosition())
+						.theme('success-toast')
+						.hideDelay(3000)
+			);
+
+			});
 		};
 
 		$scope.updateDeviceSensor = function()
@@ -386,5 +443,47 @@ angular.module('devices').controller('DevicesController', ['$scope', '$statePara
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+
+		$scope.updateRecord = function()
+		{
+
+
+			$scope.device.$update(function() {
+				//$location.path('devices/' + device._id);
+				$mdToast.show(
+					$mdToast.simple()
+						.content('Record Updated')
+						.position($scope.getToastPosition())
+						.theme('success-toast')
+						.hideDelay(3000)
+				);
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		$scope.connectedSensorsTabSelected = function () {
+
+			if($scope.device.sensors){
+				$scope.currentSelectedSensor = $scope.device.sensors[0];
+
+				$scope.showView('edit',$scope.currentSelectedSensor);
+			}
+
+
+		};
+
+		$scope.sensorsAlertsTabSelected = function () {
+
+			if($scope.currentSelectedSensor.sensoralerts){
+				$scope.currentSelectedSensorAlert = $scope.currentSelectedSensor.sensoralerts[0];
+
+				$scope.showAlertView('editAlert',$scope.currentSelectedSensorAlert);
+			}
+
+		};
+
 	}
 ]);

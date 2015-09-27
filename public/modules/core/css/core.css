@@ -92,6 +92,15 @@ input.rounded:focus {
     margin-left: 20px;
 }
 
+span:focus {
+	outline: none;
+	border: 0;
+}
+
+md-whiteframe:focus {
+	outline: none;
+	border: 0;
+}
 
 /*end my defs*/
 /*Available on appstore badge css*/

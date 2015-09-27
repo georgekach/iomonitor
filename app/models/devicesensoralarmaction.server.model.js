@@ -20,10 +20,6 @@ var DevicesensoralarmactionSchema = new Schema({
 		required: 'Please fill Devicesensoralarmaction name',
 		trim: true
 	},
-	devicesensoralertId:{
-		type: Schema.ObjectId,
-		ref:'Devicesensoralert'
-	},
 	actiontype:{
 		type: String,
 		trim: true
