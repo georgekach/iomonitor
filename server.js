@@ -57,7 +57,9 @@ else
 var cronjobs = require('./servercron');
 //cronjobs.startReadingsDeviceIdCronJob(ios);
 //cronjobs.startAlertsCronJob();
+var notificationsCronjob = require('./server.notifications.cronjob');
 
+notificationsCronjob.startNotificationsCronJob();
 
 
 

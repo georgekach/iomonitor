@@ -14,6 +14,9 @@ module.exports = function(app) {
 		.put(users.requiresLogin, alerts.hasAuthorization, alerts.update)
 		.delete(users.requiresLogin, alerts.hasAuthorization, alerts.delete);
 
+	app.route('/myalerts/:userId')
+		.get(alerts.alertByUser)
 	// Finish by binding the Alert middleware
 	app.param('alertId', alerts.alertByID);
+	app.param('userId',alerts.alertByUser);
 };

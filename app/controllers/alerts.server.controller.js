@@ -96,6 +96,23 @@ exports.alertByID = function(req, res, next, id) {
 	});
 };
 
+/*
+Alerts aimed at a user
+ */
+exports.alertByUser = function(req,res,next,id){
+	Alert.find({belongsto:req.params.userId}).exec(function(err,alerts){
+
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(alerts);
+		}
+
+	});
+};
+
 /**
  * Alert authorization middleware
  */

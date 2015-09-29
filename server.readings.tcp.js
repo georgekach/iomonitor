@@ -15,12 +15,14 @@ var currentReadString = '';
 var Reading = mongoose.model('Reading');
 var Device = mongoose.model('Device');
 var Devicesensoralert = mongoose.model('Devicesensoralert');
+var Notification = mongoose.model('Notification');
+var User = mongoose.model('User');
 
 var completeData = '';
 
-module.exports = function(io) {
+module.exports = function (io) {
 
-    console.log('The value of ios from the readings tcp server are '+ io);
+    console.log('The value of ios from the readings tcp server are ' + io);
 
     var socketServer = net.createServer(function (socket) {
         //socket.write('Echo server\r\n');
@@ -40,14 +42,14 @@ module.exports = function(io) {
             var lastPos = receivedbytes.length - 1;
             console.log('Last pos is ' + lastPos);
             /*if ((receivedbytes.indexOf('$') == 0) && ((receivedbytes.lastIndexOf('$') == lastPos))) {
-                console.log('Am here');*/
+             console.log('Am here');*/
 
 
-                if (completeData.indexOf('ET33') > -1) {
-                    console.log('saving from X ' + receivedbytes.indexOf('$'));
-                    parseCompleteData(completeData);
-                    completeData='';
-                }
+            if (completeData.indexOf('ET33') > -1) {
+                console.log('saving from X ' + receivedbytes.indexOf('$'));
+                parseCompleteData(completeData);
+                completeData = '';
+            }
 
             //}
 
@@ -123,23 +125,15 @@ module.exports = function(io) {
             }
             console.log('Saved record');
 
-            Device.findOne({'deviceId': reading.unitId}).populate({path:'user sensors'}).exec( function (err2, devicep) {
+            Device.findOne({'deviceId': reading.unitId}).populate({path: 'user sensors'}).exec(function (err2, device) {
                 var options = {
-                  path:'sensors.sensoralerts',
-                    model:'Devicesensoralert'
+                    path: 'sensors.sensoralerts',
+                    model: 'Devicesensoralert'
                 };
+                var actions = device.sensors[0].sensoralerts[0].alertactions[0];
+                console.log('Sensor @ 0 is ' + actions);
 
-                Device.populate(devicep,options,function(err34,devicer){
-
-                    var options2 = {
-                        path:'sensors.sensoralerts.alertactions',
-                        model:'Devicesensoralarmaction'
-                    };
-
-                    Device.populate(devicep,options,function(err34,device){
-                    console.log('Device Details are '+device.sensors);
-
-                if (err34) {
+                if (err2) {
                     console.log('error finding the device');
 
                 } else {
@@ -149,7 +143,7 @@ module.exports = function(io) {
                         if (err3) {
                             console.log('error saving the record');
                         } else {
-                            console.log('saved the reading from inside receiving the readings'+reading._id);
+                            console.log('saved the reading from inside receiving the readings' + reading._id);
                         }
                     });
                     if (device) {
@@ -167,8 +161,11 @@ module.exports = function(io) {
                         device.latestreadinggps = reading.gps;
 
                         //+device.deviceId
-                        console.log(io);
-                        io.sockets.emit('pushdata', {readingtime:new Date().getTime(),readingvalue: reading.lastValue1});
+                        //console.log(io);
+                        io.sockets.emit('pushdata', {
+                            readingtime: new Date().getTime(),
+                            readingvalue: reading.lastValue1
+                        });
                         console.log(reading.lastValue1);
 
                         device.save(function (err4) {
@@ -190,60 +187,88 @@ module.exports = function(io) {
                         });
 
                         //process reading for alerts
-                        if(device.sensors){
+                        if (device.sensors) {
 
 
                             console.log('found some sensors proceeding to loop through them');
 
-                            device.sensors.forEach(function(sensor){
+                            device.sensors.forEach(function (sensor) {
 
                                 console.log('looping through sensors');
 
+                                if (sensor.sensoralerts) {
+                                    console.log('found some sensor alerts for sensor ' + sensor.name + ' proceeding to loop through them ' + sensor.sensoralerts.length);
 
+                                    sensor.sensoralerts.forEach(function (sensoralert) {
+                                        console.log('continuing loop through them');
+                                        if (sensoralert) {
+                                            if (sensoralert.alertactions) {
+                                                console.log('found some sensor alert alarm action proceeding to loop through them');
+                                                sensoralert.alertactions.forEach(function (alertaction) {
+                                                    console.log('proceeding to loop through them [sensor alert alarm action]');
+                                                    if (alertaction) {
+                                                        console.log('alert action with name is being considered' + alertaction.name);
 
-                                Devicesensoralert.find({'devicesensorId':sensor._id}).populate('alarmactions').exec(function(err3,sensoralerts){
-                                    if(err3)
-                                    {
-                                        console.log('Error finding the sensor alerts');
-
-                                    }
-                                    else{
-                                        if(sensoralerts)
-                                        {
-                                            console.log('found some sensor alerts for sensor '+sensor.name+' proceeding to loop through them ' +sensoralerts.length);
-
-                                            sensoralerts.forEach(function(sensoralert){
-                                                console.log('continuing loop through them');
-                                                if(sensoralert)
-                                                {
-                                                    if(sensoralert.alarmactions){
-                                                        console.log('found some sensor alert alarm action proceeding to loop through them');
-                                                        sensoralert.alarmactions.forEach(function(alertaction){
-                                                            console.log('proceeding to loop through them [sensor alert alarm action]');
-                                                            if(alertaction){
-                                                                console.log('alert action with name is being considered'+alertaction.name);
-
+                                                        if (sensor.channel.indexOf('1') > -1) {
+                                                            if ((reading.lastValue1 < alertaction.thresholdvaluemin) || (reading.lastValue1 > alertaction.thresholdvaluemax)) {
+                                                                createNotification(device, sensor, sensoralert, reading.lastValue1, alertaction);
+                                                                console.log('Compare the channel 1 readings .... value is out of range' + reading.lastValue1);
                                                             }
-                                                            else{
-                                                                console.log('Cant work with a null alertaction');
+                                                            else {
+                                                                console.log('All is OK');
                                                             }
 
-                                                        });
+                                                        }
 
-                                                    }else{
-                                                        console.log('The alert has no alarm actions');
+
+                                                        if (sensor.channel.indexOf('2') > -1) {
+                                                            if ((reading.lastValue2 < alertaction.thresholdvaluemin) || (reading.lastValue2 > alertaction.thresholdvaluemax)) {
+                                                                console.log('Compare the channel 2 readings .... value is out of range' + reading.lastValue2);
+                                                            }
+                                                            else {
+                                                                console.log('All is OK');
+                                                            }
+                                                        }
+
+                                                        if (sensor.channel.indexOf('3') > -1) {
+                                                            if ((reading.lastValue3 < alertaction.thresholdvaluemin) || (reading.lastValue3 > alertaction.thresholdvaluemax)) {
+                                                                console.log('Compare the channel 3 readings .... value is out of range' + reading.lastValue3);
+                                                            }
+                                                            else {
+                                                                console.log('All is OK');
+                                                            }
+                                                        }
+
+                                                        if (sensor.channel.indexOf('4') > -1) {
+                                                            if ((reading.lastValue4 < alertaction.thresholdvaluemin) || (reading.lastValue4 > alertaction.thresholdvaluemax)) {
+                                                                console.log('Compare the channel 4 readings .... value is out of range' + reading.lastValue4);
+                                                            }
+                                                            else {
+                                                                console.log('All is OK');
+                                                            }
+                                                        }
+
                                                     }
-                                                }
-                                                else{
-                                                    console.log('cannot work with null sensor alert');
-                                                }
-                                            });
+                                                    else {
+                                                        console.log('Cant work with a null alertaction');
+                                                    }
 
-                                        }else{
-                                            console.log('can work with a null array of sensor alerts');
+                                                });
+
+                                            } else {
+                                                console.log('The alert has no alarm actions');
+                                            }
                                         }
-                                    }
-                                });
+                                        else {
+                                            console.log('cannot work with null sensor alert');
+                                        }
+                                    });
+
+                                } else {
+                                    console.log('can work with a null array of sensor alerts');
+                                }
+                                //}
+                                //});
 
                             });
 
@@ -255,17 +280,63 @@ module.exports = function(io) {
                     }
 
 
-
                 }
-                });
+                //});
 
+                //});
             });
-        });
 
         });
     };
 
+    var createNotification = function (device, sensor, alert, reading, alertaction) {
+        var notificationmessage = 'Device ' + device.name + ' [' + device.deviceId + '] sensor ' + sensor.name
+            + 'has raised alert ' + alert.name + ' with value' + reading + ' required range is [' + alertaction.thresholdvaluemin + ' - ' + alertaction.thresholdvaluemax + ' ]';
 
+        var newNotification = new Notification();
+        newNotification.action = alertaction.actiontype;
+        newNotification.message = notificationmessage;
+        newNotification.timeofoccurance = Date.now();
+        newNotification.notificationtype = 'device';
+        newNotification.processed = false;
+        newNotification.haserrors = false;
+        newNotification.errormessages = '';
+        newNotification.created = Date.now();
+
+        User.findById(alertaction.usertonotify, function (err, user) {
+            //console.log('looking for the user');
+            if (user) {
+                if (alertaction.actiontype === 'email') {
+                    newNotification.actionaddress = user.email;
+                }
+                if (alertaction.actiontype === 'text') {
+                    newNotification.actionaddress = user.cellnumber;
+                }
+                if (alertaction.actiontype === 'phone') {
+                    newNotification.actionaddress = user.phonenumber;
+                }
+                if (alertaction.actiontype === 'alert') {
+
+                    newNotification.actionaddress = user.id;
+                }
+
+                newNotification.save(function (err) {
+                    if (err) {
+                        console.log('Error saving notification record' + err);
+                    }
+
+                    //console.log('Notification record saved');
+
+                });
+            }
+            else {
+                console.log('unable to find user');
+            }
+        });
+
+
+        console.log(notificationmessage);
+    };
 
     return socketServer;
 };

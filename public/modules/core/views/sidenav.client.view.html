@@ -46,7 +46,7 @@
 
 
                         <li>
-                            <a href='/#!/dashboard'>
+                            <a href='/#!/dashboard' restrict access='user'>
                                 <i class="fa fa-laptop fa-fw"></i>
                                 Dashboard
                             </a>
@@ -59,19 +59,19 @@
                                 <span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li>
+                                <li restrict access='admin agentadmin'>
                                     <a href="/#!/vendors" ng-click="toggleLeft()"> Agents</a>
                                 </li>
-                                <li>
+                                <li restrict access='admin agentadmin'>
                                     <a href="/#!/clients" ng-click="toggleLeft()"> Clients </a>
                                 </li>
-                                <li>
+                                <li restrict access='admin agentadmin user'>
                                     <a href="/#!/clients" ng-click="toggleLeft()"> My Clients </a>
                                 </li>
-                                <li>
+                                <li restrict access='admin agentadmin'>
                                     <a href="/#!/devices" ng-click="toggleLeft()"> Devices </a>
                                 </li>
-                                <li>
+                                <li restrict access='clientadmin user'>
                                     <a href="/#!/devices" ng-click="toggleLeft()"> My Devices </a>
                                 </li>
 

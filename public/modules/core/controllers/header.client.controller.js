@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus','$mdSidenav','$mdUtil','$log','$location',
-	function($scope, Authentication, Menus,$mdSidenav,$mdUtil,$log,$location) {//
+angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus','$mdSidenav','$mdUtil','$log','$location','MyAlerts',
+	function($scope, Authentication, Menus,$mdSidenav,$mdUtil,$log,$location,MyAlerts) {//
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
@@ -18,9 +18,11 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 
 
             $('#side-menu').metisMenu();
+        $scope.myAlerts = '';
 
-
-
+        $scope.myAlerts = MyAlerts.query({
+            userId: Authentication.user._id
+        });
 
 
         /**

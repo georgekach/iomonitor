@@ -10,12 +10,7 @@ var mongoose = require('mongoose'),
  * Alert Schema
  */
 var AlertSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Alert name',
-		trim: true
-	},
+
 	message: {
 		type: String,
 		default: '',
@@ -23,21 +18,22 @@ var AlertSchema = new Schema({
 		trim: true
 	},
 	dateofoccurence: {
-		type: String,
-		default: '',
-		required: 'Please fill Alert date of occurence',
+		type: Date,
+		default: Date.now(),
+		required: 'Please fill Alert date of occurance',
 		trim: true
 	},
 	alerttype:{
 		type:String,
 		default:'',
-		enum:['system','device','notification']
+		enum:['system','device','license']
 	},
 	alertstatus:{
 		type: String
 	},
-	lastalerm:{
-		type: Date
+	belongsto:{
+		type: Schema.ObjectId,
+		ref: 'User'
 	},
 	created: {
 		type: Date,

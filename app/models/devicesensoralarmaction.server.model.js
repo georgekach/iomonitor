@@ -22,7 +22,8 @@ var DevicesensoralarmactionSchema = new Schema({
 	},
 	actiontype:{
 		type: String,
-		trim: true
+		trim: true,
+		enum:['email','text','phone','alert']
 	},
 	userid:{
 		type:Schema.ObjectId,
@@ -37,6 +38,10 @@ var DevicesensoralarmactionSchema = new Schema({
 	sendonclear:{/* this is for sending notifications or not when the alert has been claered*/
 		type: Boolean,
 		default: false
+	},
+	usertonotify:{
+		type: Schema.ObjectId,
+		ref: 'User'
 	},
 	created: {
 		type: Date,
