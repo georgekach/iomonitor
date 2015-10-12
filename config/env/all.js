@@ -23,6 +23,7 @@ module.exports = {
 				//'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
 				'public/lib/openlayers3/build/ol.css',
 				'public/lib/weather-icons/css/weather-icons.css',
+				'public/lib/c3/c3.css',
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -50,6 +51,10 @@ module.exports = {
 				'public/lib/openlayers3/build/ol.js',
 				'public/lib/angular-openlayers-directive/dist/angular-openlayers-directive.js',
 				'public/lib/angular-sanitize/angular-sanitize.js',
+				'public/lib/d3/d3.js',
+				'public/lib/c3/c3.js',
+				'public/lib/angular-chart/angular-chart.js',
+				'public/lib/angular-scroll/angular-scroll.min.js',
 			]
 		},
 		css: [

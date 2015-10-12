@@ -156,6 +156,39 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 
 		$scope.myval = 10;
 
+		$scope.options = {
+			data: (function () {
+				// generate an array of random data
+				var data = [],
+					time = (new Date()).getTime(),
+					i;
+
+				for (i = -19; i <= 0; i += 1) {
+					data.push({
+						sales:time + i * 1000 ,
+						income: Math.random()
+					});
+				}
+				return data;
+			}())
+
+			,
+			dimensions: {
+				sales: {
+					type: 'line'
+				},
+				income: {
+					axis: 'y2'
+				}
+			}
+		};
+
+		$scope.pushpoint = function()
+		{
+			$scope.options.data.shift();
+			$scope.options.data.push({sales:(new Date()).getTime(),income: Math.random()});
+		}
+
 		$scope.update = function() {
 			$scope.chartConfig.title = $scope.selectedDevice.name;
 			// use $scope.selectedItem.code and $scope.selectedItem.name here

@@ -29,7 +29,8 @@ var AlertSchema = new Schema({
 		enum:['system','device','license']
 	},
 	alertstatus:{
-		type: String
+		type: String,
+		enum: ['active','inprogress','resolved']
 	},
 	belongsto:{
 		type: Schema.ObjectId,

@@ -113,6 +113,19 @@ exports.alertByUser = function(req,res,next,id){
 	});
 };
 
+exports.unresolvedalerts = function(req,res,next,id){
+	Alert.find({alerttype:req.params.alerttype}).exec(function(err,alerts){
+		if(err)
+		{
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}else {
+			res.jsonp(alerts);
+		}
+	});
+}
+
 /**
  * Alert authorization middleware
  */

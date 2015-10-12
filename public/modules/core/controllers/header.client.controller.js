@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus','$mdSidenav','$mdUtil','$log','$location','MyAlerts',
-	function($scope, Authentication, Menus,$mdSidenav,$mdUtil,$log,$location,MyAlerts) {//
+angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus','$mdSidenav','$mdUtil','$log','$location','MyAlerts','UnresolvedAlerts',
+	function($scope, Authentication, Menus,$mdSidenav,$mdUtil,$log,$location,MyAlerts,UnresolvedAlerts) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
@@ -24,6 +24,12 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
             userId: Authentication.user._id
         });
 
+        $scope.unresovedSystemAlerts = UnresolvedAlerts.query({
+            alerttype:'system'
+        });
+        $scope.unresovedLicenceAlerts = UnresolvedAlerts.query({
+            alerttype:'license'
+        });
 
         /**
          * Build handler to open/close a SideNav; when animation finishes
