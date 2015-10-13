@@ -1,27 +1,32 @@
 <section layout="column" data-ng-controller="ClientsController" data-ng-init="findOne()">
-	<div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
+    <div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
         <!--<h2 data-ng-bind="client.name"></h2>-->
-        <h2 class="left-margin-20">{{client.name}} - View</h2>
+
+        <div layout-align="start center" class="container">
+            <div layout="row">
+                <h2 class="left-margin-20">{{client.name}} - View</h2>
+            </div>
+        </div>
     </div>
-	<div class="section-margin">
-		
-	
-	<div class="pull-right" >
-		<a class="btn btn-primary" href="/#!/clients/{{client._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="client.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="client.user.displayName"></span>
-		</em>
-	</small>
-		
-	</div>
+    <div class="container">
+
+
+        <div class="pull-right">
+            <a class="btn btn-primary" href="/#!/clients/{{client._id}}/edit">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a class="btn btn-primary" data-ng-click="remove();">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </div>
+        <small>
+            <em class="text-muted">
+                Posted on
+                <span data-ng-bind="client.created | date:'mediumDate'"></span>
+                by
+                <span data-ng-bind="client.user.displayName"></span>
+            </em>
+        </small>
+
+    </div>
 </section>

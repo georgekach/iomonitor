@@ -24,18 +24,18 @@
         <table st-table="clients" class="table table-striped top-buffer">
             <thead>
             <tr>
-                <th>Client ID</th>
+                <th>Client Name</th>
                 <th>Name</th>
                 <th>Surname</th>
-
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="client in clients | filter:query">
-                <td><a href="/#!/clients/{{client._id}}"> {{client.name}}</a></td>
+                <td> {{client.name}}</td>
                 <td>{{client.fname}}</td>
                 <td>{{client.sname}}</td>
-
+                <td><a class="btn btn-primary" href="/#!/clients/{{client._id}}">Edit</a></td>
             </tr>
             </tbody>
         </table>

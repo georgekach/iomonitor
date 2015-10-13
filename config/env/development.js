@@ -2,11 +2,11 @@
 
 module.exports = {
 
-	db: 'mongodb://george:pass123*@ds047802.mongolab.com:47802/rtumon',
-	//db: 'mongodb://localhost:27017/rtumon',
+	//db: 'mongodb://george:pass123*@ds047802.mongolab.com:47802/rtumon',
+	db: 'mongodb://localhost:27017/rtumon',
 
 	app: {
-		title: 'meantest - Development Environment'
+		title: 'Intellisense - Cloud-based Environment Sensing '
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

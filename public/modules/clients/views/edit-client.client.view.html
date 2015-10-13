@@ -1,10 +1,13 @@
 <section data-ng-controller="ClientsController" data-ng-init="findOne()">
     <div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
-       
-        <h2>Edit Client</h2>
-       
+        <div layout-align="start center" class="container">
+            <div layout="row">
+                <h2>Edit Client</h2>
+            </div>
+        </div>
+
     </div>
-    
+
     <!--<div class="page-header">
         <ol class="breadcrumb">
             <li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
@@ -33,171 +36,171 @@
     </script>-->
 
     <!--<button class="btn btn-default" ng-click="open()">Open me!</button>-->
-<div class="section-margin">
-    <form class="form-horizontal" data-ng-submit="update()" novalidate>
-    <md-content>
+    <div class="container">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <md-content>
 
-            <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab label="General Details">
-                    <div class="col-md-12 top-buffer">
-                        <!--<form class="form-horizontal" data-ng-submit="update()" novalidate>-->
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="control-label"> Basic Information</label>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label  col-sm-2" for="name">Name</label>
-
-                                <div class="controls  col-sm-4">
-                                    <input type="text" data-ng-model="client.name" id="name" class="form-control"
-                                           placeholder="Name" required>
+                <md-tabs md-dynamic-height md-border-bottom>
+                    <md-tab label="General Details">
+                        <div class="col-md-12 top-buffer">
+                            <!--<form class="form-horizontal" data-ng-submit="update()" novalidate>-->
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="control-label"> Basic Information</label>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label"> Contact Person</label>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label  col-sm-2" for="fname">First Name</label>
+                                <div class="form-group">
+                                    <label class="control-label  col-sm-2" for="name">Name</label>
 
-                                <div class="controls  col-sm-4">
-                                    <input type="text" data-ng-model="client.fname" id="fname" class="form-control"
-                                           placeholder="First Name">
+                                    <div class="controls  col-sm-4">
+                                        <input type="text" data-ng-model="client.name" id="name" class="form-control"
+                                               placeholder="Name" required>
+                                    </div>
                                 </div>
-                                <label class="control-label  col-sm-2" for="fname">Surname</label>
-
-                                <div class="controls  col-sm-4">
-                                    <input type="text" data-ng-model="client.sname" id="sname" class="form-control"
-                                           placeholder="Surname">
+                                <div class="form-group">
+                                    <label class="control-label"> Contact Person</label>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label  col-sm-2" for="fname">Contact Number</label>
+                                <div class="form-group">
+                                    <label class="control-label  col-sm-2" for="fname">First Name</label>
 
-                                <div class="controls  col-sm-4">
-                                    <input type="text" data-ng-model="client.cellnumber" id="cellnumber"
-                                           class="form-control"
-                                           placeholder="Cell Number">
+                                    <div class="controls  col-sm-4">
+                                        <input type="text" data-ng-model="client.fname" id="fname" class="form-control"
+                                               placeholder="First Name">
+                                    </div>
+                                    <label class="control-label  col-sm-2" for="fname">Surname</label>
+
+                                    <div class="controls  col-sm-4">
+                                        <input type="text" data-ng-model="client.sname" id="sname" class="form-control"
+                                               placeholder="Surname">
+                                    </div>
                                 </div>
-                                <label class="control-label  col-sm-2" for="email">Email</label>
+                                <div class="form-group">
+                                    <label class="control-label  col-sm-2" for="fname">Contact Number</label>
 
-                                <div class="controls  col-sm-4">
-                                    <input type="text" data-ng-model="client.email" id="email" class="form-control"
-                                           placeholder="Email Address">
+                                    <div class="controls  col-sm-4">
+                                        <input type="text" data-ng-model="client.cellnumber" id="cellnumber"
+                                               class="form-control"
+                                               placeholder="Cell Number">
+                                    </div>
+                                    <label class="control-label  col-sm-2" for="email">Email</label>
+
+                                    <div class="controls  col-sm-4">
+                                        <input type="text" data-ng-model="client.email" id="email" class="form-control"
+                                               placeholder="Email Address">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div data-ng-show="error" class="text-danger">
-                                <strong data-ng-bind="error"></strong>
-                            </div>
-                        </fieldset>
-                        <!--</form>-->
-                    </div>
-                </md-tab>
-                <md-tab label="Billing Information">
-                    <div class="container">
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="control-label">Billing Address</label>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label  col-sm-2" for="cellnumber"></label>
-
-                                <div class="controls  col-sm-4">
-                                    <input type="text" id="cellnumber1" class="form-control"
-                                           placeholder="Street Address">
+                                <div data-ng-show="error" class="text-danger">
+                                    <strong data-ng-bind="error"></strong>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label  col-sm-2" for="cellnumber"></label>
-
-                                <div class="controls  col-sm-4 ">
-                                    <input type="text" id="cellnumber2" class="form-control"
-                                           placeholder="Town">
+                            </fieldset>
+                            <!--</form>-->
+                        </div>
+                    </md-tab>
+                    <md-tab label="Billing Information">
+                        <div class="container">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="control-label">Billing Address</label>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label  col-sm-2" for="cellnumber"></label>
 
-                                <div class="controls  col-sm-4 ">
-                                    <input type="text" id="cellnumbe3" class="form-control"
-                                           placeholder="City">
+                                <div class="form-group">
+                                    <label class="control-label  col-sm-2" for="cellnumber"></label>
+
+                                    <div class="controls  col-sm-4">
+                                        <input type="text" id="cellnumber1" class="form-control"
+                                               placeholder="Street Address">
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label class="control-label  col-sm-2" for="cellnumber"></label>
 
-                            <div class="form-group">
-                                <label class="control-label">Billing Frequency</label>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label  col-sm-2" for="cellnumber">Frequency</label>
-
-                                <div class="controls  col-sm-4 ">
-                                    <input type="text" id="cellnumbe4" class="form-control"
-                                           placeholder="Billing frequency">
+                                    <div class="controls  col-sm-4 ">
+                                        <input type="text" id="cellnumber2" class="form-control"
+                                               placeholder="Town">
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label class="control-label  col-sm-2" for="cellnumber"></label>
 
-                        </fieldset>
-                    </div>
-                </md-tab>
-                <md-tab label="Users">
-                    <h3> Users</h3>
-                    <button class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> </button>
-                    <table st-table="clientsUsers" class="table table-striped top-buffer">
-                        <thead>
-                        <tr>
-                            <th>User Id</th>
-                            <th>First name</th>
-                            <th>Surname</th>
-                            <th>Roles</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="user in clientsUsers ">
-                            <td><span ng-click="openEditDevice('lg',device)">{{user.username}}</span></td>
-                            <td><span ng-click="openEditDevice('lg',device)"> {{user.firstName}}</span></td>
-                            <td> </td>
-                            <td></td>
+                                    <div class="controls  col-sm-4 ">
+                                        <input type="text" id="cellnumbe3" class="form-control"
+                                               placeholder="City">
+                                    </div>
+                                </div>
 
-                        </tr>
-                        </tbody>
-                    </table>
-                </md-tab>
-                <md-tab label="devices">
-                    <h1>
-                        Devices </h1>
+                                <div class="form-group">
+                                    <label class="control-label">Billing Frequency</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label  col-sm-2" for="cellnumber">Frequency</label>
 
-                    <div class="top-buffer" >
-                        <table st-table="client.devices" class="table table-striped top-buffer">
+                                    <div class="controls  col-sm-4 ">
+                                        <input type="text" id="cellnumbe4" class="form-control"
+                                               placeholder="Billing frequency">
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+                    </md-tab>
+                    <md-tab label="Users">
+                        <h3> Users</h3>
+                        <button class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i></button>
+                        <table st-table="clientsUsers" class="table table-striped top-buffer">
                             <thead>
                             <tr>
-                                <th>Device ID</th>
-                                <th>Name</th>
-                                <th>Actions</th>
-
+                                <th>User Id</th>
+                                <th>First name</th>
+                                <th>Surname</th>
+                                <th>Roles</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="device in client.devices ">
-                                <td><span>{{device._id}}</span></td>
-                                <td><span> {{device.name}}</span></td>
-                                <td><a class="btn btn-primary" href="/#!/devices/{{device._id}}/edit"> Edit</a></td>
+                            <tr ng-repeat="user in clientsUsers ">
+                                <td><span ng-click="openEditDevice('lg',device)">{{user.username}}</span></td>
+                                <td><span ng-click="openEditDevice('lg',device)"> {{user.firstName}}</span></td>
+                                <td></td>
+                                <td></td>
 
                             </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </md-tab>
+                    <md-tab label="devices">
+                        <h1>
+                            Devices </h1>
 
-                </md-tab>
-            </md-tabs>
+                        <div class="top-buffer">
+                            <table st-table="client.devices" class="table table-striped top-buffer">
+                                <thead>
+                                <tr>
+                                    <th>Device ID</th>
+                                    <th>Name</th>
+                                    <th>Actions</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="device in client.devices ">
+                                    <td><span>{{device._id}}</span></td>
+                                    <td><span> {{device.name}}</span></td>
+                                    <td><a class="btn btn-primary" href="/#!/devices/{{device._id}}/edit"> Edit</a></td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </md-tab>
+                </md-tabs>
 
 
-    </md-content>
-    <div >
-        <input type="submit" value="Save Record" class="btn btn-primary">
-        <a href="/#!/clients" class="btn btn-danger">Discard</a>
-    </div>
-    </form>
+            </md-content>
+            <div>
+                <input type="submit" value="Save Record" class="btn btn-primary">
+                <a href="/#!/clients" class="btn btn-danger">Discard</a>
+            </div>
+        </form>
     </div>
 </section>
 

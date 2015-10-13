@@ -45,14 +45,14 @@ var socketServer = require('./server.readings.tcp')(ios);
     console.log('Readings tcp server started on port' + config.readingsport);
 
 
-
+/*
 if(!ios){
     console.log('no val for ios');
 }
 else
 {
     console.log('ios has values'+ios);
-}
+}*/
 
 var cronjobs = require('./servercron');
 //cronjobs.startReadingsDeviceIdCronJob(ios);
