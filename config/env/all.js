@@ -52,7 +52,7 @@ module.exports = {
 				'public/lib/d3/d3.js',
 				'public/lib/c3/c3.js',
 				'public/lib/angular-chart/angular-chart.js',
-				'public/lib/angular-scroll/angular-scroll.min.js'
+				'https://cdnjs.cloudflare.com/ajax/libs/angular-scroll/0.7.3/angular-scroll.min.js'
 			]
 		},
 		css: [
