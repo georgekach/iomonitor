@@ -16,8 +16,14 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 			$scope.isCollapsed = false;
 		});
 
+        var result = document.getElementById('side-menu');
+        //alert(result);
 
-            $('#side-menu').metisMenu();
+        //var sidemenu = angular.element(result);
+        //sidemenu.metisMenu();
+        $('#side-menu').metisMenu();
+        //(angular.element( document.querySelector( '#side-menu'))).metisMenu();
+
         $scope.myAlerts = '';
 
         $scope.myAlerts = MyAlerts.query({

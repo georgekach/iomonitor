@@ -23,6 +23,7 @@ coremodule.directive('restrict',['Authentication', function(Authentication){
                     //if(user.role === attributes[i]){
                       //  accessDenied = false;
                     //}
+                    if(user.roles)
                     if(user.roles.indexOf(attributes[i])>-1)
                     {
                         accessDenied = false;
@@ -36,6 +37,6 @@ coremodule.directive('restrict',['Authentication', function(Authentication){
                 }
 
             }
-        }
+        };
     }]);
 

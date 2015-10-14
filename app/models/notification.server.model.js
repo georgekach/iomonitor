@@ -52,8 +52,7 @@ var NotificationSchema = new Schema({
         type: String,
         default: '',
         trim: true
-    }
-    ,
+    },
     created: {
         type: Date,
         default: Date.now

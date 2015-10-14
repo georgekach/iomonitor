@@ -187,7 +187,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 		{
 			$scope.options.data.shift();
 			$scope.options.data.push({sales:(new Date()).getTime(),income: Math.random()});
-		}
+		};
 
 		$scope.update = function() {
 			$scope.chartConfig.title = $scope.selectedDevice.name;
