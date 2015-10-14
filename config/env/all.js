@@ -36,8 +36,10 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/highcharts-release/adapters/standalone-framework.js',
-				'public/lib/highcharts-release/highcharts.js',
-				'public/lib/highcharts-ng/src/highcharts-ng.js',
+				//'public/lib/highcharts-release/highcharts.js',
+				'http://code.highcharts.com/highcharts.js',
+				'public/lib/highcharts-ng/dist/highcharts-ng.js',
+				
 				'public/lib/socket-io/socket.io.js',
 				'public/lib/angular-socket-io/socket.min.js',
 				'public/lib/jquery/dist/jquery.js',
