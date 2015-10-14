@@ -6,7 +6,7 @@ module.exports = {
 		description: 'my first mean application',
 		keywords: 'rtu, device mean app'
 	},
-	port: process.env.PORT || 3002,
+	port: process.env.PORT || 8080,
 	readingsport: 3000,
 	templateEngine: 'swig',
 	sessionSecret: 'MEAN',

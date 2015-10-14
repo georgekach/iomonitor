@@ -7,7 +7,10 @@
 var net = require('net'),
     mongoose = require('mongoose'),
     config = require('./config/config');
-
+/*var re = require('./app/models/reading.server.model.js');
+var devw = require('./app/models/device.server.model.js');
+var sa= require('./app/models/devicesensoralert.server.model.js');
+var notfj = require('./app/models/notification.server.model.js');*/
 var unitId, type, time, channels, state1 = '', lastValue1 = '', state2 = '',
     lastValue2 = '', state3 = '', lastValue3 = '', state4 = '', lastValue4 = '', gps = '';
 var readingDataArray = '';
@@ -290,8 +293,7 @@ module.exports = function (io) {
     };
 
     var createNotification = function (device, sensor, alert, reading, alertaction) {
-        var notificationmessage = 'Device ' + device.name + ' [' + device.deviceId + '] sensor ' + sensor.name
-            + 'has raised alert ' + alert.name + ' with value' + reading + ' required range is [' + alertaction.thresholdvaluemin + ' - ' + alertaction.thresholdvaluemax + ' ]';
+        var notificationmessage = 'Device ' + device.name + ' [' + device.deviceId + '] sensor ' + sensor.name  + 'has raised alert ' + alert.name + ' with value' + reading + ' required range is [' + alertaction.thresholdvaluemin + ' - ' + alertaction.thresholdvaluemax + ' ]';
 
         var newNotification = new Notification();
         newNotification.action = alertaction.actiontype;

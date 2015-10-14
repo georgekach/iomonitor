@@ -124,7 +124,7 @@ exports.unresolvedalerts = function(req,res,next,id){
 			res.jsonp(alerts);
 		}
 	});
-}
+};
 
 /**
  * Alert authorization middleware

@@ -3,6 +3,10 @@
  */
 
 'use strict';
+var re = require('./app/models/alert.server.model.js');
+var devw = require('./app/models/notification.server.model.js');
+var re = require('./app/models/user.server.model.js');
+
 var mongoose = require('mongoose');
 var Notification = mongoose.model('Notification');
 var Alert = mongoose.model('Alert');
