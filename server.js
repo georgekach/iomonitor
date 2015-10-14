@@ -13,11 +13,12 @@ var init = require('./config/init')(),
  * Please note that the order of loading is important.
  */
 
+/*
 var models_path = __dirname + '/app/models';
 fs.readdirSync(models_path).forEach(function (file) {
     if (~file.indexOf('.js'))
         require(models_path + '/' + file);
-});
+});*/
 
 // Bootstrap db connection
 
