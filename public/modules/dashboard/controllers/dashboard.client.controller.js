@@ -178,7 +178,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 					type: 'line'
 				},
 				income: {
-					axis: 'y2'
+					axis: 'x'
 				}
 			}
 		};

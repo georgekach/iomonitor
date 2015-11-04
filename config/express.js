@@ -22,7 +22,25 @@ var fs = require('fs'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path');
+	path = require('path'),
+	url = require('url');
+
+//QuotaGugard
+/*var proxy, target, options;
+proxy = url.parse(process.env.QUOTAGUARDSTATIC_URL);
+target = url.parse("http://teamintellisol.com/");
+
+options = {
+	hostname: proxy.hostname,
+	port: proxy.port || 80,
+	path: target.href,
+	headers: {
+		"Proxy-Authorization": "Basic " + (new Buffer(proxy.auth).toString("base64")),
+		"Host": target.hostname
+	}
+};*/
+
+
 
 module.exports = function(db) {
 	// Initialize express app

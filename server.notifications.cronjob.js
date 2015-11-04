@@ -24,7 +24,7 @@ exports.startNotificationsCronJob = function (io) {
         // this cronjob aligns readings with devices
         Notification.find({processed: false}, function (err, unprocessedNotifications) {
 
-            console.log('Need to process' + unprocessedNotifications.length)
+            //console.log('Need to process' + unprocessedNotifications.length)
             unprocessedNotifications.forEach(function (notification) {
 
                 switch (notification.action) {

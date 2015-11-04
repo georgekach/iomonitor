@@ -14,7 +14,7 @@ var cron = require('cron');
 
 exports.startReadingsDeviceIdCronJob = function(io){
 
-    console.log('io value is '+ io);
+    //console.log('io value is '+ io);
 
     var readingsDeviceIdCronJob = cron.job('0 */1 * * * *', function () {
         // perform operation e.g. GET request http.get() etc.
