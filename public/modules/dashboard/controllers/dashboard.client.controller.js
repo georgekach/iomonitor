@@ -52,7 +52,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 
 			console.log('$scope.myval = '+$scope.myval)
 			if($scope.selectedDevice)
-			if(data.device===$scope.selectedDevice.deviceId)
+			if(data.device==$scope.selectedDevice.deviceId)
 			{
 				$scope.myval = data.readingvalue;
 				/*

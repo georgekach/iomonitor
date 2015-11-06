@@ -86,6 +86,33 @@ exports.list = function(req, res) {
 };
 
 /**
+ * List of Clients
+ */
+exports.mylist = function(req, res) {
+
+	var  clients = [];
+	Users.findById(req.user._id).populate('client').exec(function(err,user){
+		if(err){
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}else{
+			clients.push(user.client);
+			res.jsonp(clients);
+		}
+	});
+
+	/*Client.find({'users._id': req.user._id}).sort('-created').populate('user', 'displayName').exec(function(err, clients) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(clients);
+		}
+	});*/
+};
+/**
  * Client middleware
  */
 exports.clientByID = function(req, res, next, id) { 

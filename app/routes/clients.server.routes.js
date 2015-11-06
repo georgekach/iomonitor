@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, clients.create);
 
 	app.route('/myclients')
-		.get(clients.list)
+		.get(clients.mylist)
 		.post(users.requiresLogin, clients.create);
 
 	app.route('/clients/:clientId')
