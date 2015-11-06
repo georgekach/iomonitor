@@ -9,7 +9,16 @@ module.exports = function(app) {
 		.get(clients.list)
 		.post(users.requiresLogin, clients.create);
 
+	app.route('/myclients')
+		.get(clients.list)
+		.post(users.requiresLogin, clients.create);
+
 	app.route('/clients/:clientId')
+		.get(clients.read)
+		.put(users.requiresLogin, clients.hasAuthorization, clients.update)
+		.delete(users.requiresLogin, clients.hasAuthorization, clients.delete);
+
+	app.route('/myclients/:clientId')
 		.get(clients.read)
 		.put(users.requiresLogin, clients.hasAuthorization, clients.update)
 		.delete(users.requiresLogin, clients.hasAuthorization, clients.delete);

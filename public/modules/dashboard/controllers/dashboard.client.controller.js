@@ -1,12 +1,20 @@
 'use strict';
 
-angular.module('dashboard').controller('DashboardController', ['$scope','$mdToast', '$animate','$mdDialog','$interval','Devices',
-	function($scope,$mdToast, $animate,$mdDialog,$interval,Devices) {
+angular.module('dashboard').controller('DashboardController', ['$scope','$mdToast', '$animate','$mdDialog','$interval','Devices','MyDevices',"Authentication",
+	function($scope,$mdToast, $animate,$mdDialog,$interval,Devices,MyDevices,Authentication) {
 		// Controller Logic
 		// ...
+		$scope.authentication = Authentication;
 
-		$scope.devices = Devices.query();
-		//$scope.selectedDevice = '';
+		var usersClient = $scope.authentication.user.client;
+		if(usersClient){
+			$scope.devices = MyDevices.query();
+		}else
+		{
+			$scope.devices = Devices.query();
+		}
+
+		$scope.selectedDevice = '';
 
 		$scope.toastPosition = {
 			bottom: true,
@@ -29,26 +37,39 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 		 }
 		 });*/
 
-		var socket = io('http://localhost:3002');
+		var socket = io('http://40.124.8.98:3002');
 		socket.on('connect', function(){
 			console.log('connected');
 		});
+		var currentDeviceId = '';
+		if($scope.selectedDevice)
+		currentDeviceId = $scope.selectedDevice.deviceId;
+
 		socket.on('pushdata', function(data){
 
-			console.log('Data Received'+ data.readingtime+' '+data.readingvalue);
+
+			console.log('Data Received'+ data.readingtime+' '+data.readingvalue+ ''+data.device);
+
+			console.log('$scope.myval = '+$scope.myval)
+			if($scope.selectedDevice)
+			if(data.device===$scope.selectedDevice.deviceId)
+			{
+				$scope.myval = data.readingvalue;
+				/*
 			$mdToast.show(
+
 				$mdToast.simple()
 					.content('Data Received @'+ data.readingtime+'  '+data.readingvalue)
 					.position($scope.getToastPosition())
 					.hideDelay(3000)
-			);
-
+			);*/
+		}
 			var x = (new Date()).getTime(), // current time
 				y = data.readingvalue;
 			//$scope.chartConfig.series[0].data.concat(10,x,y)//.addPoint([x, y], true, true);
 			$scope.chartConfig.series[0].data.shift();
 			$scope.chartConfig.series[0].data.push([x, y]);
-			$scope.myval = y;
+			//$scope.myval = y;
 		});
 		socket.on('disconnect', function(){
 

@@ -12,6 +12,13 @@ angular.module('clients').config(['$stateProvider',
 					displayName:'Clients'
 				}
 		}).
+			state('listMyClients', {
+				url: '/myclients',
+				templateUrl: 'modules/clients/views/list-myclients.client.view.html',
+				data:{
+					displayName:'My Clients'
+				}
+			}).
 		state('createClient', {
 			url: '/clients/create',
 			templateUrl: 'modules/clients/views/create-client.client.view.html'

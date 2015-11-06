@@ -156,7 +156,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="user in clientsUsers ">
+                            <tr ng-repeat="user in client.users">
                                 <td><span ng-click="openEditDevice('lg',device)">{{user.username}}</span></td>
                                 <td><span ng-click="openEditDevice('lg',device)"> {{user.firstName}}</span></td>
                                 <td></td>
@@ -174,16 +174,18 @@
                             <table st-table="client.devices" class="table table-striped top-buffer">
                                 <thead>
                                 <tr>
-                                    <th>Device ID</th>
+
                                     <th>Name</th>
+                                    <th>Device Id</th>
                                     <th>Actions</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="device in client.devices ">
-                                    <td><span>{{device._id}}</span></td>
+
                                     <td><span> {{device.name}}</span></td>
+                                    <td><span>{{device.deviceId}}</span></td>
                                     <td><a class="btn btn-primary" href="/#!/devices/{{device._id}}/edit"> Edit</a></td>
 
                                 </tr>
@@ -198,7 +200,7 @@
             </md-content>
             <div>
                 <input type="submit" value="Save Record" class="btn btn-primary">
-                <a href="/#!/clients" class="btn btn-danger">Discard</a>
+                <a href="/#!/clients" class="btn btn-danger">Back to Clients</a>
             </div>
         </form>
     </div>

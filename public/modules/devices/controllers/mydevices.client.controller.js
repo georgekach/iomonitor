@@ -1,8 +1,8 @@
 'use strict';
 
 // Devices controller
-angular.module('devices').controller('DevicesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Devices', '$rootScope', '$mdToast', 'Devicesensors', 'Sensortypes', '$filter', 'Devicesensoralerts', '$modal','Readings2','DeviceSensor',
-	function ($scope, $stateParams, $location, Authentication, Devices, $rootScope, $mdToast, Devicesensors, Sensortypes, $filter, Devicesensoralerts, $modal,Readings2,DeviceSensor) {
+angular.module('devices').controller('MyDevicesController', ['$scope', '$stateParams', '$location', 'Authentication', 'MyDevices', '$rootScope', '$mdToast', 'Devicesensors', 'Sensortypes', '$filter', 'Devicesensoralerts', '$modal','Readings2','DeviceSensor',
+	function ($scope, $stateParams, $location, Authentication, MyDevices, $rootScope, $mdToast, Devicesensors, Sensortypes, $filter, Devicesensoralerts, $modal,Readings2,DeviceSensor) {
 		$scope.authentication = Authentication;
 		$rootScope.section = 'Devices';
 		$scope.selectedView = '';
@@ -59,7 +59,7 @@ angular.module('devices').controller('DevicesController', ['$scope', '$statePara
 
 
 			// Create new Device object
-			var device = new Devices({
+			var device = new MyDevices({
 				deviceId: this.deviceId,
 				location: this.location,
 				name: this.name,
@@ -137,18 +137,19 @@ angular.module('devices').controller('DevicesController', ['$scope', '$statePara
 
 		// Find a list of Devices
 		$scope.find = function () {
-			$scope.devices = Devices.query();
+			$scope.devices = MyDevices.query();
 		};
 
 		$scope.deviceSensorAlerts = '';
 		// Find existing Device
 		$scope.findOne = function () {
-			$scope.device = Devices.get({
+			$scope.device = MyDevices.get({
 				deviceId: $stateParams.deviceId
 			});
 
 
 			$scope.devicesReadings = Readings2.query({ myId: $stateParams.deviceId});
+
 
 
 		/*	var resultP = Devicesensors.query();

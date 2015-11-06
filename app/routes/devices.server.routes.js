@@ -14,6 +14,15 @@ module.exports = function(app) {
 		.put(users.requiresLogin, devices.hasAuthorization, devices.update)
 		.delete(users.requiresLogin, devices.hasAuthorization, devices.delete);
 
+	app.route('/mydevices')
+		.get(devices.mylist)
+		.post(users.requiresLogin, devices.create);
+
+	app.route('/mydevices/:deviceId')
+		.get(devices.read)
+		.put(users.requiresLogin, devices.hasAuthorization, devices.update)
+		.delete(users.requiresLogin, devices.hasAuthorization, devices.delete);
+
 	app.route('/devicesensor/:sensId')
 		.get(devices.readsensor)
 		.delete(users.requiresLogin, devices.hasAuthorization, devices.deletesensor);

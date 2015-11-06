@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Client = mongoose.model('Client'),
+	Users = mongoose.model('User'),
 	_ = require('lodash');
 
 /**
@@ -95,7 +96,7 @@ exports.clientByID = function(req, res, next, id) {
 		next();
 	});*/
 
-	Client.findById(id).populate('devices').exec(function(err, client) {
+	Client.findById(id).populate('devices users').exec(function(err, client) {
 		if (err) return next(err);
 		if (! client) return next(new Error('Failed to load Client ' + id));
 		req.client = client ;
@@ -106,6 +107,8 @@ exports.clientByID = function(req, res, next, id) {
 	});
 
 };
+
+
 
 /**
  * Client authorization middleware

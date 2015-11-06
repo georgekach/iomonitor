@@ -20,6 +20,22 @@ angular.module('devices').config(['$stateProvider',
 		state('editDevice', {
 			url: '/devices/:deviceId/edit',
 			templateUrl: 'modules/devices/views/edit-device.client.view.html'
-		});
+		}).
+			state('listMyDevices', {
+				url: '/mydevices',
+				templateUrl: 'modules/devices/views/list-mydevices.client.view.html'
+			})./*
+			state('createMyDevice', {
+				url: '/mydevices/create',
+				templateUrl: 'modules/devices/views/create-mydevice.client.view.html'
+			}).
+			state('viewMyDevice', {
+				url: '/mydevices/:deviceId',
+				templateUrl: 'modules/devices/views/view-mydevice.client.view.html'
+			}).*/
+			state('editMyDevice', {
+				url: '/mydevices/:deviceId/edit',
+				templateUrl: 'modules/devices/views/edit-mydevice.client.view.html'
+			});
 	}
 ]);

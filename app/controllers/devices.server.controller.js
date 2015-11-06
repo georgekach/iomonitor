@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Device = mongoose.model('Device'),
+	Client = mongoose.model('Client'),
 	_ = require('lodash');
 
 
@@ -110,6 +111,50 @@ exports.list = function(req, res) {
 		}
 	});
 };
+
+/**
+ * List of My Devices
+ */
+exports.mylist = function(req, res) {
+
+	var userId = req.user._id;
+	var Schema = mongoose.Schema;
+	Client.findById(req.user.client).populate('users devices').exec(function(err,client){
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+
+			//console.log('Value of req is '+  req.user._id);
+			if(client)
+			{
+				//console.log('Number of clients is '+clients.length);
+				console.log(client);
+				res.jsonp(client.devices);
+			}
+			else
+			{
+				console.log('no clients to show');
+			}
+
+		}
+	});
+	 /*
+	Device.find().sort('-created').populate('user', 'displayName').exec(function(err, devices) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+
+			console.log('Value of req is '+  req.user._id);
+
+			res.jsonp(devices);
+		}
+	});*/
+};
+
 
 /**
  * Device middleware

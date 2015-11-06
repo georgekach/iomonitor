@@ -79,7 +79,7 @@ exports.listByClient = function (req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			console.log('My Results are '+ users);
+			console.log('My Results are for client '+req.params.clientId1+ users);
 			res.jsonp(users);
 		}
 	});

@@ -1,0 +1,28 @@
+<section data-ng-controller="MyDevicesController" data-ng-init="findOne()">
+    <div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
+        <div layout-align="start center" class="container">
+            <div layout="row">
+                <h2 class="left-margin-20">{{device.name}} - View</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == device.user._id))">
+            <a class="btn btn-primary" href="/#!/devices/{{device._id}}/edit">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a class="btn btn-primary" data-ng-click="remove();">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </div>
+        <small>
+            <em class="text-muted">
+                Created on
+                <span data-ng-bind="device.created | date:'mediumDate'"></span>
+                by
+                <span data-ng-bind="device.user.displayName"></span>
+            </em>
+        </small>
+    </div>
+</section>
