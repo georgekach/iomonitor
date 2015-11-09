@@ -161,9 +161,12 @@
 
                             </div>
                             <h4>Current Reading</h4>
-                            <span>{{myval}}</span>
                             <div>
-                                <just-gage id="test1" min=0 max=100 value='myval' title="Cold Room 1 Temp"></just-gage>
+                                <!--<just-gage id="test1" min=0 max=100 value='myval' title="Cold Room 1 Temp"></just-gage>-->
+                                <span><strong>Sensor 1: </strong>{{sensor1}}</span>
+                                <span><strong>Sensor 2: </strong>{{sensor2}}</span>
+                                <span><strong>Sensor 3: </strong>{{sensor3}}</span>
+                                <span><strong>Sensor 4: </strong>{{sensor4}}</span>
                             </div>
                         </div>
 
@@ -178,10 +181,10 @@
 
         </div>
 
-        <button ng-click="pushpoint()"> Add point</button>
+        <!--<button ng-click="pushpoint()"> Add point</button>
         <div>
             <angular-chart class="chart-line" options="options"></angular-chart>
-        </div>
+        </div>-->
 
         <div flex layout="row">
             <openlayers ol-center="center" defaults="defaults" flex>

@@ -42,6 +42,11 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 			console.log('connected');
 		});
 		var currentDeviceId = '';
+		$scope.sensor1 ='';
+		$scope.sensor2 = '';
+		$scope.sensor3 = '';
+		$scope.sensor4 = '';
+
 		if($scope.selectedDevice)
 		currentDeviceId = $scope.selectedDevice.deviceId;
 
@@ -54,7 +59,14 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 			if($scope.selectedDevice)
 			if(data.device==$scope.selectedDevice.deviceId)
 			{
-				$scope.myval = data.readingvalue;
+				$scope.$apply(function(){
+					$scope.sensor1 = data.sensor1;
+					$scope.sensor2 = data.sensor2;
+					$scope.sensor3 = data.sensor3;
+					$scope.sensor4 = data.sensor4;
+
+				});
+
 				/*
 			$mdToast.show(
 
@@ -65,11 +77,16 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 			);*/
 		}
 			var x = (new Date()).getTime(), // current time
-				y = data.readingvalue;
+				y = data.sensor1,y2 = data.sensor2;
 			//$scope.chartConfig.series[0].data.concat(10,x,y)//.addPoint([x, y], true, true);
+			if($scope.chartConfig.series[0].data){
 			$scope.chartConfig.series[0].data.shift();
-			$scope.chartConfig.series[0].data.push([x, y]);
+			$scope.chartConfig.series[0].data.push([x, y]);}
+			/*if($scope.chartConfig.series[1].data){
+			$scope.chartConfig.series[1].data.shift();
+			$scope.chartConfig.series[1].data.push([x, y2]);
 			//$scope.myval = y;
+			}*/
 		});
 		socket.on('disconnect', function(){
 
@@ -125,7 +142,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 				}
 			},
 			title: {
-				text: 'Readings Cold Room 1'
+				text: 'Readings'
 			},
 			xAxis: {
 				type: 'datetime',
@@ -133,13 +150,14 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 			},
 			yAxis: {
 				title: {
-					text: 'Value'
+					text: 'Temperature'
 				},
 				plotLines: [{
 					value: 0,
 					width: 1,
 					color: '#808080'
-				}]
+				}],
+				max:100
 
 			},
 			//tooltip: {
@@ -149,7 +167,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 			//               Highcharts.numberFormat(this.y, 2);
 			//   }
 			//},
-
+			pointInterval: 60*1000,// every minute
 			legend: {
 				enabled: false
 			},
@@ -157,25 +175,45 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 				enabled: false
 			},
 			series: [{
-				name: 'Random data',
+				name: 'Sensor 1',
 				data: (function () {
 					// generate an array of random data
 					var data = [],
-						time = (new Date()).getTime(),
-						i;
+				time = (new Date()).getTime(),
+						i; /*
 
 					for (i = -19; i <= 0; i += 1) {
 						data.push({
 							x: time + i * 1000,
 							y: Math.random()
 						});
-					}
+					}*/
 					return data;
-				}())
-			}]
+				}()),
+				color:'#808080'
+			},
+				{
+					name: 'Sensor 2',
+					data: (function () {
+						// generate an array of random data
+						var data = [],
+							time = (new Date()).getTime(),
+							i;/*
+
+						for (i = -19; i <= 0; i += 1) {
+							data.push({
+								x: time + i * 1000,
+								y: Math.random()
+							});
+						}*/
+						return data;
+					}()),
+					color:'#ff0000'
+				}
+			]
 		};
 
-		$scope.myval = 10;
+		$scope.myval = 0;
 
 		$scope.options = {
 			data: (function () {
