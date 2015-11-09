@@ -37,7 +37,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 		 }
 		 });*/
 
-		var socket = io('http://40.124.8.98:3002');
+		var socket = io('https://40.124.8.98:3002');
 		socket.on('connect', function(){
 			console.log('connected');
 		});
