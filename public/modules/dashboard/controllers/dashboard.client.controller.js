@@ -49,6 +49,12 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 
 		if($scope.selectedDevice)
 		currentDeviceId = $scope.selectedDevice.deviceId;
+		$scope.$watch('selectedDevice',function(){
+
+				$scope.chartConfig.series[0].data = [];
+				$scope.chartConfig.series[1].data = [];
+
+		});
 
 		socket.on('pushdata', function(data){
 
@@ -65,6 +71,32 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 					$scope.sensor3 = data.sensor3;
 					$scope.sensor4 = data.sensor4;
 
+					var x = (new Date()).getTime(); // current time
+					var y = data.sensor1,y2 = data.sensor2;
+					//$scope.chartConfig.series[0].data.concat(10,x,y)//.addPoint([x, y], true, true);
+					if($scope.chartConfig.series[0].data){
+						if($scope.chartConfig.series[0].data.length>15)
+						$scope.chartConfig.series[0].data.shift();
+						$scope.chartConfig.series[0].data.push([x,  parseFloat(y)]);}
+					if($scope.chartConfig.series[1].data){
+						if($scope.chartConfig.series[1].data.length>15)
+					 $scope.chartConfig.series[1].data.shift();
+					 $scope.chartConfig.series[1].data.push([x, parseFloat(y2)]);
+					 //$scope.myval = y;
+					 }
+					if($scope.chartConfig.series[2].data){
+						if($scope.chartConfig.series[2].data.length>15)
+							$scope.chartConfig.series[2].data.shift();
+						$scope.chartConfig.series[2].data.push([x, parseFloat(data.sensor3)]);
+						//$scope.myval = y;
+					}
+					if($scope.chartConfig.series[3].data){
+						if($scope.chartConfig.series[3].data.length>15)
+							$scope.chartConfig.series[3].data.shift();
+						$scope.chartConfig.series[3].data.push([x, parseFloat(data.sensor4)]);
+						//$scope.myval = y;
+					}
+
 				});
 
 				/*
@@ -76,17 +108,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 					.hideDelay(3000)
 			);*/
 		}
-			var x = (new Date()).getTime(), // current time
-				y = data.sensor1,y2 = data.sensor2;
-			//$scope.chartConfig.series[0].data.concat(10,x,y)//.addPoint([x, y], true, true);
-			if($scope.chartConfig.series[0].data){
-			$scope.chartConfig.series[0].data.shift();
-			$scope.chartConfig.series[0].data.push([x, y]);}
-			/*if($scope.chartConfig.series[1].data){
-			$scope.chartConfig.series[1].data.shift();
-			$scope.chartConfig.series[1].data.push([x, y2]);
-			//$scope.myval = y;
-			}*/
+
 		});
 		socket.on('disconnect', function(){
 
@@ -209,6 +231,42 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 						return data;
 					}()),
 					color:'#ff0000'
+				},
+				{
+					name: 'Sensor 3',
+					data: (function () {
+						// generate an array of random data
+						var data = [],
+							time = (new Date()).getTime(),
+							i;/*
+
+						 for (i = -19; i <= 0; i += 1) {
+						 data.push({
+						 x: time + i * 1000,
+						 y: Math.random()
+						 });
+						 }*/
+						return data;
+					}()),
+					color:'#0000ff'
+				},
+				{
+					name: 'Sensor 4',
+					data: (function () {
+						// generate an array of random data
+						var data = [],
+							time = (new Date()).getTime(),
+							i;/*
+
+						 for (i = -19; i <= 0; i += 1) {
+						 data.push({
+						 x: time + i * 1000,
+						 y: Math.random()
+						 });
+						 }*/
+						return data;
+					}()),
+					color:'#00ff00'
 				}
 			]
 		};
