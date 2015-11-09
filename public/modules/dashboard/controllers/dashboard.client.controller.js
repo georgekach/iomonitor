@@ -53,9 +53,9 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 		socket.on('pushdata', function(data){
 
 
-			console.log('Data Received'+ data.readingtime+' '+data.readingvalue+ ''+data.device);
+			/*console.log('Data Received'+ data.readingtime+' '+data.readingvalue+ ''+data.device);
 
-			console.log('$scope.myval = '+$scope.myval)
+			console.log('$scope.myval = '+$scope.myval)*/
 			if($scope.selectedDevice)
 			if(data.device==$scope.selectedDevice.deviceId)
 			{

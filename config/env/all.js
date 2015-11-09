@@ -40,7 +40,8 @@ module.exports = {
 				'https://code.highcharts.com/highcharts.js',
 				'public/lib/highcharts-ng/dist/highcharts-ng.js',
 				
-				'public/lib/socket-io/socket.io.js',
+				/*'public/lib/socket-io/socket.io.js',*/
+				'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js',
 				'public/lib/angular-socket-io/socket.min.js',
 				'public/lib/jquery/dist/jquery.js',
 				'https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.2.0/metisMenu.js',
