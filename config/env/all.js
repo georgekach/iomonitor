@@ -24,7 +24,8 @@ module.exports = {
 				//'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
 				'public/lib/openlayers3/build/ol.css',
 				'public/lib/weather-icons/css/weather-icons.css',
-				'public/lib/c3/c3.css'
+				'public/lib/c3/c3.css',
+				'public/lib/ng-mobile-menu/dist/ng-mobile-menu.min.css'
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -57,7 +58,8 @@ module.exports = {
 				'public/lib/d3/d3.js',
 				'public/lib/c3/c3.js',
 				'public/lib/angular-chart/angular-chart.js',
-				'https://cdnjs.cloudflare.com/ajax/libs/angular-scroll/0.7.3/angular-scroll.min.js'
+				'https://cdnjs.cloudflare.com/ajax/libs/angular-scroll/0.7.3/angular-scroll.min.js',
+				'public/lib/ng-mobile-menu/dist/ng-mobile-menu.min.js'
 			]
 		},
 		css: [

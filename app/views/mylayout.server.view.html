@@ -49,14 +49,17 @@
 <body flex>
 
 		
-			<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-			<div flex layout-fill layout="row">
+					<!--<div flex layout-fill layout="row">-->
 			
-				<div data-ng-include="'/modules/core/views/sidenav.client.view.html'"></div>
+				<div  id="sp-nav" class="bg-light-gray"  data-ng-include="'/modules/core/views/sidenav.client.view.html'"></div>
 
+				<div  id="sp-page" style="background-color: white;">
+					<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
 
-				{% block content %}{% endblock %}
-			</div>
+					{% block content %}{% endblock %}
+				</div>
+
+			<!--</div>-->
 		
 
 		<!--

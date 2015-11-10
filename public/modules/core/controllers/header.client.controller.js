@@ -4,6 +4,7 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 	function($scope, Authentication, Menus,$mdSidenav,$mdUtil,$log,$location,MyAlerts,UnresolvedAlerts) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
+        $scope.showOverlay = true;
 		$scope.menu = Menus.getMenu('topbar');
 		//$scope.menu = Menus.getMenu('footbar');
 
@@ -25,6 +26,7 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
         //(angular.element( document.querySelector( '#side-menu'))).metisMenu();
 
         $scope.myAlerts = '';
+
 
         $scope.myAlerts = MyAlerts.query({
             userId: Authentication.user._id

@@ -1,47 +1,56 @@
 <section data-ng-controller="VendorsController" data-ng-init="find()">
     <div flex layout="row" layout-align="start center" class="page-header bg-light-gray">
         <!--<h2 data-ng-bind="client.name"></h2>-->
-        <h2 class="left-margin-20">Agents List</h2>
-        <div flex offset="75">
-            <input class="rounded" type="text" placeholder="Filter By" ng-model="query" autofocus>
+        <div flex layout="row">
+            <div layout-align="start center" class="container">
+                <div layout="row">
+                    <h2 flex="66">Device List </h2>
+
+                    <div flex="33" layout="row" layout-margin layout-align="end center">
+                        <input class="rounded" type="text" placeholder="Filter By" ng-model="query" autofocus>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-    <div class="section-margin">
-    <div>
-        <a href="/#!/vendors/create" class="btn btn-primary"> Add New</a>
-    </div>
 
-    <table st-table="vendors" class="table table-striped top-buffer">
-        <thead>
-        <tr>
-            <th>Agent Name</th>
-            <th>Company Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="vendor in vendors | filter:query">
-            <td> {{vendor.vendorname}}</td>
-            <td>{{vendor.companyname}}</td>
-            <td>{{vendor.email}}</td>
-            <td><a href="/#!/vendors/{{vendor._id}}" class="btn btn-primary"> View</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <!--<div class="list-group">-->
-        <!--<a data-ng-repeat="vendor in vendors" data-ng-href="#!/vendors/{{vendor._id}}" class="list-group-item">-->
-			<!--<small class="list-group-item-text">-->
-				<!--Posted on-->
-				<!--<span data-ng-bind="vendor.created | date:'medium'"></span>-->
-				<!--by-->
-				<!--<span data-ng-bind="vendor.user.displayName"></span>-->
-			<!--</small>-->
-			<!--<h4 class="list-group-item-heading" data-ng-bind="vendor.companyname"></h4>-->
-        <!--</a>-->
-    <!--</div>-->
-    <div class="alert alert-warning text-center" data-ng-hide="!vendors.$resolved || vendors.length">
-    	No Vendors yet, why don't you <a href="/#!/vendors/create">create one</a>?
-    </div>
+        <div class="container">
+            <div>
+                <a href="/#!/vendors/create" class="btn btn-primary"> Add New</a>
+            </div>
+
+            <table st-table="vendors" class="table table-striped top-buffer">
+                <thead>
+                <tr>
+                    <th>Agent Name</th>
+                    <th>Company Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="vendor in vendors | filter:query">
+                    <td> {{vendor.vendorname}}</td>
+                    <td>{{vendor.companyname}}</td>
+                    <td>{{vendor.email}}</td>
+                    <td><a href="/#!/vendors/{{vendor._id}}" class="btn btn-primary"> View</a></td>
+                </tr>
+                </tbody>
+            </table>
+            <!--<div class="list-group">-->
+            <!--<a data-ng-repeat="vendor in vendors" data-ng-href="#!/vendors/{{vendor._id}}" class="list-group-item">-->
+            <!--<small class="list-group-item-text">-->
+            <!--Posted on-->
+            <!--<span data-ng-bind="vendor.created | date:'medium'"></span>-->
+            <!--by-->
+            <!--<span data-ng-bind="vendor.user.displayName"></span>-->
+            <!--</small>-->
+            <!--<h4 class="list-group-item-heading" data-ng-bind="vendor.companyname"></h4>-->
+            <!--</a>-->
+            <!--</div>-->
+            <div class="alert alert-warning text-center" data-ng-hide="!vendors.$resolved || vendors.length">
+                No Vendors yet, why don't you <a href="/#!/vendors/create">create one</a>?
+            </div>
         </div>
 </section>

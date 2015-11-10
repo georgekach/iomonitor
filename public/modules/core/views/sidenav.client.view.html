@@ -1,4 +1,4 @@
-<div data-ng-controller="HeaderController">
+<!--<div data-ng-controller="HeaderController">
     <md-sidenav layout="column" layout-fill class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
         <md-toolbar class="nav navbar-nav navbar-inverse">
             <div layout="row" layout-align="space-between center">
@@ -9,277 +9,276 @@
             </div>
         </md-toolbar>
         <md-content layout="row" layout-align="start start" flex ng-controller="HeaderController">
+-->
+<!--<nav layout="column" class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">-->
 
-            <!--<nav layout="column" class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">-->
-
-            <!-- Orgiginal code
-                    <ul class="menu" data-ng-if="menu.shouldRender(authentication.user);">
-                        <li data-ng-repeat="item in menu.items | orderBy: 'position'"
-                            data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType"
-                            ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}"
-                            dropdown="item.menuItemType === 'dropdown'">
-                            <a ng-switch-when="dropdown" class="dropdown-toggle">
-                                <span data-ng-bind="item.title"></span>
-                                <b class="caret"></b>
-                            </a>
-                            <ul ng-switch-when="dropdown" class="menu-item">
-                                <li data-ng-repeat="subitem in item.items | orderBy: 'position'"
-                                    data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}"
-                                    ng-class="{active: $uiRoute}">
-                                    <a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
-                                </li>
-                            </ul>
-                            <a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
-                        </li>
-                    </ul> -->
-
-
-
-
-
-
-
-
-            <div layout-align="start start" class="navbar-default sidebar" role='navigation'>
-                <nav class="sidebar-nav navbar-collapse sidebar " style="width: 300px;">
-                    <ul id="side-menu" class="nav">
-
-
-                        <li>
-                            <a href='/#!/dashboard' restrict access='user'>
-                                <i class="fa fa-laptop fa-fw"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-briefcase fa-fw"> </i>
-                                    Business entities
-
-                                <span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li restrict access='admin agentadmin'>
-                                    <a href="/#!/vendors" ng-click="toggleLeft()"> Agents</a>
-                                </li>
-                                <li restrict access='admin agentadmin'>
-                                    <a href="/#!/clients" ng-click="toggleLeft()"> Clients </a>
-                                </li>
-                                <li restrict access='agentadmin clientadmin user'>
-                                    <a href="/#!/myclients" ng-click="toggleLeft()"> My Clients </a>
-                                </li>
-                                <li restrict access='admin agentadmin'>
-                                    <a href="/#!/devices" ng-click="toggleLeft()"> Devices </a>
-                                </li>
-                                <li restrict access='clientadmin user'>
-                                    <a href="/#!/mydevices" ng-click="toggleLeft()"> My Devices </a>
-                                </li>
-
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/#!/systemadministration">
-                                <i class="fa fa-cogs fa-fw"></i>
-                                System Administration
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/#!/useradministration">
-                                <i class="fa fa-user fa-fw"></i>
-                                User Administration
-                                <span class="fa arrow"></span>
-                            </a>
-
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="/#!/users"> System Users
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/#!/userroles"> User Roles
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/#!/accessrules"> Access Rules
-                                </a>
-                            </li>
-                        </ul>
-                        </li>
-                        <li>
-                            <a href="forms.html">
-                                <i class="fa fa-key fa-fw"></i>
-                                License Administration
-                                <span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/#!/softwareproducts"> Software Products
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/licensegen"> License Generator
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/licensing/notifications"> Notifications
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/licensing/extension"> License Extensions
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-envelope fa-fw"></i>
-                                Notifications
-                                <span class="fa arrow"></span>
-                            </a>
-
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#"> System Alerts
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Device Alerts
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Notifications
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                </nav>
-            </div>
-            <!--
-
-                        <ul class="docs-menu">
-                            <li ng-repeat="item in menu.items" class="parent-list-item {{section.className || ''}}" ng-class="{'parentActive' : isSectionSelected(section)}">
-                                <h2>
-                                    {{item.title}}
-                                </h2>
-                                <menu-link section="section" ></menu-link>
-
-                                <menu-toggle section="section" ng-if="section.type === 'dropdown'"></menu-toggle>
-
-                                <ul ng-if="item.items" class="menu-nested-list">
-                                    <li ng-repeat="child in item.items" ng-class="{'childActive' : isSectionSelected(child)}">
-                                        <menu-link section="child" ng-if="child.type === 'link'">{{child.title}}</menu-link>
-
-                                       <menu-toggle section="child" ng-if="child.type === 'toggle'"></menu-toggle>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>-->
-
-
-            <!--
-                        <div class="navbar-default sidebar" role='navigation'>
-                            <nav class="sidebar-nav navbar-collapse sidebar" data-ng-controller="HeaderController">
-                                <ul id="side-menu" class="nav">
-                                    <li class="active" data-ng-repeat="item in menu.items | orderBy: 'position'"
-                                        data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType"
-                                            >
-
-
-
-                                            <a ng-switch-when="dropdown" href="/#!/{{item.link}}" >
-                                                <i class="fa fa-bar-chart-o fa-fw">{{item.title}}</i>
-                                            </a>
-
-                                        <ul ng-switch-when="dropdown" class="nav nav-second-level">
-
-                                                <li data-ng-repeat="subitem in item.items | orderBy: 'position'"
-                                                    data-ng-if="subitem.shouldRender(authentication.user);"
-                                                    ui-route="{{subitem.uiRoute}}"
-                                                        >
-                                                    <a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
-                                                </li>
-
-                                        </ul>
-                                        <a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
-
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-            -->
-            <!--
-
-                <ul id="side-menu" class="docs-menu">
-
-                    <li data-ng-repeat="item in menu.items | orderBy: 'position'"
-                        data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType"
-                        class="parent-list-item version-picker" ng-class="{'parentActive' : isSectionSelected(section)}">
-                        <menu-toggle ng-switch-when="dropdown" class="dropdown-toggle">
-                            <span data-ng-bind="item.title"></span>
-                            <b class="md-toggle-icon"></b>
-                        </menu-toggle>
-                        <ul ng-switch-when="dropdown" class="nav nav-second-level">
-                            <menu-link section="page" class="ng-isolate-scope">
-                                <li data-ng-repeat="subitem in item.items | orderBy: 'position'"
-                                    data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}"
-                                    ng-class="{active: $uiRoute}">
-                                    <a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
-                                </li>
-                            </menu-link>
-                        </ul>
-                    </li>
+<!-- Orgiginal code
+        <ul class="menu" data-ng-if="menu.shouldRender(authentication.user);">
+            <li data-ng-repeat="item in menu.items | orderBy: 'position'"
+                data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType"
+                ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}"
+                dropdown="item.menuItemType === 'dropdown'">
+                <a ng-switch-when="dropdown" class="dropdown-toggle">
+                    <span data-ng-bind="item.title"></span>
+                    <b class="caret"></b>
+                </a>
+                <ul ng-switch-when="dropdown" class="menu-item">
+                    <li data-ng-repeat="subitem in item.items | orderBy: 'position'"
+                        data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}"
+                        ng-class="{active: $uiRoute}">
+                        <a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
                     </li>
                 </ul>
-        -->
-
-            <!--<md-list data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}">-->
-            <!--{{item.title}}-->
-            <!--<md-list-item data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">-->
-
-            <!--<a href="/#!/{{subitem.link}}">{{subitem.title}}</a>-->
+                <a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
+            </li>
+        </ul> -->
 
 
-            <!--</md-list-item>-->
-            <!--</md-list>-->
+<div data-ng-controller="HeaderController" layout-align="start start" class="navbar-default sidebar " role='navigation'>
 
-            <!--<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">-->
-            <!--<li ui-route="/signup" ng-class="{active: $uiRoute}">-->
-            <!--<a href="/#!/signup">Sign Up</a>-->
-            <!--</li>-->
-            <!--<li class="divider-vertical"></li>-->
-            <!--<li ui-route="/signin" ng-class="{active: $uiRoute}">-->
-            <!--<a href="/#!/signin">Sign In</a>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">-->
-            <!--<li class="dropdown">-->
-            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-            <!--<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu">-->
-            <!--<li>-->
-            <!--<a href="/#!/settings/profile">Edit Profile</a>-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--<a href="/#!/settings/accounts">Manage Social Accounts</a>-->
-            <!--</li>-->
-            <!--<li data-ng-show="authentication.user.provider === 'local'">-->
-            <!--<a href="/#!/settings/password">Change Password</a>-->
-            <!--</li>-->
-            <!--<li class="divider"></li>-->
-            <!--<li>-->
-            <!--<a href="/auth/signout">Signout</a>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</li>-->
-            <!--</ul>-->
+    <div >
+        <nav class="sidebar-nav navbar-collapse sidebar " style="width: 300px;">
+            <ul id="side-menu" class="nav">
 
-<!--</nav>-->
+
+                <li>
+                    <a href='/#!/dashboard' restrict access='user'>
+                                <span ng-click="$spMenu.toggle()"><i class="fa fa-laptop fa-fw"></i>
+                                Dashboard
+                                    </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-briefcase fa-fw"> </i>
+                        Business entities
+
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li restrict access='admin agentadmin'>
+                            <a href="/#!/vendors" ng-click="toggleLeft()"> Agents</a>
+                        </li>
+                        <li restrict access='admin agentadmin'>
+                            <a href="/#!/clients" ng-click="toggleLeft()"> Clients </a>
+                        </li>
+                        <li restrict access='agentadmin clientadmin user'>
+                            <a href="/#!/myclients" ng-click="toggleLeft()"> My Clients </a>
+                        </li>
+                        <li restrict access='admin agentadmin'>
+                            <a href="/#!/devices" ng-click="toggleLeft()"> Devices </a>
+                        </li>
+                        <li restrict access='clientadmin user'>
+                            <a href="/#!/mydevices" ng-click="toggleLeft()"> My Devices </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="/#!/systemadministration">
+                        <i class="fa fa-cogs fa-fw"></i>
+                        System Administration
+                    </a>
+                </li>
+                <li>
+                    <a href="/#!/useradministration">
+                        <i class="fa fa-user fa-fw"></i>
+                        User Administration
+                        <span class="fa arrow"></span>
+                    </a>
+
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/#!/users"> System Users
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#!/userroles"> User Roles
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#!/accessrules"> Access Rules
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="forms.html">
+                        <i class="fa fa-key fa-fw"></i>
+                        License Administration
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/#!/softwareproducts"> Software Products
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/licensegen"> License Generator
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/licensing/notifications"> Notifications
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/licensing/extension"> License Extensions
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="fa fa-envelope fa-fw"></i>
+                        Notifications
+                        <span class="fa arrow"></span>
+                    </a>
+
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#"> System Alerts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"> Device Alerts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"> Notifications
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </nav>
+    </div>
+</div>
+<!--
+
+            <ul class="docs-menu">
+                <li ng-repeat="item in menu.items" class="parent-list-item {{section.className || ''}}" ng-class="{'parentActive' : isSectionSelected(section)}">
+                    <h2>
+                        {{item.title}}
+                    </h2>
+                    <menu-link section="section" ></menu-link>
+
+                    <menu-toggle section="section" ng-if="section.type === 'dropdown'"></menu-toggle>
+
+                    <ul ng-if="item.items" class="menu-nested-list">
+                        <li ng-repeat="child in item.items" ng-class="{'childActive' : isSectionSelected(child)}">
+                            <menu-link section="child" ng-if="child.type === 'link'">{{child.title}}</menu-link>
+
+                           <menu-toggle section="child" ng-if="child.type === 'toggle'"></menu-toggle>
+                        </li>
+                    </ul>
+                </li>
+            </ul>-->
+
+
+<!--
+            <div class="navbar-default sidebar" role='navigation'>
+                <nav class="sidebar-nav navbar-collapse sidebar" data-ng-controller="HeaderController">
+                    <ul id="side-menu" class="nav">
+                        <li class="active" data-ng-repeat="item in menu.items | orderBy: 'position'"
+                            data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType"
+                                >
+
+
+
+                                <a ng-switch-when="dropdown" href="/#!/{{item.link}}" >
+                                    <i class="fa fa-bar-chart-o fa-fw">{{item.title}}</i>
+                                </a>
+
+                            <ul ng-switch-when="dropdown" class="nav nav-second-level">
+
+                                    <li data-ng-repeat="subitem in item.items | orderBy: 'position'"
+                                        data-ng-if="subitem.shouldRender(authentication.user);"
+                                        ui-route="{{subitem.uiRoute}}"
+                                            >
+                                        <a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
+                                    </li>
+
+                            </ul>
+                            <a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
+
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+-->
+<!--
+
+    <ul id="side-menu" class="docs-menu">
+
+        <li data-ng-repeat="item in menu.items | orderBy: 'position'"
+            data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType"
+            class="parent-list-item version-picker" ng-class="{'parentActive' : isSectionSelected(section)}">
+            <menu-toggle ng-switch-when="dropdown" class="dropdown-toggle">
+                <span data-ng-bind="item.title"></span>
+                <b class="md-toggle-icon"></b>
+            </menu-toggle>
+            <ul ng-switch-when="dropdown" class="nav nav-second-level">
+                <menu-link section="page" class="ng-isolate-scope">
+                    <li data-ng-repeat="subitem in item.items | orderBy: 'position'"
+                        data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}"
+                        ng-class="{active: $uiRoute}">
+                        <a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
+                    </li>
+                </menu-link>
+            </ul>
+        </li>
+        </li>
+    </ul>
+-->
+
+<!--<md-list data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}">-->
+<!--{{item.title}}-->
+<!--<md-list-item data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">-->
+
+<!--<a href="/#!/{{subitem.link}}">{{subitem.title}}</a>-->
+
+
+<!--</md-list-item>-->
+<!--</md-list>-->
+
+<!--<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">-->
+<!--<li ui-route="/signup" ng-class="{active: $uiRoute}">-->
+<!--<a href="/#!/signup">Sign Up</a>-->
+<!--</li>-->
+<!--<li class="divider-vertical"></li>-->
+<!--<li ui-route="/signin" ng-class="{active: $uiRoute}">-->
+<!--<a href="/#!/signin">Sign In</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">-->
+<!--<li class="dropdown">-->
+<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+<!--<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>-->
+<!--</a>-->
+<!--<ul class="dropdown-menu">-->
+<!--<li>-->
+<!--<a href="/#!/settings/profile">Edit Profile</a>-->
+<!--</li>-->
+<!--<li>-->
+<!--<a href="/#!/settings/accounts">Manage Social Accounts</a>-->
+<!--</li>-->
+<!--<li data-ng-show="authentication.user.provider === 'local'">-->
+<!--<a href="/#!/settings/password">Change Password</a>-->
+<!--</li>-->
+<!--<li class="divider"></li>-->
+<!--<li>-->
+<!--<a href="/auth/signout">Signout</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</li>-->
+<!--</ul>-->
+
+<!--</nav>
+
 </md-content>
-</md-sidenav>
+</md-sidenav>-->
 
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
     <md-toolbar class="md-theme-light">

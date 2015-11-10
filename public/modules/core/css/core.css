@@ -98,7 +98,7 @@ span:focus {
 	border: 0;
 }
 
-md-whiteframe:focus {
+.md-whiteframe:focus {
 	outline: none;
 	border: 0;
 }
@@ -218,7 +218,7 @@ div.zoom3 {
 	background-attachment: scroll;
 	background-image: url(../img/header-bg.jpg);
 	background-position: center center;
-	background-repeat: none;
+	/*background-repeat: none;*/
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
@@ -579,7 +579,7 @@ aside.clients img {
 
 section#contact {
 	background-color: #222;
-	background-image: url(../img/map-image.png);
+	/*background-image: url(../img/map-image.png);*/
 	background-position: center;
 	background-repeat: no-repeat;
 }

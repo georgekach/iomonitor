@@ -173,6 +173,7 @@ module.exports = function(db) {
 			cert: certificate
 		}, app);
 
+
 		// Return HTTPS server instance
 		return httpsServer;
 	}
