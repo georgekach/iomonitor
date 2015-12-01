@@ -2,17 +2,17 @@
  * Created by George on 8/3/2015.
  */
 'use strict';
-angular.module('users').controller('ManageUsersController', ['$scope', '$http', '$location','Users','$modal','Devicesensoralerts','Devicesensors',
-    function($scope, $http, $location, Users,$modal,Devicesensoralerts,Devicesensors) {
+angular.module('users').controller('ManageUsersController', ['$scope', '$http', '$location','Users','$uibModal','Devicesensoralerts','Devicesensors','Authentication','ClientsUsers',
+    function($scope, $http, $location, Users,$uibModal,Devicesensoralerts,Devicesensors,Authentication,ClientsUsers) {
 
         $scope.animationsEnabled = true;
 
         $scope.openCreate = function(){
 
-            $modal.open({
+        var uibModalInstance =    $uibModal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'modules/users/views/manage/create-user.client.view.html',//'myModalContent.html',
-                controller: function($modalInstance,$scope,user){
+                controller: function($uibModalInstance,$scope,user){
                     /*$scope.device = deviceOnEdit;
 
                     var resultP = Devicesensors.query();
@@ -23,11 +23,11 @@ angular.module('users').controller('ManageUsersController', ['$scope', '$http', 
                     $scope.deviceSensorAlerts = resForDeviceSensorAlerts;*/
 
                     $scope.ok = function () {
-                        $modalInstance.close(user);
+                        $uibModalInstance.close(user);
                     };
 
                     $scope.cancel = function () {
-                        $modalInstance.dismiss('cancel');
+                        $uibModalInstance.dismiss('cancel');
                     };
 
                 },
@@ -52,6 +52,22 @@ angular.module('users').controller('ManageUsersController', ['$scope', '$http', 
         // Find a list of Devices
         $scope.find = function () {
             $scope.users = Users.query();
+        };
+
+        $scope.findAllForClient = function () {
+            var clientId = Authentication.user.client;
+
+            var usersList = ClientsUsers.query({clientId1:clientId},function(){
+
+                usersList.forEach(function(user){
+                    //otherList.push({user:user,select:false});
+                    user.select = false;
+                });
+            });
+
+
+
+            $scope.users = usersList;
         };
 
     }

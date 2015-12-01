@@ -1,30 +1,24 @@
-<section layout="column"  data-ng-controller="DashboardController">
+<section layout="column"   data-ng-controller="DashboardController">
     <div class="container">
-        <div class="header">
-            <h3 layout="row" layout-align="start center" layout-padding layout-margin><i
-                    class="fa fa-laptop right-padded-5"></i>Dashboard</h3>
-            <ol class="breadcrumb">
-                <li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>
-                <li><i class="fa fa-laptop right-padded-5 active"></i>Dashboard</li>
-            </ol>
+        <!--<button class="btn btn-primary top-buffer" ng-morph-overlay="morphSettings">Demo</button>-->
+        <div  class="header top-buffer">
+
+            <h3  layout="row" layout-align="start center" layout-padding layout-margin><i
+                    class="fa fa-laptop right-padded-5 "></i>Dashboard</h3>
+
         </div>
-        <div class="btn-offset">
-            <button type="button" btn-layer-morph="" target="#layer-search" ripple=""
-                    class="btn btn-info btn-circle btn-lg shadow-z1">
-                <em class="fa fa-search"></em>
-                <span class="ripple"></span></button>
-        </div>
-        <div flex layout="row">
+     <!--
+        <div flex layout="row" ng-intro-autostart="false">
             <div class="panel" flex layout-align="start center">
                 <div  layout="row">
                     <div layout="row" flex="15" layout-fill>
                         <div  layout-align="space-around center">
-                            <div flex="50" layout="row" layout-align="center center" class="dashboard-tile clickable btn-primary"
+                            <div  flex="50" layout="row" layout-align="center center" class="dashboard-tile clickable btn-primary"
                                  ng-click="showSummary('stats')">
                                 <span class="fa fa-pie-chart fa-2x"></span>
 
                             </div>
-                            <div flex="50" layout="row" layout-align="center center" class="dashboard-tile clickable"
+                            <div  flex="50" layout="row" layout-align="center center" class="dashboard-tile clickable"
                                  ng-click="showSummary('agents')">
                                 <span class="fa fa-suitcase fa-2x"></span>
 
@@ -49,6 +43,28 @@
 
                             <div ng-switch-when="stats">
                                 Statistics Summary
+                                <div >
+                                    <form>
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label class="control-label   col-sm-2"
+                                                       for="Sensor_1">Sensor 1</label>
+
+                                                <div class="controls  col-md-3 ">
+                                                    <input type="text"
+                                                           data-ng-model="data.sensor1"
+                                                           id="Sensor_1" class="form-control"
+                                                           placeholder="Sensor Type"
+                                                           >
+                                                </div>
+                                            </div>
+                                            <button ng-click="myFunction()"> Push Point</button>
+                                            <button class="btn btn-primary" ng-click="callFunction()">Go</button>
+
+                                        </fieldset>
+                                    </form>
+
+                                </div>
 
                             </div>
                             <div ng-switch-when="agents">
@@ -69,25 +85,8 @@
                 </div>
             </div>
 
-            <!--
-            <div flex="30" layout="column" layout-margin>
-                <div flex>
-                    <div flex layout-align="space-around center">
-                        <div class="panel ">
-                            <div class="panel-body">
-                                <just-gage id="test1" min=0 max=100 value='myval' title="Test 1"></just-gage>
 
-                            </div>
-                            <div class="panel-footer">
-                                <small>footer text</small>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            -->
-        </div>
+        </div> -->
         <div flex  layout="row">
             <div class="panel" flex layout-align="start center">
                 <div flex class="panel panel-default">

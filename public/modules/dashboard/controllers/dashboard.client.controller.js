@@ -1,20 +1,54 @@
 'use strict';
 
-angular.module('dashboard').controller('DashboardController', ['$scope','$mdToast', '$animate','$mdDialog','$interval','Devices','MyDevices',"Authentication",
-	function($scope,$mdToast, $animate,$mdDialog,$interval,Devices,MyDevices,Authentication) {
+angular.module('dashboard').controller('DashboardController', ['$scope','$mdToast', '$animate','$mdDialog','$interval','Devices','MyDevices','Authentication','$log','$timeout','$q',
+	function($scope,$mdToast, $animate,$mdDialog,$interval,Devices,MyDevices,Authentication,$log,$timeout,$q) {
 		// Controller Logic
 		// ...
+		//
+		$scope.selectedDevice = '';
 		$scope.authentication = Authentication;
+
+		//overlay morph
+		$scope.morphSettings = {
+			closeEl: '.close',
+			overlay: {
+				templateUrl: 'modules/dashboard/views/morph.client.view.html',
+				scroll: false
+			}
+		};
+
+
+		//angular-intro
+		$scope.IntroOptions = {
+			steps:[
+				{
+					element: '#step1',
+					intro: 'First tooltip'
+				},
+				{
+					element: '#step4',
+					intro: 'Second tooltip',
+					position: 'right'
+				}]
+		};
+
+		$scope.callFunction = function(){
+			$timeout( function() {
+				$scope.CallMe('1');
+			});
+		};
 
 		var usersClient = $scope.authentication.user.client;
 		if(usersClient){
 			$scope.devices = MyDevices.query();
 		}else
 		{
+
 			$scope.devices = Devices.query();
+
 		}
 
-		$scope.selectedDevice = '';
+
 
 		$scope.toastPosition = {
 			bottom: true,
@@ -37,10 +71,11 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 		 }
 		 });*/
 
+		/*
 		var socket = io('https://40.124.8.98');
 		socket.on('connect', function(){
 			console.log('connected');
-		});
+		});*/
 		var currentDeviceId = '';
 		$scope.sensor1 ='';
 		$scope.sensor2 = '';
@@ -49,21 +84,116 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 
 		if($scope.selectedDevice)
 		currentDeviceId = $scope.selectedDevice.deviceId;
-		$scope.$watch('selectedDevice',function(){
 
-				$scope.chartConfig.series[0].data = [];
-				$scope.chartConfig.series[1].data = [];
+	var count = 0;
 
+		var myRun;
+/*
+		var myRun = $interval(function(dev){
+			console.log('getDeviceData called ' +dev._Id);
+			var devs = Devices.query();
+			var currentDevice = dev;
+
+
+			console.log(currentDevice);
+			if(typeof currentDevice !== 'undefined') {
+
+
+				//$scope.evalAsync(function(){
+				//$timeout(function() {
+				console.log('Inside $timeout');
+				count = count + 1;
+				$scope.sensor1 = count;
+				$scope.sensor2 = currentDevice.latestreadinglastValue2;
+				$scope.sensor3 = currentDevice.latestreadinglastValue3;
+				$scope.sensor4 = currentDevice.latestreadinglastValue4;
+
+				$scope.pushpoint({sensor1:$scope.sensor1,sensor2:$scope.sensor2,sensor3:$scope.sensor3,sensor4:$scope.sensor4})
+			}
+			},5000
+				);
+*/
+
+		/*
+		var c=0;
+		$scope.message="This DIV is refreshed "+c+" time.";
+		$interval(function(){
+			$scope.message="This DIV is refreshed "+c+" time.";
+			c++;
+		},1000);
+		 */
+
+		$scope.fail=false;
+
+		$scope.myFunction = function(){
+
+			var deferred  = $q.defer();
+			var promise  = deferred.promise;
+
+			promise.then(function(result){
+				alert('success'+ result);
+			},function(reason){
+				alert('Error '+ reason);
+			});
+
+			if($scope.fail) {
+				deferred.reject('Sorry');
+			}
+				else {
+				deferred.resolve('Cool');
+			}
+
+
+		};
+
+
+		$scope.start = function () {
+			$scope.stop();
+			myRun = $interval(function(){
+				/*console.log('pushed point');
+				console.log('Selected Device is '+$scope.selectedDevice)*/
+
+				if($scope.selectedDevice){
+				Devices.get({deviceId:$scope.selectedDevice._id},function(deviceData){
+
+					/*console.log('found the data');
+					console.log('deviceData.latestreadinglastValue1 ->'+deviceData.latestreadinglastValue1);*/
+					$scope.pushpoint({sensor1:deviceData.latestreadinglastValue1,
+						sensor2:deviceData.latestreadinglastValue2,
+						sensor3:deviceData.latestreadinglastValue3,
+						sensor4:deviceData.latestreadinglastValue4});
+				});
+				}
+
+
+
+			},1000);
+		};
+
+		$scope.stop = function () {
+			$interval.cancel(myRun);
+		};
+
+		$scope.$on('$destroy', function() {
+			$scope.stop();
 		});
 
-		socket.on('pushdata', function(data){
+		$scope.$watch('selectedDevice',function(){
+			$scope.stop();
+
+			$scope.chartConfig.series[0].data = [];
+			$scope.chartConfig.series[1].data = [];
+
+			$scope.start();
+		});
+/*
+
+		socket.on('pushdatac', function(data){
 
 
-			/*console.log('Data Received'+ data.readingtime+' '+data.readingvalue+ ''+data.device);
 
-			console.log('$scope.myval = '+$scope.myval)*/
 			if($scope.selectedDevice)
-			if(data.device==$scope.selectedDevice.deviceId)
+			if(data.device===$scope.selectedDevice.deviceId)
 			{
 				$scope.$apply(function(){
 					$scope.sensor1 = data.sensor1;
@@ -99,14 +229,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 
 				});
 
-				/*
-			$mdToast.show(
 
-				$mdToast.simple()
-					.content('Data Received @'+ data.readingtime+'  '+data.readingvalue)
-					.position($scope.getToastPosition())
-					.hideDelay(3000)
-			);*/
 		}
 
 		});
@@ -114,7 +237,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 
 			console.log('Connection is lost');
 		});
-
+		*/
 		$scope.colours = [{
 			name: 'Red',
 			hex: '#F21B1B'
@@ -182,13 +305,6 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 				max:100
 
 			},
-			//tooltip: {
-			//   formatter: function () {
-			//       return '<b>' + this.series.name + '</b><br/>' +
-			//               Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-			//               Highcharts.numberFormat(this.y, 2);
-			//   }
-			//},
 			pointInterval: 60*1000,// every minute
 			legend: {
 				enabled: false
@@ -273,38 +389,47 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 
 		$scope.myval = 0;
 
-		$scope.options = {
-			data: (function () {
-				// generate an array of random data
-				var data = [],
-					time = (new Date()).getTime(),
-					i;
+		$scope.newPointToPush = function(){
 
-				for (i = -19; i <= 0; i += 1) {
-					data.push({
-						sales:time + i * 1000 ,
-						income: Math.random()
-					});
-				}
-				return data;
-			}())
+			console.log('pushed point');
+			$scope.pushpoint({sensor1:1,sensor2:4,sensor3:7,sensor4:8});
+		};
 
-			,
-			dimensions: {
-				sales: {
-					type: 'line'
-				},
-				income: {
-					axis: 'x'
-				}
+		$scope.pushpoint = function(data){
+
+			$scope.sensor1 = data.sensor1;
+			$scope.sensor2 = data.sensor2;
+			$scope.sensor3 = data.sensor3;
+			$scope.sensor4 = data.sensor4;
+
+			var x = (new Date()).getTime(); // current time
+			var y = data.sensor1,y2 = data.sensor2;
+			//$scope.chartConfig.series[0].data.concat(10,x,y)//.addPoint([x, y], true, true);
+			if($scope.chartConfig.series[0].data){
+				if($scope.chartConfig.series[0].data.length>15)
+					$scope.chartConfig.series[0].data.shift();
+				$scope.chartConfig.series[0].data.push([x,  parseFloat(y)]);}
+			if($scope.chartConfig.series[1].data){
+				if($scope.chartConfig.series[1].data.length>15)
+					$scope.chartConfig.series[1].data.shift();
+				$scope.chartConfig.series[1].data.push([x, parseFloat(y2)]);
+				//$scope.myval = y;
 			}
+			if($scope.chartConfig.series[2].data){
+				if($scope.chartConfig.series[2].data.length>15)
+					$scope.chartConfig.series[2].data.shift();
+				$scope.chartConfig.series[2].data.push([x, parseFloat(data.sensor3)]);
+				//$scope.myval = y;
+			}
+			if($scope.chartConfig.series[3].data){
+				if($scope.chartConfig.series[3].data.length>15)
+					$scope.chartConfig.series[3].data.shift();
+				$scope.chartConfig.series[3].data.push([x, parseFloat(data.sensor4)]);
+				//$scope.myval = y;
+			}
+
 		};
 
-		$scope.pushpoint = function()
-		{
-			$scope.options.data.shift();
-			$scope.options.data.push({sales:(new Date()).getTime(),income: Math.random()});
-		};
 
 		$scope.update = function() {
 			$scope.chartConfig.title = $scope.selectedDevice.name;
@@ -317,19 +442,6 @@ angular.module('dashboard').controller('DashboardController', ['$scope','$mdToas
 			$scope.selectedSummary = selection;
 
 		};
-		/*
-		// undo this for dummy data
-
-		$interval(function(){
-		//	$scope.myval = Math.random();
-			var x = (new Date()).getTime(), // current time
-				y = Math.random();
-			//$scope.chartConfig.series[0].data.concat(10,x,y)//.addPoint([x, y], true, true);
-			$scope.chartConfig.series[0].data.shift();
-			$scope.chartConfig.series[0].data.push([x, y]);
-			$scope.myval = y*100;
-
-		},1000);*/
 
 		function updateData(){
 			setInterval(function () {

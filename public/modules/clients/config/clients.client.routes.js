@@ -30,6 +30,10 @@ angular.module('clients').config(['$stateProvider',
 		state('editClient', {
 			url: '/clients/:clientId/edit',
 			templateUrl: 'modules/clients/views/edit-client.client.view.html'
-		});
+		}).
+			state('editMyClient', {
+				url: '/myclients/:clientId/edit',
+				templateUrl: 'modules/clients/views/edit-myclient.client.view.html'
+			});
 	}
 ]);

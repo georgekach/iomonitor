@@ -5,6 +5,7 @@ angular.module('devicesensors').controller('DevicesensorsController', ['$scope',
 	function($scope, $stateParams, $location, Authentication, Devicesensors,$mdToast) {
 		$scope.authentication = Authentication;
 
+
 		// Create new Devicesensor
 		$scope.create = function() {
 			// Create new Devicesensor object
@@ -22,6 +23,8 @@ angular.module('devicesensors').controller('DevicesensorsController', ['$scope',
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+
 
 		// Remove existing Devicesensor
 		$scope.remove = function(devicesensor) {
@@ -66,3 +69,6 @@ angular.module('devicesensors').controller('DevicesensorsController', ['$scope',
 		
 	}
 ]);
+
+
+

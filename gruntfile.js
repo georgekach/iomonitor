@@ -127,6 +127,9 @@ module.exports = function(grunt) {
 			},
 			secure: {
 				NODE_ENV: 'secure'
+			},
+			production: {
+				NODE_ENV: 'production'
 			}
 		},
 		mochaTest: {
@@ -166,6 +169,8 @@ module.exports = function(grunt) {
 
 	// Secure task(s).
 	grunt.registerTask('secure', ['env:secure', 'lint', 'concurrent:default']);
+
+	//grunt.registerTask('production', ['env:production', 'lint', 'concurrent:default', 'uglify', 'cssmin']);
 
 	// Lint task(s).
 	grunt.registerTask('lint', ['jshint', 'csslint']);

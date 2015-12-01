@@ -43,6 +43,10 @@ var DevicesensoralarmactionSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+	userstonotify:[{
+		type: Schema.ObjectId,
+		ref: 'User'
+	}],
 	created: {
 		type: Date,
 		default: Date.now

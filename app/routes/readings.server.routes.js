@@ -16,7 +16,8 @@ module.exports = function(app) {
 
 	app.route('/readingsbydevice/:myId')
 		.get(readings.readingByDeviceID);
-
+	app.route('/readingsbydeviceforperiod/:myId1/:startOfPeriod/:endOfPeriod')
+		.get(readings.readingByDeviceIDForPeriod);
 		
 	
 /*
@@ -26,5 +27,7 @@ module.exports = function(app) {
 	// Finish by binding the Reading middleware
 	app.param('readingId', readings.readingByID);
 	app.param('myId', readings.readingByDeviceID);
-
+	app.param('myId1', readings.readingByDeviceIDForPeriod);
+	app.param('startOfPeriod', readings.readingByDeviceIDForPeriod);
+	app.param('endOfPeriod', readings.readingByDeviceIDForPeriod);
 };

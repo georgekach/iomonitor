@@ -8,9 +8,9 @@ var net = require('net'),
     mongoose = require('mongoose'),
     config = require('./config/config');
 /*var re = require('./app/models/reading.server.model.js');
-var devw = require('./app/models/device.server.model.js');
-var sa= require('./app/models/devicesensoralert.server.model.js');
-var notfj = require('./app/models/notification.server.model.js');*/
+ var devw = require('./app/models/device.server.model.js');
+ var sa= require('./app/models/devicesensoralert.server.model.js');
+ var notfj = require('./app/models/notification.server.model.js');*/
 var unitId, type, time, channels, state1 = '', lastValue1 = '', state2 = '',
     lastValue2 = '', state3 = '', lastValue3 = '', state4 = '', lastValue4 = '', gps = '';
 var readingDataArray = '';
@@ -133,22 +133,29 @@ module.exports = function (io) {
                     path: 'sensors.sensoralerts',
                     model: 'Devicesensoralert'
                 };
-                var actions = device.sensors[0].sensoralerts[0].alertactions[0];
-                console.log('Sensor @ 0 is ' + actions);
+                //var actions = device.sensors[0].sensoralerts[0].alertactions[0];
+                //console.log('Sensor @ 0 is ' + actions);
 
                 if (err2) {
                     console.log('error finding the device');
 
                 } else {
 
-                    reading.device = device._id;
-                    reading.save(function (err3) {
-                        if (err3) {
-                            console.log('error saving the record');
-                        } else {
-                            console.log('saved the reading from inside receiving the readings' + reading._id);
-                        }
-                    });
+                    if (device) {
+                        reading.device = device._id;
+                        reading.save(function (err3) {
+                            if (err3) {
+                                console.log('error saving the record');
+                            } else {
+                                console.log('saved the reading from inside receiving the readings' + reading._id);
+                            }
+
+
+                        });
+                    }
+                    else {
+                        console.log('error saving the record could not match the device id');
+                    }
                     if (device) {
                         //device.previousreadingtime = device.latestreadingtime;
                         device.latestreadingtime = reading.time;
@@ -165,12 +172,17 @@ module.exports = function (io) {
 
                         //+device.deviceId
                         //console.log(io);
+                        /*
                         io.sockets.emit('pushdata', {
                             readingtime: new Date().getTime(),
-                            readingvalue: reading.lastValue1
+                            sensor1: reading.lastValue1,
+                            sensor2: reading.lastValue2,
+                            sensor3: reading.lastValue3,
+                            sensor4: reading.lastValue4,
+                            device: device.deviceId
                         });
                         console.log(reading.lastValue1);
-
+*/
                         device.save(function (err4) {
                             if (err4) {
                                 console.log('Error Saving Devices latest Reading');
@@ -190,6 +202,7 @@ module.exports = function (io) {
                         });
 
                         //process reading for alerts
+
                         if (device.sensors) {
 
 
@@ -277,6 +290,7 @@ module.exports = function (io) {
 
 
                         }
+
                     }
                     else {
                         console.log('Cant find the device');
@@ -293,7 +307,7 @@ module.exports = function (io) {
     };
 
     var createNotification = function (device, sensor, alert, reading, alertaction) {
-        var notificationmessage = 'Device ' + device.name + ' [' + device.deviceId + '] sensor ' + sensor.name  + 'has raised alert ' + alert.name + ' with value' + reading + ' required range is [' + alertaction.thresholdvaluemin + ' - ' + alertaction.thresholdvaluemax + ' ]';
+        var notificationmessage = 'Device ' + device.name + ' [' + device.deviceId + '] sensor ' + sensor.name + 'has raised alert ' + alert.name + ' with value' + reading + ' required range is [' + alertaction.thresholdvaluemin + ' - ' + alertaction.thresholdvaluemax + ' ]';
 
         var newNotification = new Notification();
         newNotification.action = alertaction.actiontype;

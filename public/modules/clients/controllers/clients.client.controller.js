@@ -1,8 +1,8 @@
 'use strict';
 
 // Clients controller
-angular.module('clients').controller('ClientsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Clients','$mdToast', '$animate','$mdDialog','Devices','$modal','$log','ClientsUsers',
-	function($scope, $stateParams, $location, Authentication, Clients,$mdToast, $animate,$mdDialog,Devices,$modal,$log,ClientsUsers) {
+angular.module('clients').controller('ClientsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Clients','$mdToast', '$animate','$mdDialog','Devices','$uibModal','$log','ClientsUsers','$http',
+	function($scope, $stateParams, $location, Authentication, Clients,$mdToast, $animate,$mdDialog,Devices,$uibModal,$log,ClientsUsers,$http) {
 		$scope.authentication = Authentication;
         $scope.section = 'Clients';
         $scope.clientsDevices = '';
@@ -24,7 +24,7 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
 
         $scope.open = function (size) {
 
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'modules/clients/views/edit-client.client.view.html',//'myModalContent.html',
                 controller: 'ClientsController',
@@ -37,10 +37,158 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
             });
         };
 
+        //EndModal
+
+        $scope.openCreateNewUser = function(size,ownerClient){
+
+            var uibModalInstance = $uibModal.open({
+                animation:$scope.animationsEnabled,
+                templateUrl: 'modules/clients/views/create-user-for-client.view.html',
+                controller: function($uibModalInstance,$scope,owner){
+
+                    $scope.cancel = function(){$uibModalInstance.dismiss('cancel');};
+                    $scope.ok = function(){
+                        console.log('Scope.cred'+$scope.credentials.username);
+                        console.log('Scope.Client'+$scope.credentials.client);
+                        if(!$scope.credentials.client)
+                        $scope.credentials.client = owner._id;
+
+                        console.log('Scope.Client is now'+$scope.credentials.client);
+
+                    $http.post('/auth/signupforclient', $scope.credentials).success(function(response) {
+                        // If successful we assign the response to the global user model
+                        //$scope.authentication.user = response;
+
+                        $uibModalInstance.close($scope.credentials);
+                        // And redirect to the index page
+                        //$location.path('/');
+                    }).error(function(response) {
+                        $scope.error = response.message;
+                    });};
 
 
-            //EndModal
+                },
+                size: size,
+                resolve:{
+                owner:    function()
+                {
+                     return ownerClient;
+                }}
+            });
 
+            uibModalInstance.result.then(function (newClient) {
+
+                if(newClient){
+
+                    console.log('New User is '+newClient.username);
+
+
+
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('User Record created')
+                            .position($scope.getToastPosition())
+                            .theme('success-toast')
+                            .hideDelay(3000)
+                    );
+                }
+
+                /*
+                $scope.client.users.push(newClient);
+                $scope.client.$update(function () {
+
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('Client Record Updated')
+                            .position($scope.getToastPosition())
+                            .theme('success-toast')
+                            .hideDelay(3000)
+                    );
+
+
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });*/
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+
+        $scope.openCreateNewDevice = function(size,ownerClient){
+
+            var uibModalInstance = $uibModal.open({
+                animation:$scope.animationsEnabled,
+                templateUrl: 'modules/clients/views/create-user-for-client.view.html',
+                controller: function($uibModalInstance,$scope,owner){
+
+                    $scope.cancel = function(){$uibModalInstance.dismiss('cancel');};
+                    $scope.ok = function(){
+                        console.log('Scope.cred'+$scope.credentials.username);
+                        console.log('Scope.Client'+$scope.credentials.client);
+                        if(!$scope.credentials.client)
+                            $scope.credentials.client = owner._id;
+
+                        console.log('Scope.Client is now'+$scope.credentials.client);
+
+                        $http.post('/auth/signupforclient', $scope.credentials).success(function(response) {
+                            // If successful we assign the response to the global user model
+                            //$scope.authentication.user = response;
+
+                            $uibModalInstance.close($scope.credentials);
+                            // And redirect to the index page
+                            //$location.path('/');
+                        }).error(function(response) {
+                            $scope.error = response.message;
+                        });};
+
+
+                },
+                size: size,
+                resolve:{
+                    owner:    function()
+                    {
+                        return ownerClient;
+                    }}
+            });
+
+            uibModalInstance.result.then(function (newClient) {
+
+                if(newClient){
+
+                    console.log('New User is '+newClient.username);
+
+
+
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('User Record created')
+                            .position($scope.getToastPosition())
+                            .theme('success-toast')
+                            .hideDelay(3000)
+                    );
+                }
+
+                /*
+                 $scope.client.users.push(newClient);
+                 $scope.client.$update(function () {
+
+                 $mdToast.show(
+                 $mdToast.simple()
+                 .content('Client Record Updated')
+                 .position($scope.getToastPosition())
+                 .theme('success-toast')
+                 .hideDelay(3000)
+                 );
+
+
+                 }, function (errorResponse) {
+                 $scope.error = errorResponse.data.message;
+                 });*/
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
         $scope.getToastPosition = function() {
             return Object.keys($scope.toastPosition)
@@ -89,10 +237,11 @@ angular.module('clients').controller('ClientsController', ['$scope', '$statePara
 			client.$update(function() {
 				$location.path('clients/' + client._id);
 			}, function(errorResponse) {
+                if(errorResponse)
 				$scope.error = errorResponse.data.message;
                 $mdToast.show(
                     $mdToast.simple()
-                        .content('Updated Record Successfully')
+                        .content('Updated Record Successfullykkk')
                         .position($scope.getToastPosition())
                         .hideDelay(3000)
                 );

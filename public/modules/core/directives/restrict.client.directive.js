@@ -35,7 +35,7 @@ coremodule.directive('restrict',['Authentication', function(Authentication){
                     if(user){
                     element.children().remove();
                     element.remove();
-                    console.log('Removed Element');
+                    //console.log('Removed Element');
                     }
                 }
 

@@ -10,690 +10,340 @@
     </div>
 
     <div class="container">
-        <!--<div class="page-header">-->
-        <!--<ol class="breadcrumb">-->
-        <!--<li><i class="fa fa-home right-padded-5"></i><a href="/#!/">Home</a></li>-->
-        <!--<li><i class="right-padded-5"></i><a href="/#!/devices">Devices</a></li>-->
-        <!--<li><i class="right-padded-5 active"></i>Edit Device - {{device.deviceId}}</li>-->
-        <!--</ol>-->
-        <!--</div>-->
-
-        <md-content>
-            <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab label="Device Details">
-                    <div class="top-buffer">
-                        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-                            <fieldset>
-                                <div class="form-group">
-                                    <label class="control-label   col-sm-2" for="name">Device Name</label>
-
-                                    <div class="controls  col-sm-4">
-                                        <input type="text" data-ng-model="device.name" id="name" class="form-control"
-                                               placeholder="Device Name" required>
-                                    </div>
-                                    <label class="control-label   col-sm-2" for="version">Device Version</label>
-
-                                    <div class="controls  col-sm-4">
-                                        <input type="text" data-ng-model="device.version" id="version"
-                                               class="form-control" placeholder="Device Version" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label   col-sm-2" for="deviceId">Device Id</label>
-
-                                    <div class="controls  col-sm-4">
-                                        <input type="text" data-ng-model="device.deviceId" id="deviceId"
-                                               class="form-control" placeholder="Device Identification Number"
-                                               required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="description">Description</label>
-
-                                    <div class="controls  col-sm-4">
-                                        <input type="text" data-ng-model="device.description" id="description"
-                                               class="form-control" placeholder="description">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="location.lon">Long</label>
-
-                                    <div class="controls  col-sm-4">
-                                        <input type="text" data-ng-model="device.location.lon" id="location.lon"
-                                               class="form-control" placeholder="description">
-                                    </div>
-                                    <label class="control-label col-sm-2" for="location.lat">Lat</label>
-
-                                    <div class="controls  col-sm-4">
-                                        <input type="text" data-ng-model="device.location.lat" id="location.lat"
-                                               class="form-control" placeholder="description">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="simnumber">SIM</label>
-
-                                    <div class="controls  col-sm-4">
-                                        <input type="text" data-ng-model="device.simnumber" id="simnumber"
-                                               class="form-control" placeholder="SIM Number">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="interval">Upload Interval</label>
-
-                                    <div class="controls  col-sm-4">
-                                        <input type="text" data-ng-model="device.interval" id="interval"
-                                               class="form-control" placeholder="Upload frequency">
-                                    </div>
-                                </div>
-
-                                <!--
+        <uib-tabset >
+            <uib-tab heading="Device Details">
+                <div class="top-buffer">
+                    <form class="form-horizontal" data-ng-submit="update()" novalidate>
+                        <fieldset>
                             <div class="form-group">
-                                <input type="submit" value="Update" class="btn btn-success">
-                            </div>-->
+                                <label class="control-label   col-sm-2" for="name">Device Name</label>
 
-                                <div data-ng-show="error" class="text-danger">
-                                    <strong data-ng-bind="error"></strong>
+                                <div class="controls  col-sm-4">
+                                    <input type="text" data-ng-model="device.name" id="name" class="form-control"
+                                           placeholder="Device Name" required>
                                 </div>
-                            </fieldset>
-                            <!--<input type="submit" value="Update" class="btn btn-default">-->
-                        </form>
-                    </div>
-                </md-tab>
-                <md-tab label="Connected Sensors" md-on-select="connectedSensorsTabSelected()">
-                    <md-content>
-                        <div layout="column" class="top-buffer" flex>
-                            <div layout="column">
-                                <div layout="row" layout-align="start center" layout-margin layout-padding>
-                                    <span class="btn btn-primary margin-right-5" ng-click="showView('create')"> <i
-                                            class="glyphicon glyphicon-plus "></i> </span>
-                                    <span class="btn btn-danger  margin-right-5" ng-click="showView('create')">
-                                        <i class="glyphicon glyphicon-minus "></i> </span>
+                                <label class="control-label   col-sm-2" for="version">Device Version</label>
 
-                                    <div layout="row" layout-align="end center" layout-margin layout padding
-                                         class="pull-right">
-                                        <!--<md-button class="md-raised md-primary"  ng-click="showView('create')" class="btn btn-primary top-buffer right-padded-5">Add-->
-                                        <!--Sensor</md-button>-->
-                                        <!--<span class="btn btn-danger" ><i class="glyphicon glyphicon-minus"></i></span>-->
-
-                                        <div class=" margin-right-5" data-ng-repeat="sensor in device.sensors">
-                                            <!--<span class="btn btn-primary label-primary right-padded-5" ng-click="showView('view',sensor)"><i class="wi wi-thermometer fa-2x green-fg"></i>{{sensor.name}}</span>-->
-                                            <md-whiteframe layout layout-align="center center"
-                                                           style="height: 35px;width: 35px;"
-                                                           class="md-whiteframe-z1 bg-info"
-                                                           ng-click="showView('edit',sensor)"><i style="height: 30px;"
-                                                                                                 class="wi wi-thermometer fa-2x "></i>
-                                            </md-whiteframe>
-                                        </div>
-                                    </div>
+                                <div class="controls  col-sm-3">
+                                    <input type="text" data-ng-model="device.version" id="version"
+                                           class="form-control" placeholder="Device Version" required>
                                 </div>
                             </div>
-                            <div layout="row" layout-margin flex>
-                                <!--<div layout="column" flex="20" layout-fill>
-                                <table st-table="connectedSensors" class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
+                            <div class="form-group">
+                                <label class="control-label   col-sm-2" for="deviceId">Device Id</label>
 
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="sensor in connectedSensors">
-                                        <td><span ng-click="showView('view',sensor)"> {{sensor._id}}</span></td>
-                                        <td>{{sensor.location}}</td>
+                                <div class="controls  col-sm-4">
+                                    <input type="text" data-ng-model="device.deviceId" id="deviceId"
+                                           class="form-control" placeholder="Device Identification Number"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="description">Description</label>
 
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="controls  col-sm-4">
+                                    <input type="text" data-ng-model="device.description" id="description"
+                                           class="form-control" placeholder="description">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="location.lon">Long</label>
 
-                            </div>-->
-                                <div layout="column" layout-fill>
-                                    <div flex ng-switch="selectedView">
+                                <div class="controls  col-sm-4">
+                                    <input type="text" data-ng-model="device.location.lon" id="location.lon"
+                                           class="form-control" placeholder="description">
+                                </div>
+                                <label class="control-label col-sm-2" for="location.lat">Lat</label>
 
+                                <div class="controls  col-sm-3">
+                                    <input type="text" data-ng-model="device.location.lat" id="location.lat"
+                                           class="form-control" placeholder="description">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="simnumber">SIM</label>
 
-                                        <div ng-switch-when="create">
-                                            <form class="form-horizontal" data-ng-submit="createsensor()" novalidate>
-                                                <fieldset>
-                                                    <!--<input type="hidden" value="device._id" id="parentdeviceId">-->
+                                <div class="controls  col-sm-4">
+                                    <input type="text" data-ng-model="device.simnumber" id="simnumber"
+                                           class="form-control" placeholder="SIM Number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="interval">Upload Interval</label>
 
-                                                    <div class="form-group">
-                                                        <label class="control-label   col-sm-2"
-                                                               for="sensorname_c">Name</label>
+                                <div class="controls  col-sm-4">
+                                    <input type="text" data-ng-model="device.interval" id="interval"
+                                           class="form-control" placeholder="Upload frequency">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </uib-tab>
+            <uib-tab heading="Connected Sensors">
+                <div layout="column" class="top-buffer" flex>
+                    <div layout="column">
+                        <div class="container" style="padding-bottom: 10px;">
+                            <button type="button" class="btn btn-primary" ng-click="openCreateSensor('lg',device)">Create New Sensor</button>
+                        </div>
 
-                                                        <div class="controls  col-sm-4">
-                                                            <input type="text" data-ng-model="sensorname_c"
-                                                                   id="sensorname_c" class="form-control"
-                                                                   placeholder="Name" required>
+                        <uib-tabset>
+                            <uib-tab data-ng-repeat="sensor in device.sensors" heading="Sensor - {{sensor.name}}">
+                                <div>
+                                    <form data-ng-submit="updateRecord()" novalidate>
+
+                                        <div layout="column" class="top-buffer">
+                                            <div class="form-group">
+                                                <label class="control-label   col-md-2"
+                                                       for="sensorname_e">Name</label>
+
+                                                <div class="controls  col-sm-3">
+                                                    <input type="text"
+                                                           data-ng-model="sensor.name"
+                                                           id="sensorname_e" class="form-control"
+                                                           placeholder="Name" required>
+                                                </div>
+                                                <label class="control-label   col-sm-2"
+                                                       for="sensortype_e">Type</label>
+
+                                                <div class="controls  col-md-3">
+                                                    <select class="form-control"
+                                                            data-ng-model="sensor.sensortype"
+                                                            ng-options="x._id as x.name for x in availableSensortypes"
+                                                            id="sensortype_e"></select>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label   col-sm-2"
+                                                       for="channel_e">Channel</label>
+
+                                                <div class="controls  col-md-3 ">
+                                                    <input type="text"
+                                                           data-ng-model="sensor.channel"
+                                                           id="channel_e" class="form-control"
+                                                           placeholder="Sensor Type"
+                                                           required>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel" >
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <div class="panel-title">
+                                                            Sensor Alerts
                                                         </div>
+
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label   col-sm-2"
-                                                               for="sensortype_c">Type</label>
+                                                    <div class="panel-body">
 
-                                                        <div class="controls  col-sm-4">
-                                                            <!--<input type="text" data-ng-model="sensortype_c" id="sensortype_c"-->
-                                                            <!--class="form-control" placeholder="Sensor Type" required>-->
+                                                        <uib-tabset>
+                                                            <uib-tab data-ng-repeat="alert in sensor.sensoralerts" heading="Alert - {{alert.name}}">
+                                                                <div>
+                                                                    <form class="form-horizontal" data-ng-submit="updateRecord()"
+                                                                          novalidate>
+                                                                        <fieldset>
+                                                                            <div class="form-group top-buffer">
+                                                                                <label class="control-label"
+                                                                                       for="alertname">Name</label>
 
-                                                            <select class="form-control" ng-model="sensortype_c"
-                                                                    ng-options="x._id as x.name for x in availableSensortypes"
-                                                                    id="sensortype_c"></select>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label   col-sm-2"
-                                                               for="channel_c">Channel</label>
-
-                                                        <div class="controls  col-sm-4">
-                                                            <input type="text" data-ng-model="channel_c" id="channel_c"
-                                                                   class="form-control" placeholder="Sensor Type"
-                                                                   required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <input class="btn btn-primary" type="submit" value="Save"
-                                                               class="btn btn-default">
-                                                        <!--<button class="btn btn-primary" ng-click="createsensor()">Save</button>-->
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                        <div ng-switch-when="edit">
-                                            Edit
-                                            <md-content>
-                                                <md-tabs>
-                                                    <md-tab label="Sensor Details">
-
-                                                        <form data-ng-submit="updateRecord()" novalidate>
-
-                                                            <div layout="column" class="top-buffer">
-                                                                <div class="form-group">
-                                                                    <label class="control-label   col-md-2"
-                                                                           for="sensorname_c">Name</label>
-
-                                                                    <div class="controls  col-sm-3">
-                                                                        <input type="text"
-                                                                               data-ng-model="currentSelectedSensor.name"
-                                                                               id="sensorname_e" class="form-control"
-                                                                               placeholder="Name" required>
-                                                                    </div>
-                                                                    <label class="control-label   col-sm-2"
-                                                                           for="sensortype_c">Type</label>
-
-                                                                    <div class="controls  col-md-3">
-                                                                        <!--<input type="text" data-ng-model="sensortype_c" id="sensortype_c"-->
-                                                                        <!--class="form-control" placeholder="Sensor Type" required>-->
-
-                                                                        <select class="form-control"
-                                                                                data-ng-model="currentSelectedSensor.sensortype"
-                                                                                ng-options="x._id as x.name for x in availableSensortypes"
-                                                                                id="sensortype_e"></select>
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label class="control-label   col-sm-2"
-                                                                           for="channel_c">Channel</label>
-
-                                                                    <div class="controls  col-md-3 ">
-                                                                        <input type="text"
-                                                                               data-ng-model="currentSelectedSensor.channel"
-                                                                               id="channel_e" class="form-control"
-                                                                               placeholder="Sensor Type"
-                                                                               required>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group md-margin">
-                                                                    <input type="submit" value="Update"
-                                                                           class="btn btn-primary">
-                                                                    <button class="btn btn-danger"
-                                                                            ng-click="removeSensor(currentSelectedSensor)">
-                                                                        Delete
-                                                                    </button>
-
-
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </md-tab>
-                                                    <md-tab label="Sensor Alerts"
-                                                            md-on-select="sensorsAlertsTabSelected()">
-                                                        <div layout="column" class="top-buffer">
-                                                            <div layout="row" layout-align="start center">
-                                                                <span class="btn btn-primary"><i
-                                                                        class="glyphicon glyphicon-plus "
-                                                                        ng-click="showAlertView('createAlert')"></i></span>
-
-                                                                <div class=" margin-right-5"
-                                                                     data-ng-repeat="alert in currentSelectedSensor.sensoralerts">
-                                                                    <!--<span class="btn btn-primary label-primary right-padded-5" ng-click="showView('view',sensor)"><i class="wi wi-thermometer fa-2x green-fg"></i>{{sensor.name}}</span>-->
-                                                                    <md-whiteframe layout layout-align="center center"
-                                                                                   style="height: 35px;width: 35px;"
-                                                                                   class="md-whiteframe-z1 bg-info"
-                                                                                   ng-click="showAlertView('editAlert',alert)">
-                                                                        <i style="height: 30px;"
-                                                                           class="wi wi-thermometer fa-2x "></i>
-                                                                    </md-whiteframe>
-                                                                </div>
-                                                            </div>
-                                                            <div layout="row" flex class="top-buffer">
-                                                                <!--<div flex="30" class="bg-info">
-                                                                    <table st-table="currentSelectedSensor.sensoralerts" class="table table-striped">
-                                                                        <thead>
-                                                                            <tr>
-
-                                                                                <th>Name</th>
-
-
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr ng-repeat="alert in currentSelectedSensor.sensoralerts">
-
-                                                                                <td><span ng-click="showAlertView('editAlert',alert)">{{alert.name}}</span>
-                                                                                </td>
-
-
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>-->
-                                                                <div flex class="bg-light-gray">
-                                                                    <div layout="column" layout-fill>
-                                                                        <div flex ng-switch="selectedAlertView">
-
-
-                                                                            <div ng-switch-when="createAlert">
-
-                                                                                <form data-ng-submit="createSensorAlert()"
-                                                                                      novalidate>
-                                                                                    Create View
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="control-label   col-sm-2"
-                                                                                               for="sensorname_c">Name</label>
-
-                                                                                        <div class="controls  col-sm-4">
-                                                                                            <input type="text"
-                                                                                                   data-ng-model="alertname_c"
-                                                                                                   id="alertname_c"
-                                                                                                   class="form-control"
-                                                                                                   placeholder="Name">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <!--<button class="btn btn-primary" ng-click="createSensorAlert()">Save Alert</button>-->
-                                                                                    <div class="form-group">
-                                                                                        <input type="submit"
-                                                                                               value="Save"
-                                                                                               class="btn btn-primary col-md-2">
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
-
-                                                                            <div ng-switch-when="editAlert">
-                                                                                <div layout="column" layout-padding
-                                                                                     layout-margin>
-                                                                                    <!--<h3>Edit Device Sensor Alert
-                                                                                    {{currentSelectedSensorAlert.name}}</h3>-->
-                                                                                    <section class="padding">
-                                                                                        <div class="top-buffer">
-
-                                                                                            <!--<form class="form-horizontal" data-ng-submit="update()" novalidate>-->
-                                                                                            <md-tabs>
-                                                                                                <md-tab label="General Details">
-                                                                                                    <form data-ng-submit="updateRecord()"
-                                                                                                          novalidate>
-                                                                                                        <fieldset>
-                                                                                                            <div class="form-group top-buffer">
-                                                                                                                <label class="control-label"
-                                                                                                                       for="alertname">Name</label>
-
-                                                                                                                <div class="controls">
-                                                                                                                    <input type="text"
-                                                                                                                           data-ng-model="currentSelectedSensorAlert.name"
-                                                                                                                           id="alertname"
-                                                                                                                           class="form-control"
-                                                                                                                           placeholder="Name"
-                                                                                                                            >
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <div class="form-group">
-                                                                                                                <input type="submit"
-                                                                                                                       value="Update"
-                                                                                                                       class="btn btn-primary">
-                                                                                                                <button class="btn btn-danger"
-                                                                                                                        ng-click="removeSensorAlert(currentSelectedSensorAlert)">
-                                                                                                                    Remove
-                                                                                                                </button>
-                                                                                                            </div>
-
-                                                                                                            <div data-ng-show="error"
-                                                                                                                 class="text-danger">
-                                                                                                                <strong data-ng-bind="error"></strong>
-                                                                                                            </div>
-                                                                                                        </fieldset>
-                                                                                                    </form>
-                                                                                                </md-tab>
-                                                                                                <md-tab label="Alert Actions">
-                                                                                                    <div layout="row"
-                                                                                                         layout-align="start center">
-                                                                                                        <button class="btn btn-primary top-buffer">
-                                                                                                            <i class="glyphicon glyphicon-plus"
-                                                                                                               ng-click="showAlertActionView('createAlertAction')"></i>
-                                                                                                        </button>
-
-                                                                                                        <div class=" margin-right-5"
-                                                                                                             data-ng-repeat="alertAction in currentSelectedSensorAlert.alertactions">
-                                                                                                            <!--<span class="btn btn-primary label-primary right-padded-5" ng-click="showView('view',sensor)"><i class="wi wi-thermometer fa-2x green-fg"></i>{{sensor.name}}</span>-->
-                                                                                                            <md-whiteframe
-                                                                                                                    layout
-                                                                                                                    layout-align="center center"
-                                                                                                                    style="height: 35px;width: 35px;"
-                                                                                                                    class="md-whiteframe-z1 bg-info"
-                                                                                                                    ng-click="showAlertActionView('editAlertAction',alertAction)">
-                                                                                                                <i style="height: 30px;"
-                                                                                                                   class="wi wi-thermometer fa-2x "></i>
-                                                                                                            </md-whiteframe>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <div flex
-                                                                                                         ng-switch="selectedAlertActionView">
-                                                                                                        <div ng-switch-when="createAlertAction">
-
-                                                                                                            <form data-ng-submit="createAlertAction()"
-                                                                                                                  novalidate>
-                                                                                                                Create
-                                                                                                                View
-
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="control-label   col-sm-2"
-                                                                                                                           for="alertaction_name_c">Name</label>
-
-                                                                                                                    <div class="controls  col-sm-4">
-                                                                                                                        <input type="text"
-                                                                                                                               data-ng-model="alertaction_name_c"
-                                                                                                                               id="alertaction_name_c"
-                                                                                                                               class="form-control"
-                                                                                                                               placeholder="Name">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="control-label   col-sm-2"
-                                                                                                                           for="alertaction_actiontype_c">Action
-                                                                                                                        Type</label>
-
-                                                                                                                    <div class="controls  col-sm-4">
-                                                                                                                        <input type="text"
-                                                                                                                               data-ng-model="alertaction_actiontype_c"
-                                                                                                                               id="alertaction_actiontype_c"
-                                                                                                                               class="form-control"
-                                                                                                                               placeholder="Action type">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="control-label   col-sm-2"
-                                                                                                                           for="alertaction_thresholdvaluemin_c">Threshold
-                                                                                                                        Min</label>
-
-                                                                                                                    <div class="controls  col-sm-4">
-                                                                                                                        <input type="text"
-                                                                                                                               data-ng-model="alertaction_thresholdvaluemin_c"
-                                                                                                                               id="alertaction_thresholdvaluemin_c"
-                                                                                                                               class="form-control"
-                                                                                                                               placeholder="Min">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="control-label   col-sm-2"
-                                                                                                                           for="alertaction_thresholdvaluemax_c">Threshold
-                                                                                                                        Max</label>
-
-                                                                                                                    <div class="controls  col-sm-4">
-                                                                                                                        <input type="text"
-                                                                                                                               data-ng-model="alertaction_thresholdvaluemax_c"
-                                                                                                                               id="alertaction_thresholdvaluemax_c"
-                                                                                                                               class="form-control"
-                                                                                                                               placeholder="Max">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="control-label   col-sm-2"
-                                                                                                                           for="alertaction_sendonclear_c">Send
-                                                                                                                        on
-                                                                                                                        Clear</label>
-
-                                                                                                                    <div class="controls  col-sm-4">
-                                                                                                                        <input type="text"
-                                                                                                                               data-ng-model="alertaction_sendonclear_c"
-                                                                                                                               id="alertaction_sendonclear_c"
-                                                                                                                               class="form-control"
-                                                                                                                               placeholder="SendOnClear">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <!--<button class="btn btn-primary" ng-click="createSensorAlert()">Save Alert</button>-->
-                                                                                                                <div class="form-group">
-                                                                                                                    <input type="submit"
-                                                                                                                           value="Save"
-                                                                                                                           class="btn btn-primary col-md-2">
-                                                                                                                </div>
-                                                                                                            </form>
-
-
-                                                                                                            </button>
-                                                                                                        </div>
-                                                                                                        <div ng-switch-when="editAlertAction">
-
-                                                                                                            <form class="form-horizontal"
-                                                                                                                  data-ng-submit="updateRecord()"
-                                                                                                                  novalidate>
-
-
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="control-label   col-sm-2"
-                                                                                                                           for="alertaction_name_e">Name</label>
-
-                                                                                                                    <div class="controls  col-sm-4">
-                                                                                                                        <input type="text"
-                                                                                                                               data-ng-model="currentSelectedSensorAlertAction.name"
-                                                                                                                               id="alertaction_name_e"
-                                                                                                                               class="form-control"
-                                                                                                                               placeholder="Name">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="control-label   col-sm-2"
-                                                                                                                           for="alertaction_actiontype_e">Action
-                                                                                                                        Type</label>
-
-                                                                                                                    <div class="controls  col-sm-4">
-                                                                                                                        <input type="text"
-                                                                                                                               data-ng-model="currentSelectedSensorAlertAction.actiontype"
-                                                                                                                               id="alertaction_actiontype_e"
-                                                                                                                               class="form-control"
-                                                                                                                               placeholder="Action type">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="control-label   col-sm-2"
-                                                                                                                           for="alertaction_thresholdvaluemin_e">Threshold
-                                                                                                                        Min</label>
-
-                                                                                                                    <div class="controls  col-sm-4">
-                                                                                                                        <input type="text"
-                                                                                                                               data-ng-model="currentSelectedSensorAlertAction.thresholdvaluemin"
-                                                                                                                               id="alertaction_thresholdvaluemin_e"
-                                                                                                                               class="form-control"
-                                                                                                                               placeholder="Min">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="control-label   col-sm-2"
-                                                                                                                           for="alertaction_thresholdvaluemax_e">Threshold
-                                                                                                                        Max</label>
-
-                                                                                                                    <div class="controls  col-sm-4">
-                                                                                                                        <input type="text"
-                                                                                                                               data-ng-model="currentSelectedSensorAlertAction.thresholdvaluemax"
-                                                                                                                               id="alertaction_thresholdvaluemax_e"
-                                                                                                                               class="form-control"
-                                                                                                                               placeholder="Max">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="control-label   col-sm-2"
-                                                                                                                           for="alertaction_sendonclear_e">Send
-                                                                                                                        on
-                                                                                                                        Clear</label>
-
-                                                                                                                    <div class="controls  col-sm-4">
-                                                                                                                        <input type="text"
-                                                                                                                               data-ng-model="currentSelectedSensorAlertAction.sendonclear"
-                                                                                                                               id="alertaction_sendonclear_e"
-                                                                                                                               class="form-control"
-                                                                                                                               placeholder="SendOnClear">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <!--<button class="btn btn-primary" ng-click="createSensorAlert()">Save Alert</button>-->
-                                                                                                                <div class="form-group">
-                                                                                                                    <input type="submit"
-                                                                                                                           value="Update"
-                                                                                                                           class="btn btn-primary col-md-2">
-                                                                                                                    <button class="btn btn-danger"
-                                                                                                                            ng-click="createSensorAlert()">
-                                                                                                                        Remove
-                                                                                                                    </button>
-                                                                                                                </div>
-                                                                                                            </form>
-
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <!--<table st-table="currentSelectedSensorAlert.alertactions" class="table table-striped">
-                                                                                                        <thead>
-                                                                                                            <tr>
-
-                                                                                                                <th>Action
-                                                                                                                </th>
-                                                                                                                <th>User
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    Description
-                                                                                                                </th>
-
-                                                                                                            </tr>
-                                                                                                        </thead>
-                                                                                                        <tbody>
-                                                                                                            <tr ng-repeat="alertAction in currentSelectedSensorAlert.alertactions">
-                                                                                                                    <td><span>{{alertAction.name}}</span>
-
-                                                                                                                </td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-
-
-                                                                                                            </tr>
-                                                                                                        </tbody>
-                                                                                                    </table>-->
-
-                                                                                                </md-tab>
-                                                                                            </md-tabs>
-
-
-                                                                                            <!--</form>-->
-                                                                                        </div>
-                                                                                    </section>
+                                                                                <div class="controls">
+                                                                                    <input type="text"
+                                                                                           data-ng-model="alert.name"
+                                                                                           id="alertname"
+                                                                                           class="form-control"
+                                                                                           placeholder="Name"
+                                                                                            >
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div ng-switch-when="viewAlert">
-                                                                                view {{currentSelectedSensorAlert.name}}
-                                                                                <span class="btn btn-primary"
-                                                                                      ng-click="showAlertView('editAlert',currentSelectedSensorAlert)">Edit</span>
-                                                                                <!--<span class="btn btn-primary"-->
-                                                                                <!--ng-click="openEditSensorAlert('lg',currentSelectedSensorAlert)">Edit</span>-->
+                                                                            <div class="panel" >
+                                                                                <div class="panel panel-default">
+                                                                                    <div class="panel-heading">
+                                                                                        <div class="panel-title">
+                                                                                            Alert Actions
+
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                    <div class="panel-body">
+
+                                                                                        <uib-tabset>
+                                                                                            <uib-tab data-ng-repeat="alertAction in alert.alertactions" heading="Action - {{alertAction.name}}">
+                                                                                                <div class="top-buffer">
+                                                                                                    <form class="form-horizontal"
+                                                                                                          data-ng-submit="updateRecord()"
+                                                                                                          novalidate>
+
+                                                                                                        <fieldset>
+                                                                                                            <div class="form-group">
+                                                                                                                <label class="control-label   col-sm-2"
+                                                                                                                       for="alertaction_name_e">Name</label>
+
+                                                                                                                <div class="controls  col-sm-4">
+                                                                                                                    <input type="text"
+                                                                                                                           data-ng-model="alertAction.name"
+                                                                                                                           id="alertaction_name_e"
+                                                                                                                           class="form-control"
+                                                                                                                           placeholder="Name">
+                                                                                                                </div>
+
+                                                                                                                <label class="control-label   col-sm-2"
+                                                                                                                       for="alertaction_actiontype_e">Action
+                                                                                                                    Type</label>
+
+                                                                                                                <div class="controls  col-sm-3">
+                                                                                                                    <input type="text"
+                                                                                                                           data-ng-model="alertAction.actiontype"
+                                                                                                                           id="alertaction_actiontype_e"
+                                                                                                                           class="form-control"
+                                                                                                                           placeholder="Action type">
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="form-group">
+                                                                                                                <label class="control-label   col-sm-2"
+                                                                                                                       for="alertaction_thresholdvaluemin_e">Threshold
+                                                                                                                    Min</label>
+
+                                                                                                                <div class="controls  col-sm-4">
+                                                                                                                    <input type="text"
+                                                                                                                           data-ng-model="currentSelectedSensorAlertAction.thresholdvaluemin"
+                                                                                                                           id="alertaction_thresholdvaluemin_e"
+                                                                                                                           class="form-control"
+                                                                                                                           placeholder="Min">
+                                                                                                                </div>
+
+                                                                                                                <label class="control-label   col-sm-2"
+                                                                                                                       for="alertaction_thresholdvaluemax_e">Threshold
+                                                                                                                    Max</label>
+
+                                                                                                                <div class="controls  col-sm-3">
+                                                                                                                    <input type="text"
+                                                                                                                           data-ng-model="currentSelectedSensorAlertAction.thresholdvaluemax"
+                                                                                                                           id="alertaction_thresholdvaluemax_e"
+                                                                                                                           class="form-control"
+                                                                                                                           placeholder="Max">
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="form-group">
+                                                                                                                <label class="control-label   col-sm-2"
+                                                                                                                       for="alertaction_sendonclear_e">Send on
+                                                                                                                    Clear</label>
+
+                                                                                                                <div class="controls  col-sm-4">
+                                                                                                                    <input type="text"
+                                                                                                                           data-ng-model="currentSelectedSensorAlertAction.sendonclear"
+                                                                                                                           id="alertaction_sendonclear_e"
+                                                                                                                           class="form-control"
+                                                                                                                           placeholder="SendOnClear">
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </fieldset>
+                                                                                                    </form>
+                                                                                                </div>
+                                                                                            </uib-tab>
+                                                                                        </uib-tabset>
+
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
+
+
+
+
+                                                                        </fieldset>
+                                                                    </form>
                                                                 </div>
+                                                            </uib-tab>
+                                                        </uib-tabset>
+
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
-                                                            </div>
-                                                        </div>
+
+                                            <div class="form-group md-margin">
+                                                <input type="submit" value="Update"
+                                                       class="btn btn-primary">
+                                                <button class="btn btn-danger"
+                                                        ng-click="removeSensor(currentSelectedSensor)">
+                                                    Delete
+                                                </button>
 
 
-                                                    </md-tab>
-
-                                                </md-tabs>
-                                            </md-content>
-
+                                            </div>
                                         </div>
-                                        <!--<div ng-switch-when="view">-->
-                                        <!--View ID:{{currentSelectedSensor._id}}-->
-
-                                        <!--<span class="btn btn-primary" ng-click="showView('edit',currentSelectedSensor)">Edit</span>-->
-
-                                        <!--</div>-->
-
-                                    </div>
+                                    </form>
                                 </div>
-                            </div>
-                        </div>
+                            </uib-tab>
+
+                        </uib-tabset>
 
 
-                    </md-content>
-                </md-tab>
-                <md-tab label="Device Readings">
 
-                    <table st-table="devicesReadings" class="table table-striped top-buffer">
-                        <thead>
-                        <tr>
-                            <th>Reading ID</th>
-                           <!-- <th>Unit Id</th>-->
-                            <!--<th>Unit Type</th>-->
-                            <th> Time</th>
-                            <th>Channels</th>
-                            <th>State 1</th>
-                            <th>Last Value 1</th>
-                            <th>State 2</th>
-                            <th>Last Value 2</th>
-                            <th>State 3</th>
-                            <th>Last Value 3</th>
-                            <th>State 4</th>
-                            <th>Last Value 4</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="reading in devicesReadings">
-                            <td><a href="/#!/readings/{{reading._id}}"> {{reading._id}}</a></td>
-                            <!--<td>{{reading.unitId}}</td>-->
-                           <!-- <td>{{reading.unittype}}</td>-->
-                            <td>{{reading.time}}</td>
-                            <td>{{reading.channels}}</td>
-                            <td>{{reading.state1}}</td>
-                            <td>{{reading.lastValue1}}</td>
-                            <td>{{reading.state2}}</td>
-                            <td>{{reading.lastValue2}}</td>
-                            <td>{{reading.state3}}</td>
-                            <td>{{reading.lastValue3}}</td>
-                            <td>{{reading.state4}}</td>
-                            <td>{{reading.lastValue4}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </md-tab>
-            </md-tabs>
-        </md-content>
+                    </div>
+
+                </div>
+
+
+
+            </uib-tab>
+            <uib-tab heading="Device Readings">
+
+                <table st-table="devicesReadings" class="table table-striped top-buffer">
+                    <thead>
+                    <tr>
+                        <!--<th>Reading ID</th>-->
+                        <!-- <th>Unit Id</th>-->
+                        <!--<th>Unit Type</th>-->
+                        <th> Time</th>
+                        <th>Channels</th>
+                        <th>State 1</th>
+                        <th>Last Value 1</th>
+                        <th>State 2</th>
+                        <th>Last Value 2</th>
+                        <th>State 3</th>
+                        <th>Last Value 3</th>
+                        <th>State 4</th>
+                        <th>Last Value 4</th>
+                        <th> Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="reading in devicesReadings | paginateFrom :(currentPage-1)*pageSize | limitTo:pageSize">
+                        <!--<td><a href="/#!/readings/{{reading._id}}"> {{reading._id}}</a></td>-->
+                        <!--<td>{{reading.unitId}}</td>-->
+                        <!-- <td>{{reading.unittype}}</td>-->
+                        <td>{{reading.time}}</td>
+                        <td>{{reading.channels}}</td>
+                        <td>{{reading.state1}}</td>
+                        <td>{{reading.lastValue1}}</td>
+                        <td>{{reading.state2}}</td>
+                        <td>{{reading.lastValue2}}</td>
+                        <td>{{reading.state3}}</td>
+                        <td>{{reading.lastValue3}}</td>
+                        <td>{{reading.state4}}</td>
+                        <td>{{reading.lastValue4}}</td>
+                        <td><a class="btn btn-primary" href="/#!/readings/{{reading._id}}">View</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <uib-pagination total-items="devicesReadings.length" ng-model="currentPage" items-per-page="pageSize" class="pagination-sm" boundary-links="true"></uib-pagination>
+            </uib-tab>
+        </uib-tabset>
+
+
+        <div class="container pull-right top-buffer">
+            <button class="btn btn-success" ng-click="devCtrl.updateDevice();">Save and Close</button>
+            <button class="btn btn-danger" ng-click="cancel()">Close</button>
+        </div>
     </div>
 
-    <!-- <div class="modal-footer">
-         <input type="submit" value="Update" class="btn btn-default">-->
-
-    <div clas="container pull-right">
-  <button class="btn btn-success" ng-click="devCtrl.updateDevice();">Save and Close</button>
-  <button class="btn btn-danger" ng-click="cancel()">Close</button>
-        </div>
- </div>
-
+    <div data-ng-show="error"
+         class="text-danger">
+        <strong data-ng-bind="error"></strong>
+    </div>
 
 </section>

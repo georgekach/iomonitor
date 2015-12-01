@@ -36,6 +36,7 @@
 
 <div data-ng-controller="HeaderController" layout-align="start start" class="navbar-default sidebar " role='navigation'>
 
+
     <div >
         <nav class="sidebar-nav navbar-collapse sidebar " style="width: 300px;">
             <ul id="side-menu" class="nav">
@@ -57,25 +58,25 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li restrict access='admin agentadmin'>
-                            <a href="/#!/vendors" ng-click="toggleLeft()"> Agents</a>
+                            <a href="/#!/vendors" ng-click="$spMenu.toggle()"> Agents</a>
                         </li>
                         <li restrict access='admin agentadmin'>
-                            <a href="/#!/clients" ng-click="toggleLeft()"> Clients </a>
+                            <a href="/#!/clients" ng-click="$spMenu.toggle()"> Clients </a>
                         </li>
                         <li restrict access='agentadmin clientadmin user'>
-                            <a href="/#!/myclients" ng-click="toggleLeft()"> My Clients </a>
+                            <a href="/#!/myclients" ng-click="$spMenu.toggle()"> My Clients </a>
                         </li>
                         <li restrict access='admin agentadmin'>
-                            <a href="/#!/devices" ng-click="toggleLeft()"> Devices </a>
+                            <a href="/#!/devices" ng-click="$spMenu.toggle()"> Devices </a>
                         </li>
                         <li restrict access='clientadmin user'>
-                            <a href="/#!/mydevices" ng-click="toggleLeft()"> My Devices </a>
+                            <a href="/#!/mydevices" ng-click="$spMenu.toggle()"> My Devices </a>
                         </li>
 
                     </ul>
                 </li>
                 <li>
-                    <a href="/#!/systemadministration">
+                    <a href="/#!/systemadministration" ng-click="$spMenu.toggle()">
                         <i class="fa fa-cogs fa-fw"></i>
                         System Administration
                     </a>
@@ -89,15 +90,15 @@
 
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/#!/users"> System Users
+                            <a href="/#!/users" ng-click="$spMenu.toggle()"> System Users
                             </a>
                         </li>
                         <li>
-                            <a href="/#!/userroles"> User Roles
+                            <a href="/#!/userroles" ng-click="$spMenu.toggle()"> User Roles
                             </a>
                         </li>
                         <li>
-                            <a href="/#!/accessrules"> Access Rules
+                            <a href="/#!/accessrules" ng-click="$spMenu.toggle()"> Access Rules
                             </a>
                         </li>
                     </ul>

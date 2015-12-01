@@ -49,8 +49,8 @@ var ios = app.get('socketio');
 var socketServer = require('./server.readings.tcp')(ios);
 
 
-    socketServer.listen(config.readingsport);
-    console.log('Readings tcp server started on port' + config.readingsport);
+    //socketServer.listen(config.readingsport);
+    //console.log('Readings tcp server started on port' + config.readingsport);
 
 
 /*
@@ -67,7 +67,7 @@ var cronjobs = require('./servercron');
 //cronjobs.startAlertsCronJob();
 var notificationsCronjob = require('./server.notifications.cronjob');
 
-notificationsCronjob.startNotificationsCronJob();
+//notificationsCronjob.startNotificationsCronJob();
 
 
 
@@ -78,7 +78,7 @@ var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
         //user: 'kachambwa.george@gmail.com',
-        //pass: '7dAHgfu2s'
+        //pass: ''
     }
 });
 

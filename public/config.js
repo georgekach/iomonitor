@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'meantest';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ui.utils','ngMaterial','highcharts-ng','btford.socket-io','ngJustGage','openlayers-directive','angularChart','duScroll','shoppinpal.mobile-menu'];
+	var applicationModuleVendorDependencies = ['ngResource','ui.bootstrap','ui.bootstrap.modal', 'ngAria' ,'ngAnimate', 'ui.router','ngMaterial','highcharts-ng','btford.socket-io','ngJustGage','openlayers-directive','angularChart','shoppinpal.mobile-menu','ngMorph','angular-intro','angularMoment'];//duscroll
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

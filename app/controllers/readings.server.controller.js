@@ -124,6 +124,35 @@ exports.readingByDeviceID = function (req, res) {
         }
     });
 };
+
+/**
+ * Readings for a specific device for a period
+ *
+ */
+exports.readingByDeviceIDForPeriod = function (req, res) {
+
+
+    var endDate = new Date(req.params.endOfPeriod);
+     /* var startDate = endDate.getDate()-20;*/
+
+    var startDate = new Date(req.params.startOfPeriod);
+    console.log(req.params.startOfPeriod);
+    console.log(req.params.endOfPeriod);
+    console.log(startDate);
+    console.log(endDate);
+//req.params.startOfPeriod
+    // req.params.endOfPeriod
+    Reading.find({device: req.params.myId1,created:{$gte:startDate,$lt: endDate}}).exec(function (err, readings) {
+        if (err) {
+            console.log(err);
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(readings);
+        }
+    });
+};
 /**
  <<<<<<< HEAD
  * Upload a Reading

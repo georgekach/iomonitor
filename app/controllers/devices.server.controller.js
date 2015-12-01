@@ -130,7 +130,7 @@ exports.mylist = function(req, res) {
 			if(client)
 			{
 				//console.log('Number of clients is '+clients.length);
-				console.log(client);
+				//console.log(client);
 				res.jsonp(client.devices);
 			}
 			else
@@ -160,7 +160,7 @@ exports.mylist = function(req, res) {
  * Device middleware
  */
 exports.deviceByID = function(req, res, next, id) { 
-	Device.findById(id).deepPopulate('user').exec(function(err, device) {
+	Device.findById(id).populate('user sensors.sensoralerts.alertactions.userstonotify').select('-sensors.sensoralerts.alertactions.userstonotify.password').exec(function(err, device) {
 		if (err) return next(err);
 		if (! device) return next(new Error('Failed to load Device ' + id));
 

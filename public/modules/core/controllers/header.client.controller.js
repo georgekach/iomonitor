@@ -20,6 +20,7 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
         var result = document.getElementById('side-menu');
         //alert(result);
 
+
         //var sidemenu = angular.element(result);
         //sidemenu.metisMenu();
         $('#side-menu').metisMenu();
@@ -42,8 +43,9 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
         /**
          * Build handler to open/close a SideNav; when animation finishes
          * report completion in console
-         */
+         * */ /*
         function buildToggler(navID) {
+
             var debounceFn =  $mdUtil.debounce(function(){
                 $mdSidenav(navID)
                     .toggle()
@@ -68,6 +70,6 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
                 .then(function () {
                     $log.debug('close RIGHT is done');
                 });
-        };
+        };*/
 	}
 ]);
