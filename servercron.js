@@ -36,7 +36,7 @@ exports.startAlertsCronJob = function(){
     var alertsCronJob = cron.job('0 */2 * * * *', function () {
         // perform operation e.g. GET request http.get() etc.
 
-        // this cronjob aligns readings with devices
+        // this cronjob aligns readings with devices 
         var readingsController = require('./app/controllers/readings.server.controller');
         if (readingsController) {
             readingsController.processReadingsForAlerts();
