@@ -2,9 +2,9 @@
 
 module.exports = {
 
-	//db: 'mongodb://geo:pass123*@ds047802.mongolab.com:47802/rtumon',
+	db: 'mongodb://geo:pass123*@ds047802.mongolab.com:47802/rtumon',
 	//db: 'mongodb://localhost:27017/rtumon',
-	db: process.env.MONGOLAB_URI,
+	//db: process.env.MONGOLAB_URI,
 
 	app: {
 		title: 'Intellisense - Cloud-based Environment Sensing '
