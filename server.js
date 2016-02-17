@@ -8,6 +8,7 @@ var init = require('./config/init')(),
     chalk = require('chalk'),
  fs = require('fs');
 
+
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
@@ -20,10 +21,14 @@ fs.readdirSync(models_path).forEach(function (file) {
         require(models_path + '/' + file);
 });*/
 
+//require('events').EventEmitter.prototype._maxListeners = Infinity;
+//require('events').EventEmitter.prototype._maxListeners = Infinity;
+//
 // Bootstrap db connection
 
 var db = mongoose.connect(config.db, function (err) {
     if (err) {
+        console.error(chalk.green(config.db));
         console.error(chalk.red('Could not connect to MongoDB!'));
         console.log(chalk.red(err));
     }
@@ -44,9 +49,9 @@ app.get('server').listen(config.port);
 // Expose app
 exports = module.exports = app;
 
-var ios = app.get('socketio');
+//var ios = app.get('socketio');
 
-var socketServer = require('./server.readings.tcp')(ios);
+//var socketServer = require('./server.readings.tcp')(ios);
 
 
     //socketServer.listen(config.readingsport);
@@ -62,10 +67,10 @@ else
     console.log('ios has values'+ios);
 }*/
 
-var cronjobs = require('./servercron');
+//var cronjobs = require('./servercron');
 //cronjobs.startReadingsDeviceIdCronJob(ios);
 //cronjobs.startAlertsCronJob();
-var notificationsCronjob = require('./server.notifications.cronjob');
+//var notificationsCronjob = require('./server.notifications.cronjob');
 
 //notificationsCronjob.startNotificationsCronJob();
 

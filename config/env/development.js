@@ -2,8 +2,8 @@
 
 module.exports = {
 
-	db: 'mongodb://geo:pass123*@ds047802.mongolab.com:47802/rtumon',
-	//db: 'mongodb://localhost:27017/rtumon',
+	db: 'mongodb://connectuser:password@ds047802.mongolab.com:47802/rtumon',
+	//db: 'mongodb://127.0.0.1:27017/rtumon',
 	//db: process.env.MONGOLAB_URI,
 
 	app: {
