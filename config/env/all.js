@@ -72,7 +72,8 @@ module.exports = {
 				'public/lib/ngMorph/dist/angular-morph.js',
 				'public/lib/angular-intro.js/src/angular-intro.js',
 				'public/lib/moment/moment.js',
-				'public/lib/angular-moment/angular-moment.min.js'
+				'public/lib/angular-moment/angular-moment.min.js',
+				'public/lib/ng-pageslide/dist/angular-pageslide-directive.js',
 			]
 		},
 		css: [
