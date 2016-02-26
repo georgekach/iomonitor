@@ -26,12 +26,18 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
         $('#side-menu').metisMenu();
         //(angular.element( document.querySelector( '#side-menu'))).metisMenu();
 
+        $scope.checked = false; // This will be binded using the ps-open attribute
+
+        $scope.toggle = function(){
+            $scope.checked = !$scope.checked;
+        };
+
         $scope.myAlerts = '';
 
-
+/*
         $scope.myAlerts = MyAlerts.query({
             userId: Authentication.user._id
-        });
+        });*/
 
         $scope.unresovedSystemAlerts = UnresolvedAlerts.query({
             alerttype:'system'

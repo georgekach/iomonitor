@@ -53,6 +53,7 @@
 			
 				<div  id="sp-nav" class="bg-light-gray"  data-ng-include="'/modules/core/views/sidenav.client.view.html'"></div>
 
+
 				<div  id="sp-page" style="background-color: white;">
 					<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
 
@@ -84,7 +85,7 @@
 
 	{% if process.env.NODE_ENV === 'development' %}
 	<!--Livereload script rendered -->
-	<script type="text/javascript" src="https://{{request.hostname}}:35729/livereload.js"></script>
+	<!--<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>-->
 	{% endif %}
 </body>
 
