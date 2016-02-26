@@ -23,7 +23,9 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 
         //var sidemenu = angular.element(result);
         //sidemenu.metisMenu();
-        $('#side-menu').metisMenu();
+
+            //$('#side-menu').metisMenu();
+
         //(angular.element( document.querySelector( '#side-menu'))).metisMenu();
 
         $scope.checked = false; // This will be binded using the ps-open attribute
